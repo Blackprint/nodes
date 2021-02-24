@@ -4,7 +4,7 @@ if(typeof sf === 'undefined' || sf.loader === void 0)
 // Load dependencies
 sf.loader.js([
     "https://cdn.jsdelivr.net/npm/gifler@0.1.0/gifler.min.js",
-    "https://cdn.jsdelivr.net/npm/pixi.js@5.3.3/dist/pixi.js",
+    "https://cdn.jsdelivr.net/npm/pixi.js-legacy@5.3.3/dist/pixi-legacy.min.js",
 ]);
 
 // This will run after the browser was loaded all script

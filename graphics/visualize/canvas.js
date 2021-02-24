@@ -14,6 +14,8 @@ Blackprint.registerNode('Graphics/visualize/canvas', function(node, iface){
 	}
 });
 
+var firstInit = true;
+
 // For Browser Interface, let ScarletsFrame handle this (HotReload available here)
 Blackprint.registerInterface('BPAO/Graphics/visualize/canvas', function(iface){
 	var IM = iface; // Lazy Shortcut :3
@@ -27,7 +29,16 @@ Blackprint.registerInterface('BPAO/Graphics/visualize/canvas', function(iface){
 		// Initialize and save data to iface
 		// So it can persist if current scope is hot reloaded
 
-		IM.app = new PIXI.Application();
+		let time;
+		if(firstInit) time = Date.now();
+
+		IM.app = new PIXI.Application(); // First init would be slow
+
+		if(firstInit){
+			console.log("Pixi.js initialization took: "+(Date.now() - time)+'ms');
+			firstInit = false;
+		}
+
 		IM.container = IM.app.stage;
 		IM.canvas = IM.app.view;
 		IM.childs = new Map();
