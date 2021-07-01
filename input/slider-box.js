@@ -1,6 +1,6 @@
 // To be used for Visual and Standalone
 // As we don't call any Browser API
-class UIControl extends Blackprint.Node{
+class UIControl extends Blackprint.Node {
 	// Called by ScarletsFrame for when constructing new component
 	// 'this' already using the 'UIControl' class
 	static construct(){
@@ -151,14 +151,10 @@ Blackprint.registerNode('Input/slider-box', function(node, iface){
 	}
 });
 
-// == Blackprint Visual Interpreter ==
+// == Blackprint Visual Engine ==
 // For Browser
-Blackprint.registerInterface('BPAO/Input/slider-box', {
-	extend: UIControl
-});
+Blackprint.registerInterface('BPAO/Input/slider-box', UIControl);
 
-// == For Standalone Interpreter ==
+// == For Standalone Engine ==
 // For Non-browser
-Blackprint.Interpreter.registerInterface('BPAO/Input/slider-box', {
-	extend: UIControl
-});
+Blackprint.Engine.registerInterface('BPAO/Input/slider-box', UIControl);

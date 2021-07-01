@@ -1,3 +1,19 @@
+## html
+<placeholder-inf-node class="node" style="transform: translate({{ x }}px, {{ y }}px)">
+  <sf-template path="Blackprint/nodes/template/header.html"></sf-template>
+
+  <div class="content">
+    <sf-template path="BPAO/placeholder/template/placeholder.html"></sf-template>
+    <div class="right-port">
+      <sf-template path="Blackprint/nodes/template/output-port.html"></sf-template>
+    </div>
+  </div>
+</placeholder-inf-node>
+
+## scss-global
+body{}
+
+## js-global
 // To be used for Visual and Standalone
 // As we don't call any Browser API
 class PlaceHolder extends Blackprint.Node{
@@ -18,15 +34,15 @@ Blackprint.registerNode('placeholder1/placeholder2', function(handler, node){
 	};
 });
 
-// == Blackprint Visual Interpreter ==
+// == Blackprint Visual Engine ==
 // For Browser
 Blackprint.registerInterface('placeholder-inf', {
 	extend: PlaceHolder,
 	template: 'BPAO/placeholder/placeholder.html'
 });
 
-// == For Standalone Interpreter ==
+// == For Standalone Engine ==
 // For Non-browser
-Blackprint.Interpreter.registerInterface('placeholder-inf', {
+Blackprint.Engine.registerInterface('placeholder-inf', {
 	extend: PlaceHolder
 });

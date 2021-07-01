@@ -1,6 +1,7 @@
 ;(function(){ // Private scope
 
 // Node's logic, don't use browser's API or library here
+// Data processing or data/type assignment only
 Blackprint.registerNode('my-dropdown/path', function(node, iface){
 	iface.title = 'title';
 	iface.description = 'description';
@@ -39,8 +40,8 @@ Blackprint.registerNode('my-dropdown/path', function(node, iface){
 	}
 });
 
-// To be extended by Browser or Interpreter Interface (Optional)
-// Useful if you have similar logic for the browser and interpreter
+// To be extended by Browser or Engine Interface (Optional)
+// Useful if you have similar logic for the browser and engine
 class PlaceHolder extends Blackprint.Node{
 	static construct(){
 		var iface = this;
@@ -87,7 +88,7 @@ Blackprint.registerInterface('BPAO/placeholder/template', {
 	// On Intepreter we need to use "bind({get log, set log})"
 
 	// ==========================================================
-	// ====== Below can also be used for interpreter scope ======
+	// ====== Below can also be used for engine scope ======
 	// ==========================================================
 
 	// === Shortcut to get/set node's port value ===
@@ -152,7 +153,7 @@ Blackprint.registerInterface('BPAO/placeholder/template', {
 // - first parameter is named path
 // - second parameter is optional if using different settings
 // - third parameter can be placed on second parameter
-Blackprint.Interpreter.registerInterface('BPAO/placeholder/template', {
+Blackprint.Engine.registerInterface('BPAO/placeholder/template', {
 	extend: PlaceHolder
 }, function(iface, bind){
 	/* Assume we're in Node.js or Deno environment */
@@ -161,7 +162,7 @@ Blackprint.Interpreter.registerInterface('BPAO/placeholder/template', {
 	// iface.callMe == extended from PlaceHolder
 
 	iface.init = function(){
-		// When Interpreter initializing this scope
+		// When Engine initializing this scope
 	}
 
 	// Usually (iface.log = 'something') would trigger interface change

@@ -1,3 +1,4 @@
+## html
 <div class="node your-class" style="transform: translate({{ x }}px, {{ y }}px)">
   <sf-template path="Blackprint/nodes/template/header.html"></sf-template>
 
@@ -16,3 +17,11 @@
     </div>
   </div>
 </div>
+
+## scss-global
+// Element name based on html path, BPAO/placeholder/template.html
+bpao-placeholder-template{}
+
+## js-global
+// You can also write JavaScript here
+console.log("Hello from template.sf");

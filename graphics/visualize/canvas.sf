@@ -1,3 +1,34 @@
+## html
+<div class="node" style="transform: translate({{ x }}px, {{ y }}px)">
+  <sf-template path="Blackprint/nodes/template/header.html"></sf-template>
+
+  <div class="content">
+    <div class="left-port">
+      <sf-template path="Blackprint/nodes/template/input-port.html"></sf-template>
+    </div>
+
+    <div class="right-port">
+      <sf-template path="Blackprint/nodes/template/output-port.html"></sf-template>
+    </div>
+  </div>
+</div>
+
+## scss-global
+bpao-graphics-visualize-canvas {
+	.content{
+		margin-top: 0 !important;
+	}
+	canvas{
+		width: 280px;
+		max-height: 240px;
+		display: block;
+		border-bottom: 1px dashed white;
+		margin-bottom: 2px;
+	}
+}
+
+
+## js-global
 ;(function(){ // Private scope
 
 // Node's logic, don't use browser's API or library here

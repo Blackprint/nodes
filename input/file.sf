@@ -1,0 +1,64 @@
+## html
+<div class="node input" style="transform: translate({{ x }}px, {{ y }}px)">
+  <sf-template path="Blackprint/nodes/template/header.html"></sf-template>
+
+  <div class="content">
+  	<div class="file-place" @click="browseFile" @filedrop="dropFile">
+  		<input type="file" sf-bind="file">
+  		{{ name || 'Drag file here'}}
+  	</div>
+
+    <div class="right-port">
+      <sf-template path="Blackprint/nodes/template/output-port.html"></sf-template>
+    </div>
+  </div>
+</div>
+
+## scss-global
+bpao-input-file {
+  .file-place{
+    margin: 5px;
+    border: 1px dashed white;
+    width: 120px;
+    max-height: 20px;
+    overflow: hidden;
+    word-break: break-all;
+  }
+  input{
+    opacity: 0;
+    width: 1px;
+    height: 1px;
+  }
+}
+
+## js-global
+// Node's logic, don't use browser's API or library here
+Blackprint.registerNode('Input/file', function(node, iface){
+  iface.title = 'File loader';
+  iface.interface = 'BPAO/Input/file';
+
+  node.outputs = {
+    URL: String
+  }
+});
+
+// For Browser Interface, let ScarletsFrame handle this (HotReload available here)
+Blackprint.registerInterface('BPAO/Input/file', function(iface){
+  var node = iface.node;
+  iface.file = null;
+  iface.name = '';
+
+  iface.browseFile = function(ev){
+    iface.$el('input').click();
+  }
+
+  iface.dropFile = function(list){
+    iface.file = list;
+  }
+
+  iface.on$file = function(now){
+    URL.revokeObjectURL(node.outputs.URL);
+    node.outputs.URL = URL.createObjectURL(now[0]);
+    this.name = now[0].name;
+  }
+});
