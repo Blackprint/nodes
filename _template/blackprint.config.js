@@ -3,6 +3,9 @@ module.exports = {
 	name: "Empty Template",
 	description: "Your awesome nodes",
 
+	// This must be set to false if you want to compile this nodes
+	disabled: true,
+
 	// Unique prefix for .html or .sf template
 	templatePrefix: "BPAO/Template",
 

@@ -3,6 +3,9 @@ module.exports = {
 	name: "WebAudio",
 	description: "WebAudio nodes",
 
+	// This must be set to false if you want to compile this nodes
+	disabled: false,
+
 	// Unique prefix for .html or .sf template
 	templatePrefix: "BPAO/WebAudio",
 

@@ -3,6 +3,9 @@ module.exports = {
 	name: "WebAnimation",
 	description: "WebAnimation nodes",
 
+	// Ask the compiler to not compile or put this nodes to Blackprint Editor
+	disabled: true,
+
 	// Unique prefix for .html or .sf template
 	templatePrefix: "BPAO/WebAnimation",
 

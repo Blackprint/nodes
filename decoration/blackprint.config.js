@@ -3,6 +3,9 @@ module.exports = {
 	name: "Decoration",
 	description: "Decoration nodes, this doesn't have functionality except for decoration or comments",
 
+	// This must be set to false if you want to compile this nodes
+	disabled: false,
+
 	// Unique prefix for .html or .sf template
 	templatePrefix: "BPAO/Decoration",
 
