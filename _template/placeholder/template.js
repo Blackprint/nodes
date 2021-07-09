@@ -1,5 +1,3 @@
-;(function(){ // Private scope
-
 // Node's logic, don't use browser's API or library here
 // Data processing or data/type assignment only
 Blackprint.registerNode('my-dropdown/path', function(node, iface){
@@ -60,7 +58,7 @@ class PlaceHolder extends Blackprint.Node{
 // - third parameter can be placed on second parameter
 Blackprint.registerInterface('BPAO/placeholder/template', {
 	extend: PlaceHolder,
-	// template: 'Blackprint/nodes/default' // If you want to use different/default .html template
+	// template: 'Blackprint/nodes/default.sf'
 }, function(iface){
 	/* You can use browser's API or library */
 	// iface == iface from .registerNode
@@ -189,5 +187,3 @@ Blackprint.Engine.registerInterface('BPAO/placeholder/template', {
 	var Node = iface.node; // 'node' object from .registerNode
 	// ...
 });
-
-})(); // End of private scope

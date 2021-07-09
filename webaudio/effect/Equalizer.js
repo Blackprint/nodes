@@ -1,5 +1,3 @@
-;(function(){ // Private scope
-
 // Just some logic to handle, can be used for browser/non-browser
 Blackprint.registerNode('WebAudio/effect/Equalizer', function(node, iface){
 	iface.title = 'Equalizer';
@@ -21,7 +19,7 @@ Blackprint.registerNode('WebAudio/effect/Equalizer', function(node, iface){
 });
 
 Blackprint.registerInterface('BPAO/WebAudio/effect/Equalizer', {
-	template: 'Blackprint/nodes/default',
+	template: 'Blackprint/nodes/default.sf',
 	extend: Blackprint.Addons.WebAudio.MediaEffect
 }, function(iface){
 	iface.effect = ScarletsMediaEffect.equalizer();
@@ -37,6 +35,3 @@ Blackprint.registerInterface('BPAO/WebAudio/effect/Equalizer', {
 		iface.node.outputs.Out = iface.output;
 	}
 });
-
-// End of private scope
-})();

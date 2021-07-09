@@ -1,5 +1,3 @@
-;(function(){ // Private scope
-
 // Node's logic, don't use browser's API or library here
 Blackprint.registerNode('Graphics/sprite', function(node, iface){
 	iface.title = 'Sprite';
@@ -25,7 +23,7 @@ Blackprint.registerNode('Graphics/sprite', function(node, iface){
 
 // For Browser Interface, let ScarletsFrame handle this (HotReload available here)
 Blackprint.registerInterface('BPAO/Graphics/sprite', {
-	template: 'Blackprint/nodes/default'
+	template: 'Blackprint/nodes/default.sf'
 }, function(iface){
 	var node = iface.node;
 
@@ -64,5 +62,3 @@ Blackprint.registerInterface('BPAO/Graphics/sprite', {
 		);
 	}
 });
-
-})(); // End of private scope

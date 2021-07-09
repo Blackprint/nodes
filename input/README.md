@@ -1,4 +1,4 @@
-UI Control node collection
+Node collection for UI Control
 
 ### License
 MIT

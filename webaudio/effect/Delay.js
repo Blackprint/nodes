@@ -1,5 +1,3 @@
-;(function(){ // Private scope
-
 // Just some logic to handle, can be used for browser/non-browser
 Blackprint.registerNode('WebAudio/effect/Delay', function(node, iface){
 	iface.title = 'Delay';
@@ -22,7 +20,7 @@ Blackprint.registerNode('WebAudio/effect/Delay', function(node, iface){
 });
 
 Blackprint.registerInterface('BPAO/WebAudio/effect/Delay', {
-	template: 'Blackprint/nodes/default',
+	template: 'Blackprint/nodes/default.sf',
 	extend: Blackprint.Addons.WebAudio.MediaEffect
 }, function(iface){
 	iface.effect = ScarletsMediaEffect.delay();
@@ -38,6 +36,3 @@ Blackprint.registerInterface('BPAO/WebAudio/effect/Delay', {
 		iface.node.outputs.Out = iface.output;
 	}
 });
-
-// End of private scope
-})();

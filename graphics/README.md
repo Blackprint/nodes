@@ -1,4 +1,4 @@
-A template
+Graphical node collection
 
 ### License
 MIT

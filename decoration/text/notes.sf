@@ -1,6 +1,6 @@
 ## html
 <div class="node your-class" style="transform: translate({{ x }}px, {{ y }}px)">
-  <sf-template path="Blackprint/nodes/template/header.html"></sf-template>
+  <sf-template path="Blackprint/nodes/template/header.sf"></sf-template>
 
   <div class="content">
     <textarea sf-bind="options.value"></textarea>
@@ -8,8 +8,8 @@
 </div>
 
 ## scss-global
-// Element name based on html path, BPAO/placeholder/template.html
-sf-space[blackprint] bpao-decoration-text-notes .node {
+// Element name based on html path, BPAO/decoration/text/notes.sf
+bpao-decoration-text-notes .node {
 	textarea{
 		width: 249px;
 		height: 87px;
@@ -19,8 +19,6 @@ sf-space[blackprint] bpao-decoration-text-notes .node {
 
 
 ## js-global
-;(function(){ // Private scope
-
 Blackprint.registerNode('decoration/text/notes', function(node, iface){
 	iface.title = 'Notes';
 	iface.interface = 'BPAO/Decoration/text/notes'; // Interface path
@@ -49,5 +47,3 @@ Blackprint.registerInterface('BPAO/Decoration/text/notes', function(iface){
 		}, 1000);
 	}
 });
-
-})(); // End of private scope

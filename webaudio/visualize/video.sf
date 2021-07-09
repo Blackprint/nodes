@@ -1,16 +1,16 @@
 ## html
 <div class="node" style="transform: translate({{ x }}px, {{ y }}px)">
-  <sf-template path="Blackprint/nodes/template/header.html"></sf-template>
+  <sf-template path="Blackprint/nodes/template/header.sf"></sf-template>
 
   <div class="content">
     <video crossorigin="anonymous"></video>
 
     <div class="left-port">
-      <sf-template path="Blackprint/nodes/template/input-port.html"></sf-template>
+      <sf-template path="Blackprint/nodes/template/input-port.sf"></sf-template>
     </div>
 
     <div class="right-port">
-      <sf-template path="Blackprint/nodes/template/output-port.html"></sf-template>
+      <sf-template path="Blackprint/nodes/template/output-port.sf"></sf-template>
     </div>
   </div>
 </div>
@@ -29,8 +29,6 @@ bpao-webaudio-visualize-video {
 }
 
 ## js-global
-
-
 // Node's logic, don't use browser's API or library here
 Blackprint.registerNode('WebAudio/visualize/video', function(node, iface){
   iface.title = 'Video Visualization';

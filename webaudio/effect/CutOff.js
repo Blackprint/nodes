@@ -1,5 +1,3 @@
-;(function(){ // Private scope
-
 // Just some logic to handle, can be used for browser/non-browser
 Blackprint.registerNode('WebAudio/effect/CutOff', function(node, iface){
 	iface.title = 'CutOff';
@@ -22,7 +20,7 @@ Blackprint.registerNode('WebAudio/effect/CutOff', function(node, iface){
 });
 
 Blackprint.registerInterface('BPAO/WebAudio/effect/CutOff', {
-	template: 'Blackprint/nodes/default',
+	template: 'Blackprint/nodes/default.sf',
 	extend: Blackprint.Addons.WebAudio.MediaEffect
 }, function(iface){
 	iface.effect = ScarletsMediaEffect.cutOff();
@@ -38,6 +36,3 @@ Blackprint.registerInterface('BPAO/WebAudio/effect/CutOff', {
 		iface.node.outputs.Out = iface.output;
 	}
 });
-
-// End of private scope
-})();

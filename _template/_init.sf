@@ -1,0 +1,11 @@
+.js will run first before .sf
+
+## js-global
+// This script will run first, and then the other .sf files
+// depends on blackprint.config.js configuration
+
+// Prepare stuff when the page is loading
+// maybe like loading our dependencies for the nodes
+
+// If you have loaded any dependency from ./init.js can also wait from here
+await sf.loader.task;

@@ -1,6 +1,6 @@
 ## html
 <div class="node input" style="transform: translate({{ x }}px, {{ y }}px)">
-  <sf-template path="Blackprint/nodes/template/header.html"></sf-template>
+  <sf-template path="Blackprint/nodes/template/header.sf"></sf-template>
 
   <div class="content">
   	<select sf-bind="selected">
@@ -10,7 +10,7 @@
   	</select>
 
     <div class="right-port">
-      <sf-template path="Blackprint/nodes/template/output-port.html"></sf-template>
+      <sf-template path="Blackprint/nodes/template/output-port.sf"></sf-template>
     </div>
   </div>
 </div>
@@ -24,7 +24,6 @@ bpao-webaudio-input-microphone {
 }
 
 ## js-global
-
 // Just some logic to handle, can be used for browser/non-browser
 Blackprint.registerNode('WebAudio/input/microphone', function(node, iface){
   iface.title = 'Microphone';

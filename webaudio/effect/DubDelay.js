@@ -1,5 +1,3 @@
-;(function(){ // Private scope
-
 // Just some logic to handle, can be used for browser/non-browser
 Blackprint.registerNode('WebAudio/effect/DubDelay', function(node, iface){
 	iface.title = 'DubDelay';
@@ -23,7 +21,7 @@ Blackprint.registerNode('WebAudio/effect/DubDelay', function(node, iface){
 });
 
 Blackprint.registerInterface('BPAO/WebAudio/effect/DubDelay', {
-	template: 'Blackprint/nodes/default',
+	template: 'Blackprint/nodes/default.sf',
 	extend: Blackprint.Addons.WebAudio.MediaEffect
 }, function(iface){
 	iface.effect = ScarletsMediaEffect.dubDelay();
@@ -39,6 +37,3 @@ Blackprint.registerInterface('BPAO/WebAudio/effect/DubDelay', {
 		iface.node.outputs.Out = iface.output;
 	}
 });
-
-// End of private scope
-})();

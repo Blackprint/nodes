@@ -1,5 +1,3 @@
-;(function(){ // Private scope
-
 // Just some logic to handle, can be used for browser/non-browser
 Blackprint.registerNode('WebAudio/effect/Noise', function(node, iface){
 	iface.title = 'Noise';
@@ -16,7 +14,7 @@ Blackprint.registerNode('WebAudio/effect/Noise', function(node, iface){
 });
 
 Blackprint.registerInterface('BPAO/WebAudio/effect/Noise', {
-	template: 'Blackprint/nodes/default',
+	template: 'Blackprint/nodes/default.sf',
 	extend: Blackprint.Addons.WebAudio.MediaEffect
 }, function(iface){
 	iface.effect = ScarletsMediaEffect.noise();
@@ -32,6 +30,3 @@ Blackprint.registerInterface('BPAO/WebAudio/effect/Noise', {
 		iface.node.outputs.Out = iface.output;
 	}
 });
-
-// End of private scope
-})();

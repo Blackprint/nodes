@@ -1,0 +1,10 @@
+.js will run first before .sf
+
+## js-global
+// This script will run first, and then the other .sf files
+// depends on blackprint.config.js configuration
+
+
+// Wait until all dependencies ready
+// ./init.js is loading Pixi.js
+await sf.loader.task;

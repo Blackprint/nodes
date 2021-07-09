@@ -1,6 +1,6 @@
 ## html
 <div class="node input" style="transform: translate({{ x }}px, {{ y }}px)">
-  <sf-template path="Blackprint/nodes/template/header-small.html"></sf-template>
+  <sf-template path="Blackprint/nodes/template/header-small.sf"></sf-template>
 
   <div class="content header-small">
     <div class="scrollable-number-input">
@@ -13,7 +13,7 @@
       </div>
     </div>
     <div class="right-port" style="margin-top:3px">
-      <sf-template path="Blackprint/nodes/template/output-port.html"></sf-template>
+      <sf-template path="Blackprint/nodes/template/output-port.sf"></sf-template>
     </div>
   </div>
 </div>

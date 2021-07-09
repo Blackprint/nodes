@@ -1,5 +1,3 @@
-;(function(){ // Private scope
-
 // Node's logic, don't use browser's API or library here
 Blackprint.registerNode('Graphics/converter/gif', function(node, iface){
 	iface.title = 'Gif player';
@@ -16,7 +14,7 @@ Blackprint.registerNode('Graphics/converter/gif', function(node, iface){
 
 // For Browser Interface, let ScarletsFrame handle this (HotReload available here)
 Blackprint.registerInterface('BPAO/Graphics/converter/gif', {
-	template: 'Blackprint/nodes/default'
+	template: 'Blackprint/nodes/default.sf'
 }, function(iface){
 	var node = iface.node;
 	iface.canvas = null;
@@ -47,5 +45,3 @@ Blackprint.registerInterface('BPAO/Graphics/converter/gif', {
 		iface.gif.stop();
 	});
 });
-
-})(); // End of private scope

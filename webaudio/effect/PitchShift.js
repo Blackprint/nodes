@@ -1,5 +1,3 @@
-;(function(){ // Private scope
-
 // Just some logic to handle, can be used for browser/non-browser
 Blackprint.registerNode('WebAudio/effect/PitchShift', function(node, iface){
 	iface.title = 'PitchShift';
@@ -20,7 +18,7 @@ Blackprint.registerNode('WebAudio/effect/PitchShift', function(node, iface){
 });
 
 Blackprint.registerInterface('BPAO/WebAudio/effect/PitchShift', {
-	template: 'Blackprint/nodes/default',
+	template: 'Blackprint/nodes/default.sf',
 	extend: Blackprint.Addons.WebAudio.MediaEffect
 }, function(iface){
 	iface.effect = ScarletsMediaEffect.pitchShift();
@@ -36,6 +34,3 @@ Blackprint.registerInterface('BPAO/WebAudio/effect/PitchShift', {
 		iface.node.outputs.Out = iface.output;
 	}
 });
-
-// End of private scope
-})();

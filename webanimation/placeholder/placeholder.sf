@@ -1,11 +1,11 @@
 ## html
 <placeholder-inf-node class="node" style="transform: translate({{ x }}px, {{ y }}px)">
-  <sf-template path="Blackprint/nodes/template/header.html"></sf-template>
+  <sf-template path="Blackprint/nodes/template/header.sf"></sf-template>
 
   <div class="content">
-    <sf-template path="BPAO/placeholder/template/placeholder.html"></sf-template>
+    <sf-template path="BPAO/placeholder/template/placeholder.sf"></sf-template>
     <div class="right-port">
-      <sf-template path="Blackprint/nodes/template/output-port.html"></sf-template>
+      <sf-template path="Blackprint/nodes/template/output-port.sf"></sf-template>
     </div>
   </div>
 </placeholder-inf-node>
@@ -38,7 +38,7 @@ Blackprint.registerNode('placeholder1/placeholder2', function(handler, node){
 // For Browser
 Blackprint.registerInterface('placeholder-inf', {
 	extend: PlaceHolder,
-	template: 'BPAO/placeholder/placeholder.html'
+	template: 'BPAO/placeholder/placeholder.sf'
 });
 
 // == For Standalone Engine ==

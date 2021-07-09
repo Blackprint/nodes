@@ -1,11 +1,14 @@
+// This script will run first, and then the other files
+// depends on blackprint.config.js configuration
+
+// Prepare stuff when the page is loading
+// maybe like loading our dependencies for the nodes
+
+
 // Load dependencies
-sf.loader.js([
+await sf.loader.js([
 	"https://cdn.jsdelivr.net/npm/sfmediastream@latest"
 ]);
-
-// This will run after the browser was loaded all script
-$(function(){
-// Wrap all .js scripts until end.js
 
 // To fix video sync bug
 var fakeDestination = ScarletsMedia.audioContext.createGain();

@@ -1,5 +1,3 @@
-;(function(){ // Private scope
-
 // Just some logic to handle, can be used for browser/non-browser
 Blackprint.registerNode('WebAudio/effect/Flanger', function(node, iface){
 	iface.title = 'Flanger';
@@ -24,7 +22,7 @@ Blackprint.registerNode('WebAudio/effect/Flanger', function(node, iface){
 });
 
 Blackprint.registerInterface('BPAO/WebAudio/effect/Flanger', {
-	template: 'Blackprint/nodes/default',
+	template: 'Blackprint/nodes/default.sf',
 	extend: Blackprint.Addons.WebAudio.MediaEffect
 }, function(iface){
 	iface.effect = ScarletsMediaEffect.flanger();
@@ -40,6 +38,3 @@ Blackprint.registerInterface('BPAO/WebAudio/effect/Flanger', {
 		iface.node.outputs.Out = iface.output;
 	}
 });
-
-// End of private scope
-})();
