@@ -19,7 +19,7 @@ Blackprint.registerNode('WebAudio/effect/PitchShift', function(node, iface){
 
 Blackprint.registerInterface('BPAO/WebAudio/effect/PitchShift', {
 	template: 'Blackprint/nodes/default.sf',
-	extend: Blackprint.Addons.WebAudio.MediaEffect
+	extend: Context.MediaEffect
 }, function(iface){
 	iface.effect = ScarletsMediaEffect.pitchShift();
 	iface.input = iface.effect.input;

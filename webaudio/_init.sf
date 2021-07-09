@@ -9,3 +9,6 @@
 
 // If you have loaded any dependency from ./init.js can also wait from here
 await sf.loader.task;
+
+// Shared context between .js and .sf
+let Context = Blackprint.Addons('WebAudio');

@@ -10,27 +10,28 @@ await sf.loader.js([
 	"https://cdn.jsdelivr.net/npm/sfmediastream@latest"
 ]);
 
+// Shared context between .js and .sf
+let Context = Blackprint.Addons('WebAudio');
+
 // To fix video sync bug
 var fakeDestination = ScarletsMedia.audioContext.createGain();
 fakeDestination.gain.value = 0
 fakeDestination.connect(ScarletsMedia.audioContext.destination);
 
 // To be extended by node on /webaudio/effect
-Blackprint.Addons.WebAudio = {
-	MediaEffect: class MediaEffect extends Blackprint.Node{
-		init(){
-			var iface = this;
-			var node = this.node;
+Context.MediaEffect = class MediaEffect extends Blackprint.Node{
+	init(){
+		var iface = this;
+		var node = this.node;
 
-			iface.inputs.In.on('value', function(port){
-				port.value.connect(iface.input);
-			})
-			.on('disconnect', function(port){
-				port.value.disconnect(iface.input);
-			});
-		}
-	},
-}
+		iface.inputs.In.on('value', function(port){
+			port.value.connect(iface.input);
+		})
+		.on('disconnect', function(port){
+			port.value.disconnect(iface.input);
+		});
+	}
+};
 
 function customEffectFunctionBind(iface){
 	var node = iface.node;

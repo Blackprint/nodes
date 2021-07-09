@@ -24,7 +24,7 @@ Blackprint.registerNode('WebAudio/effect/DubDelay', function(node, iface){
 
 Blackprint.registerInterface('BPAO/WebAudio/effect/DubDelay', {
 	template: 'Blackprint/nodes/default.sf',
-	extend: Blackprint.Addons.WebAudio.MediaEffect
+	extend: Context.MediaEffect
 }, function(iface){
 	iface.effect = ScarletsMediaEffect.dubDelay();
 	iface.input = iface.effect.input;

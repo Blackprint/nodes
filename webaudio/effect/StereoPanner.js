@@ -19,7 +19,7 @@ Blackprint.registerNode('WebAudio/effect/StereoPanner', function(node, iface){
 
 Blackprint.registerInterface('BPAO/WebAudio/effect/StereoPanner', {
 	template: 'Blackprint/nodes/default.sf',
-	extend: Blackprint.Addons.WebAudio.MediaEffect
+	extend: Context.MediaEffect
 }, function(iface){
 	iface.effect = ScarletsMediaEffect.stereoPanner();
 	iface.input = iface.effect.input;

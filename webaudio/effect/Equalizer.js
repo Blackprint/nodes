@@ -20,7 +20,7 @@ Blackprint.registerNode('WebAudio/effect/Equalizer', function(node, iface){
 
 Blackprint.registerInterface('BPAO/WebAudio/effect/Equalizer', {
 	template: 'Blackprint/nodes/default.sf',
-	extend: Blackprint.Addons.WebAudio.MediaEffect
+	extend: Context.MediaEffect
 }, function(iface){
 	iface.effect = ScarletsMediaEffect.equalizer();
 	iface.input = iface.effect.input;

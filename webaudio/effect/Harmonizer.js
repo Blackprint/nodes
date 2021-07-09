@@ -21,7 +21,7 @@ Blackprint.registerNode('WebAudio/effect/Harmonizer', function(node, iface){
 
 Blackprint.registerInterface('BPAO/WebAudio/effect/Harmonizer', {
 	template: 'Blackprint/nodes/default.sf',
-	extend: Blackprint.Addons.WebAudio.MediaEffect
+	extend: Context.MediaEffect
 }, function(iface){
 	iface.effect = ScarletsMediaEffect.harmonizer();
 	iface.input = iface.effect.input;

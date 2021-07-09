@@ -20,7 +20,7 @@ Blackprint.registerNode('WebAudio/effect/ConReverb', function(node, iface){
 
 Blackprint.registerInterface('BPAO/WebAudio/effect/ConReverb', {
 	template: 'Blackprint/nodes/default.sf',
-	extend: Blackprint.Addons.WebAudio.MediaEffect
+	extend: Context.MediaEffect
 }, function(iface){
 	iface.effect = ScarletsMediaEffect.conReverb();
 	iface.input = iface.effect.input;

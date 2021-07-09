@@ -21,7 +21,7 @@ Blackprint.registerNode('WebAudio/effect/Delay', function(node, iface){
 
 Blackprint.registerInterface('BPAO/WebAudio/effect/Delay', {
 	template: 'Blackprint/nodes/default.sf',
-	extend: Blackprint.Addons.WebAudio.MediaEffect
+	extend: Context.MediaEffect
 }, function(iface){
 	iface.effect = ScarletsMediaEffect.delay();
 	iface.input = iface.effect.input;

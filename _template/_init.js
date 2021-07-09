@@ -15,3 +15,7 @@ await sf.loader.js([
  * without load another dependency
  */
 // await sf.loader.task;
+
+
+// Shared context between .js and .sf
+let Context = Blackprint.Addons('YourTemplate');

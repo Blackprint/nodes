@@ -15,7 +15,7 @@ Blackprint.registerNode('WebAudio/effect/Noise', function(node, iface){
 
 Blackprint.registerInterface('BPAO/WebAudio/effect/Noise', {
 	template: 'Blackprint/nodes/default.sf',
-	extend: Blackprint.Addons.WebAudio.MediaEffect
+	extend: Context.MediaEffect
 }, function(iface){
 	iface.effect = ScarletsMediaEffect.noise();
 	iface.input = iface.effect.input;

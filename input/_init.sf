@@ -5,10 +5,6 @@
 // Wait until all dependencies ready before running all .sf files
 await sf.loader.task;
 
-function objLength(obj){
-	var i = 0;
-	for(var k in obj)
-		i++;
-
-	return i;
-}
+// Shared context between .js and .sf
+let Context = Blackprint.Addons('Input');
+let {objLength} = Context;

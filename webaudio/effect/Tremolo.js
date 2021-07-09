@@ -21,7 +21,7 @@ Blackprint.registerNode('WebAudio/effect/Tremolo', function(node, iface){
 
 Blackprint.registerInterface('BPAO/WebAudio/effect/Tremolo', {
 	template: 'Blackprint/nodes/default.sf',
-	extend: Blackprint.Addons.WebAudio.MediaEffect
+	extend: Context.MediaEffect
 }, function(iface){
 	iface.effect = ScarletsMediaEffect.tremolo();
 	iface.input = iface.effect.input;

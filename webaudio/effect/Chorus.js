@@ -21,7 +21,7 @@ Blackprint.registerNode('WebAudio/effect/Chorus', function(node, iface){
 
 Blackprint.registerInterface('BPAO/WebAudio/effect/Chorus', {
 	template: 'Blackprint/nodes/default.sf',
-	extend: Blackprint.Addons.WebAudio.MediaEffect
+	extend: Context.MediaEffect
 }, function(iface){
 	iface.effect = ScarletsMediaEffect.chorus();
 	iface.input = iface.effect.input;

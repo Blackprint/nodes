@@ -8,3 +8,6 @@
 // Wait until all dependencies ready
 // ./init.js is loading Pixi.js
 await sf.loader.task;
+
+// Shared context between .js and .sf
+let Context = Blackprint.Addons('Graphics');

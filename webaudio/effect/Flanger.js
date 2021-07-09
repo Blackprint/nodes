@@ -23,7 +23,7 @@ Blackprint.registerNode('WebAudio/effect/Flanger', function(node, iface){
 
 Blackprint.registerInterface('BPAO/WebAudio/effect/Flanger', {
 	template: 'Blackprint/nodes/default.sf',
-	extend: Blackprint.Addons.WebAudio.MediaEffect
+	extend: Context.MediaEffect
 }, function(iface){
 	iface.effect = ScarletsMediaEffect.flanger();
 	iface.input = iface.effect.input;

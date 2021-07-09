@@ -21,7 +21,7 @@ Blackprint.registerNode('WebAudio/effect/PingPongDelay', function(node, iface){
 
 Blackprint.registerInterface('BPAO/WebAudio/effect/PingPongDelay', {
 	template: 'Blackprint/nodes/default.sf',
-	extend: Blackprint.Addons.WebAudio.MediaEffect
+	extend: Context.MediaEffect
 }, function(iface){
 	iface.effect = ScarletsMediaEffect.pingPongDelay();
 	iface.input = iface.effect.input;

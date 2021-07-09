@@ -8,5 +8,7 @@ The compiler will watch every changes inside this folder by following the config
 
 Before opening `.sf` file, please install the [syntax highlighter](https://github.com/StefansArya/scarletsframe-compiler/tree/master/syntax-highlighter) for your text editor.
 
+> BPAO = Blackprint Addons
+
 ### License
 MIT

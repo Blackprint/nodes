@@ -21,7 +21,7 @@ Blackprint.registerNode('WebAudio/effect/CutOff', function(node, iface){
 
 Blackprint.registerInterface('BPAO/WebAudio/effect/CutOff', {
 	template: 'Blackprint/nodes/default.sf',
-	extend: Blackprint.Addons.WebAudio.MediaEffect
+	extend: Context.MediaEffect
 }, function(iface){
 	iface.effect = ScarletsMediaEffect.cutOff();
 	iface.input = iface.effect.input;
