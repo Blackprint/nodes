@@ -13,8 +13,16 @@ await sf.loader.js([
 // Shared context between .js and .sf
 let Context = Blackprint.Addons('WebAudio');
 
+Context.objLength = function objLength(obj){
+	var i = 0;
+	for(var k in obj)
+		i++;
+
+	return i;
+}
+
 // To fix video sync bug
-var fakeDestination = ScarletsMedia.audioContext.createGain();
+var fakeDestination = Context.fakeDestination = ScarletsMedia.audioContext.createGain();
 fakeDestination.gain.value = 0
 fakeDestination.connect(ScarletsMedia.audioContext.destination);
 
@@ -50,10 +58,10 @@ function customEffectFunctionBind(iface){
 		let value = Number(options[prop].toFixed(2));
 		Object.defineProperty(options, prop, {
 			enumerable:true,
-			get:function(){
+			get(){
 				return value;
 			},
-			set:function(val){
+			set(val){
 				value = val;
 				func(val);
 			}
@@ -62,7 +70,7 @@ function customEffectFunctionBind(iface){
 		let inputComp = {
 			which:prop,
 			obj:iface.options,
-			whenChanged:function(now){
+			whenChanged(now){
 				value = now;
 				func(now);
 			}

@@ -1,7 +1,7 @@
 // This script will run first, and then the other files
 // depends on blackprint.config.js configuration
 
-// Prepare stuff when the page is loading
+// Prepare stuff when the page is loadingz
 // maybe like loading our dependencies for the nodes
 
 // Load dependencies and wait until everything ready

@@ -125,13 +125,13 @@ Blackprint.registerNode('Input/slider-box', function(node, iface){
 	node.init = function(){
 		// Put this array here, and reuse when port menu event
 		var portMenu = [{
-			title:"Create port", context:null, callback:function(){
+			title:"Create port", context:null, callback(){
 				// Always create on last position -> (key, default value)
 				node.outputs.add(iface.options.length, 0);
 				iface.createPort();
 			}
 		}, {
-			title:"Delete last port", context:null, callback:function(){
+			title:"Delete last port", context:null, callback(){
 				var length = iface.options.length;
 				if(length === 1)
 					return;

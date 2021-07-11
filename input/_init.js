@@ -6,8 +6,7 @@ await sf.loader.task;
 
 // Shared context between .js and .sf
 let Context = Blackprint.Addons('Input');
-
-Context.objLength = function objLength(obj){
+let objLength = Context.objLength = function(obj){
 	var i = 0;
 	for(var k in obj)
 		i++;
