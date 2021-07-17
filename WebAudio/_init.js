@@ -44,19 +44,19 @@ Context.MediaEffect = class MediaEffect extends Blackprint.Node{
 function customEffectFunctionBind(iface){
 	var node = iface.node;
 	var effect = iface.effect;
-	var options = iface.options;
+	var data = iface.data;
 
-	for(let prop in options){
+	for(let prop in data){
 		if(prop.includes('$'))
 			continue;
 
 		let func = effect[prop];
-		if(options[prop] !== void 0)
-			func(options[prop]);
-		else options[prop] = func();
+		if(data[prop] !== void 0)
+			func(data[prop]);
+		else data[prop] = func();
 
-		let value = Number(options[prop].toFixed(2));
-		Object.defineProperty(options, prop, {
+		let value = Number(data[prop].toFixed(2));
+		Object.defineProperty(data, prop, {
 			enumerable:true,
 			get(){
 				return value;
@@ -69,7 +69,7 @@ function customEffectFunctionBind(iface){
 
 		let inputComp = {
 			which:prop,
-			obj:iface.options,
+			obj:iface.data,
 			whenChanged(now){
 				value = now;
 				func(now);
@@ -80,7 +80,7 @@ function customEffectFunctionBind(iface){
 
 		var port = node.inputs.add(name, Number);
 		port.on('value', function(port){
-			options[prop] = port.value; // For options value
+			data[prop] = port.value; // For data value
 			inputComp.default = port.value;
 			func(port.value); // For ScarletsMediaEffect value
 		});

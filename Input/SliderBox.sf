@@ -4,7 +4,7 @@
 
   <div class="content header-small">
     <div class="scrollable-number-input">
-      <div sf-each="key,val in options" >
+      <div sf-each="key,val in data" >
         <input type="number" class="input-no-native"
           sf-bind="val.value"
           step="{{val.step}}" max="{{val.max}}" min="{{val.min}}"

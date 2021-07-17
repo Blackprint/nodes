@@ -4,7 +4,7 @@ Blackprint.registerNode('WebAudio/Effect/Chorus', function(node, iface){
 	iface.description = 'WebAudio Effect';
 	iface.interface = 'BPAO/WebAudio/Effect/Chorus';
 
-	iface.options = {
+	iface.data = {
 		mix: 0.5,
 		rate: 0, // 0~1
 		intensity: 0.75, // 0~1

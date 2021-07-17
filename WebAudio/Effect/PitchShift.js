@@ -4,7 +4,7 @@ Blackprint.registerNode('WebAudio/Effect/PitchShift', function(node, iface){
 	iface.description = 'WebAudio Effect';
 	iface.interface = 'BPAO/WebAudio/Effect/PitchShift';
 
-	iface.options = {
+	iface.data = {
 		shift: 0, // -3 ~ 3
 	};
 

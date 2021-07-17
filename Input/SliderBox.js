@@ -7,7 +7,7 @@ class UIControl extends Blackprint.Node {
 		var iface = this;
 		iface.focusIndex = void 0;
 
-		iface.options = [{
+		iface.data = [{
 			value: 0,
 			min: -100,
 			max: 100,
@@ -20,7 +20,7 @@ class UIControl extends Blackprint.Node {
 	}
 
 	// Put this here to reduce memory usage because function creation
-	// And reuse it on every node.options's item
+	// And reuse it on every node.data's item
 	valueListener(now){
 		// 'this' == current object item
 
@@ -36,7 +36,7 @@ class UIControl extends Blackprint.Node {
 	}
 
 	createPort(){
-		this.options.push({
+		this.data.push({
 			value: 0,
 			min: -100,
 			max: 100,
@@ -49,11 +49,11 @@ class UIControl extends Blackprint.Node {
 	}
 
 	deleteLastPort(){
-		this.options.pop();
+		this.data.pop();
 	}
 
 	dragMove(ev, item){
-		this.focusIndex = this.options.indexOf(item);
+		this.focusIndex = this.data.indexOf(item);
 		function onMove(ev){
 			item.value += item.step * ev.movementX;
 		}
@@ -65,12 +65,12 @@ class UIControl extends Blackprint.Node {
 			doc.off('pointermove', onMove);
 
 			if(ev2.timeStamp - ev.timeStamp < 100)
-				$('input', that.options.getElements(item)).focus();
+				$('input', that.data.getElements(item)).focus();
 		});
 	}
 
 	mouseWheel(ev, item){
-		this.focusIndex = this.options.indexOf(item);
+		this.focusIndex = this.data.indexOf(item);
 		item.value -= item.step * Math.sign(ev.deltaY);
 	}
 }
@@ -90,31 +90,31 @@ Blackprint.registerNode('Input/SliderBox', function(node, iface){
 	}
 
 	// Callback when this single node was loaded
-	// Lets handle saved options
-	node.imported = function(options){
-		if(options === void 0)
+	// Lets handle saved data
+	node.imported = function(data){
+		if(data === void 0)
 			return;
 
 		// Assign the first one
-		Object.assign(iface.options[0], options['0']);
+		Object.assign(iface.data[0], data['0']);
 
 		// Set current port value
-		node.outputs['0'] = options['0'].value;
+		node.outputs['0'] = data['0'].value;
 
-		var length = objLength(options);
+		var length = objLength(data);
 		if(length === 1)
 			return;
 
-		// Create new port handler if options is more than one
+		// Create new port handler if data is more than one
 		for (var i = 1; i < length; i++){
-			// Equal to 'iface.options.push({...})'
+			// Equal to 'iface.data.push({...})'
 			iface.createPort();
 
 			// Because it object property, we need to cast as string
-			var val = options[i+''];
+			var val = data[i+''];
 
-			// Assign object values into options
-			Object.assign(iface.options[i], val);
+			// Assign object values into data
+			Object.assign(iface.data[i], val);
 
 			// Add new port and set current port value
 			node.outputs.add(i, val.value);
@@ -127,12 +127,12 @@ Blackprint.registerNode('Input/SliderBox', function(node, iface){
 		var portMenu = [{
 			title:"Create port", context:null, callback(){
 				// Always create on last position -> (key, default value)
-				node.outputs.add(iface.options.length, 0);
+				node.outputs.add(iface.data.length, 0);
 				iface.createPort();
 			}
 		}, {
 			title:"Delete last port", context:null, callback(){
-				var length = iface.options.length;
+				var length = iface.data.length;
 				if(length === 1)
 					return;
 

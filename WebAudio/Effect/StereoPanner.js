@@ -4,7 +4,7 @@ Blackprint.registerNode('WebAudio/Effect/StereoPanner', function(node, iface){
 	iface.description = 'WebAudio Effect';
 	iface.interface = 'BPAO/WebAudio/Effect/StereoPanner';
 
-	iface.options = {
+	iface.data = {
 		set: 1, // 0 ~ 1
 	};
 

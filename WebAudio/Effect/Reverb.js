@@ -4,7 +4,7 @@ Blackprint.registerNode('WebAudio/Effect/Reverb', function(node, iface){
 	iface.description = 'WebAudio Effect';
 	iface.interface = 'BPAO/WebAudio/Effect/Reverb';
 
-	iface.options = {
+	iface.data = {
 		mix: 1, // 0 ~ 1
 		time: 1, // 0 ~ 3
 		decay: 0.1, // 0 ~ 3

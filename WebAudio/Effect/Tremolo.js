@@ -4,7 +4,7 @@ Blackprint.registerNode('WebAudio/Effect/Tremolo', function(node, iface){
 	iface.description = 'WebAudio Effect';
 	iface.interface = 'BPAO/WebAudio/Effect/Tremolo';
 
-	iface.options = {
+	iface.data = {
 		mix: 0.8, // 0 ~ 1
 		speed: 0.2, // 0 ~ 3
 		depth: 1, // 0 ~ 3

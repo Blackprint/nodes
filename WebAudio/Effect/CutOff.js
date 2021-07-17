@@ -4,7 +4,7 @@ Blackprint.registerNode('WebAudio/Effect/CutOff', function(node, iface){
 	iface.description = 'WebAudio Effect';
 	iface.interface = 'BPAO/WebAudio/Effect/CutOff';
 
-	iface.options = {
+	iface.data = {
 		type: String, // lowpass | highpass | midpass
 		frequency: 350, // Filter node's frequency value
 		width: 1, // Filter node's Q value

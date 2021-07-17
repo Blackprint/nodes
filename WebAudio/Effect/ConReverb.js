@@ -4,7 +4,7 @@ Blackprint.registerNode('WebAudio/Effect/ConReverb', function(node, iface){
 	iface.description = 'WebAudio Effect';
 	iface.interface = 'BPAO/WebAudio/Effect/ConReverb';
 
-	iface.options = {
+	iface.data = {
 		bufferFileURL: String, // 0~1
 		mix: 0.5,
 	};

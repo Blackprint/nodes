@@ -4,7 +4,7 @@ Blackprint.registerNode('WebAudio/Effect/Harmonizer', function(node, iface){
 	iface.description = 'WebAudio Effect';
 	iface.interface = 'BPAO/WebAudio/Effect/Harmonizer';
 
-	iface.options = {
+	iface.data = {
 		pitch: 34, // 0 ~ 1
 		slope: 0.65, // 0 ~ 1
 		width: 0.15, // 0 ~ 1

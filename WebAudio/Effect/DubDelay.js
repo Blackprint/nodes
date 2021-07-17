@@ -4,7 +4,7 @@ Blackprint.registerNode('WebAudio/Effect/DubDelay', function(node, iface){
 	iface.description = 'WebAudio Effect';
 	iface.interface = 'BPAO/WebAudio/Effect/DubDelay';
 
-	iface.options = {
+	iface.data = {
 		mix: 0.5, // 0 ~ 1
 		time: 0.7, // 0 ~ 180
 		feedback: 0.5, // 0 ~ 1

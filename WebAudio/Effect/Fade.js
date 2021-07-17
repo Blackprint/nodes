@@ -4,7 +4,7 @@ Blackprint.registerNode('WebAudio/Effect/DubDelay', function(node, iface){
 	iface.description = 'WebAudio Effect';
 	iface.interface = 'BPAO/WebAudio/Effect/DubDelay';
 
-	iface.options = {
+	iface.data = {
 		volume: 0.5, // First volume
 		time: 0.7, // seconds
 	};
@@ -12,7 +12,7 @@ Blackprint.registerNode('WebAudio/Effect/DubDelay', function(node, iface){
 	node.inputs = {
 		In: Blackprint.PortArrayOf(AudioNode),
 		Start: Blackprint.PortTrigger(function(){
-			iface.effect.in(iface.options.volume, iface.options.time, node.outputs.Finish);
+			iface.effect.in(iface.data.volume, iface.data.time, node.outputs.Finish);
 		})
 	};
 

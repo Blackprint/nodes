@@ -3,7 +3,7 @@
   <sf-template path="Blackprint/nodes/template/header.sf"></sf-template>
 
   <div class="content">
-    <textarea sf-bind="options.value"></textarea>
+    <textarea sf-bind="data.value"></textarea>
   </div>
 </div>
 
@@ -23,7 +23,7 @@ Blackprint.registerNode('Decoration/Text/Notes', function(node, iface){
 	iface.title = 'Notes';
 	iface.interface = 'BPAO/Decoration/Text/Notes'; // Interface path
 
-	iface.options = {
+	iface.data = {
 		value:'',
 
 		// Triggered when 'value' was changed from view/model
@@ -34,16 +34,16 @@ Blackprint.registerNode('Decoration/Text/Notes', function(node, iface){
 		}
 	};
 
-	node.imported = function(options){
+	node.imported = function(data){
 		// When this node was successfully imported
-		iface.options.value = options.value;
+		iface.data.value = data.value;
 	}
 });
 
 Blackprint.registerInterface('BPAO/Decoration/Text/Notes', function(iface){
 	iface.init = function(){
 		setTimeout(function(){
-			iface.options.on$value(); // Refresh size
+			iface.data.on$value(); // Refresh size
 		}, 1000);
 	}
 });

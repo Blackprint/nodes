@@ -4,7 +4,7 @@ Blackprint.registerNode('WebAudio/Effect/Equalizer', function(node, iface){
 	iface.description = 'WebAudio Effect';
 	iface.interface = 'BPAO/WebAudio/Effect/Equalizer';
 
-	iface.options = {
+	iface.data = {
 		frequency: 0.7,
 		decibel: 0.5, // -20 ~ 20
 	};

@@ -4,7 +4,7 @@ Blackprint.registerNode('WebAudio/Effect/Flanger', function(node, iface){
 	iface.description = 'WebAudio Effect';
 	iface.interface = 'BPAO/WebAudio/Effect/Flanger';
 
-	iface.options = {
+	iface.data = {
 		mix: 0.5, // 0 ~ 1
 		time: 0.45, // 0 ~ 1
 		speed: 0.2, // 0 ~ 1

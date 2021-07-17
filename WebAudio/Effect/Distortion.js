@@ -4,7 +4,7 @@ Blackprint.registerNode('WebAudio/Effect/Distortion', function(node, iface){
 	iface.description = 'WebAudio Effect';
 	iface.interface = 'BPAO/WebAudio/Effect/Distortion';
 
-	iface.options = {
+	iface.data = {
 		set: 0.5, // 0 ~ 1
 	};
 
