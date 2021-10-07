@@ -1,38 +1,44 @@
-// Just some logic to handle, can be used for browser/non-browser
-Blackprint.registerNode('WebAudio/Effect/Delay', function(node, iface){
-	iface.title = 'Delay';
-	iface.description = 'WebAudio Effect';
-	iface.interface = 'BPAO/WebAudio/Effect/Delay';
+Blackprint.registerNode('WebAudio/Effect/Delay',
+class DelayNode extends Blackprint.Node {
+	constructor(instance){
+		super(instance);
+		let iface = this.setInterface('BPIC/WebAudio/Effect/Delay');
 
-	iface.data = {
-		mix: 0.5, // 0 ~ 1
-		time: 0.3, // 0 ~ 180
-		feedback: 0.5, // 0 ~ 1
-	};
+		iface.title = 'Delay';
+		iface.description = 'WebAudio Effect';
 
-	node.inputs = {
-		In: Blackprint.PortArrayOf(AudioNode)
-	};
+		iface.data = {
+			mix: 0.5, // 0 ~ 1
+			time: 0.3, // 0 ~ 180
+			feedback: 0.5, // 0 ~ 1
+		};
 
-	node.outputs = {
-		Out: AudioNode
-	};
+		this.input = {
+			In: Blackprint.Port.ArrayOf(AudioNode)
+		};
+
+		this.output = {
+			Out: AudioNode
+		};
+	}
 });
 
-Blackprint.registerInterface('BPAO/WebAudio/Effect/Delay', {
-	template: 'Blackprint/nodes/default.sf',
-	extend: Context.MediaEffect
-}, function(iface){
-	iface.effect = ScarletsMediaEffect.delay();
-	iface.input = iface.effect.input;
-	iface.output = iface.effect.output;
+Blackprint.registerInterface('BPIC/WebAudio/Effect/Delay',
+Context.IFace.Delay = class DelayIFace extends Context.MediaEffect {
+	constructor(node){
+		super(node);
 
-	// Custom bind for ScarletsFrame with ScarletsMediaEffect object
-	customEffectFunctionBind(iface);
+		// Constructor for Interface can be executed twice when using Cloned Container
+		this.effect = ScarletsMediaEffect.delay();
+		this.audioInput = this.effect.input;
+		this.audioOutput = this.effect.output;
+	}
 
-	iface.init = function(){
-		iface.super(); // Call parent function
+	init(){
+		super.init(); // Call parent function
+		this.node.output.Out = this.audioOutput;
 
-		iface.node.outputs.Out = iface.output;
+		// Custom bind for ScarletsFrame with ScarletsMediaEffect object
+		customEffectFunctionBind(this);
 	}
 });

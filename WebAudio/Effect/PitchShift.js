@@ -1,36 +1,42 @@
-// Just some logic to handle, can be used for browser/non-browser
-Blackprint.registerNode('WebAudio/Effect/PitchShift', function(node, iface){
-	iface.title = 'PitchShift';
-	iface.description = 'WebAudio Effect';
-	iface.interface = 'BPAO/WebAudio/Effect/PitchShift';
+Blackprint.registerNode('WebAudio/Effect/PitchShift',
+class PitchShiftNode extends Blackprint.Node {
+	constructor(instance){
+		super(instance);
+		let iface = this.setInterface('BPIC/WebAudio/Effect/PitchShift');
 
-	iface.data = {
-		shift: 0, // -3 ~ 3
-	};
+		iface.title = 'PitchShift';
+		iface.description = 'WebAudio Effect';
 
-	node.inputs = {
-		In: Blackprint.PortArrayOf(AudioNode)
-	};
+		iface.data = {
+			shift: 0, // -3 ~ 3
+		};
 
-	node.outputs = {
-		Out: AudioNode
-	};
+		this.input = {
+			In: Blackprint.Port.ArrayOf(AudioNode)
+		};
+
+		this.output = {
+			Out: AudioNode
+		};
+	}
 });
 
-Blackprint.registerInterface('BPAO/WebAudio/Effect/PitchShift', {
-	template: 'Blackprint/nodes/default.sf',
-	extend: Context.MediaEffect
-}, function(iface){
-	iface.effect = ScarletsMediaEffect.pitchShift();
-	iface.input = iface.effect.input;
-	iface.output = iface.effect.output;
+Blackprint.registerInterface('BPIC/WebAudio/Effect/PitchShift',
+Context.IFace.PitchShift = class PitchShiftIFace extends Context.MediaEffect {
+	constructor(node){
+		super(node);
 
-	// Custom bind for ScarletsFrame with ScarletsMediaEffect object
-	customEffectFunctionBind(iface);
+		// Constructor for Interface can be executed twice when using Cloned Container
+		this.effect = ScarletsMediaEffect.pitchShift();
+		this.audioInput = this.effect.input;
+		this.audioOutput = this.effect.output;
+	}
 
-	iface.init = function(){
-		iface.super(); // Call parent function
+	init(){
+		super.init(); // Call parent function
+		this.node.output.Out = this.audioOutput;
 
-		iface.node.outputs.Out = iface.output;
+		// Custom bind for ScarletsFrame with ScarletsMediaEffect object
+		customEffectFunctionBind(this);
 	}
 });

@@ -1,37 +1,43 @@
-// Just some logic to handle, can be used for browser/non-browser
-Blackprint.registerNode('WebAudio/Effect/ConReverb', function(node, iface){
-	iface.title = 'ConReverb';
-	iface.description = 'WebAudio Effect';
-	iface.interface = 'BPAO/WebAudio/Effect/ConReverb';
+Blackprint.registerNode('WebAudio/Effect/ConReverb',
+class ConReverbNode extends Blackprint.Node {
+	constructor(instance){
+		super(instance);
+		let iface = this.setInterface('BPIC/WebAudio/Effect/ConReverb');
 
-	iface.data = {
-		bufferFileURL: String, // 0~1
-		mix: 0.5,
-	};
+		iface.title = 'ConReverb';
+		iface.description = 'WebAudio Effect';
 
-	node.inputs = {
-		In: Blackprint.PortArrayOf(AudioNode)
-	};
+		iface.data = {
+			bufferFileURL: String, // 0~1
+			mix: 0.5,
+		};
 
-	node.outputs = {
-		Out: AudioNode
-	};
+		this.input = {
+			In: Blackprint.Port.ArrayOf(AudioNode)
+		};
+
+		this.output = {
+			Out: AudioNode
+		};
+	}
 });
 
-Blackprint.registerInterface('BPAO/WebAudio/Effect/ConReverb', {
-	template: 'Blackprint/nodes/default.sf',
-	extend: Context.MediaEffect
-}, function(iface){
-	iface.effect = ScarletsMediaEffect.conReverb();
-	iface.input = iface.effect.input;
-	iface.output = iface.effect.output;
+Blackprint.registerInterface('BPIC/WebAudio/Effect/ConReverb',
+Context.IFace.ConReverb = class ConReverbIFace extends Context.MediaEffect {
+	constructor(node){
+		super(node);
 
-	// Custom bind for ScarletsFrame with ScarletsMediaEffect object
-	customEffectFunctionBind(iface);
+		// Constructor for Interface can be executed twice when using Cloned Container
+		this.effect ??= ScarletsMediaEffect.conReverb();
+		this.audioInput ??= this.effect.input;
+		this.audioOutput ??= this.effect.output;
+	}
 
-	iface.init = function(){
-		iface.super(); // Call parent function
+	init(){
+		super.init(); // Call parent function
+		this.node.output.Out = this.audioOutput;
 
-		iface.node.outputs.Out = iface.output;
+		// Custom bind for ScarletsFrame with ScarletsMediaEffect object
+		customEffectFunctionBind(this);
 	}
 });

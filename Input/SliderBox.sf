@@ -47,3 +47,30 @@
     border-radius: 10px;
   }
 }
+
+## js-global
+Blackprint.Sketch.registerInterface('BPIC/Input/SliderBox',
+class SliderBoxIFace extends Context.IFace.SliderBoxIFace {
+  dragMove(ev, item){
+    this.focusIndex = this.data.indexOf(item);
+
+    function onMove(ev){
+      item.value += item.step * ev.movementX;
+    }
+
+    var that = this;
+    var doc = $(ev.view.document);
+
+    doc.on('pointermove', onMove).once('pointerup', {capture:true}, function(ev2){
+      doc.off('pointermove', onMove);
+
+      if(ev2.timeStamp - ev.timeStamp < 100)
+        $('input', that.data.getElements(item)).focus();
+    });
+  }
+
+  mouseWheel(ev, item){
+    this.focusIndex = this.data.indexOf(item);
+    item.value -= item.step * Math.sign(ev.deltaY);
+  }
+});

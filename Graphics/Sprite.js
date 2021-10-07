@@ -1,64 +1,81 @@
-// Node's logic, don't use browser's API or library here
-Blackprint.registerNode('Graphics/Sprite', function(node, iface){
-	iface.title = 'Sprite';
-	iface.interface = 'BPAO/Graphics/Sprite';
+Blackprint.registerNode('Graphics/Sprite',
+class SpriteNode extends Blackprint.Node {
+	constructor(instance){
+		super(instance);
 
-	node.inputs = {
-		Source: [String, HTMLImageElement, HTMLCanvasElement, HTMLVideoElement, SVGElement, PIXI.resources.CanvasResource, PIXI.Texture],
-		x:0,
-		y:0,
-		ScaleX:1,
-		ScaleY:1,
-		Rotate:0,
-		// SkewX:0,
-		// SkewY:0,
-		// PivotX:0,
-		// PivotY:0,
-	};
+		let iface = this.setInterface('BPIC/Graphics/Sprite');
+		iface.title = 'Sprite';
 
-	node.outputs = {
-		Sprite: PIXI.Sprite,
+		let Port = Blackprint.Port;
+		this.input = {
+			Source: Port.Union({ // Use object so we can see the real name when minified
+				String,
+				HTMLImageElement,
+				HTMLCanvasElement,
+				HTMLVideoElement,
+				SVGElement,
+				PIXICanvasResource: PIXI.CanvasResource,
+				PIXITexture: PIXI.Texture
+			}),
+			x: Port.Default(Number, 0),
+			y: Port.Default(Number, 0),
+			ScaleX: Port.Default(Number, 1),
+			ScaleY: Port.Default(Number, 1),
+			Rotate: Port.Default(Number, 0),
+			// SkewX: Port.Default(Number, 0),
+			// SkewY: Port.Default(Number, 0),
+			// PivotX: Port.Default(Number, 0),
+			// PivotY: Port.Default(Number, 0),
+		};
+
+		this.output = {
+			Sprite: PIXI.Sprite,
+		}
+	}
+
+	update(){
+		if(this.iface.input.Source.cables.length === 0)
+			return;
+
+		this.output.Sprite.setTransform(
+			this.input.x,
+			this.input.y,
+			this.input.ScaleX,
+			this.input.ScaleY,
+			this.input.Rotate,
+			// this.input.SkewX,
+			// this.input.SkewY,
+			// this.input.PivotX,
+			// this.input.PivotY,
+		);
 	}
 });
 
-// For Browser Interface, let ScarletsFrame handle this (HotReload available here)
-Blackprint.registerInterface('BPAO/Graphics/Sprite', {
-	template: 'Blackprint/nodes/default.sf'
-}, function(iface){
-	var node = iface.node;
+Blackprint.registerInterface('BPIC/Graphics/Sprite',
+Context.IFace.Sprite = class SpriteIFace extends Blackprint.Interface{
+	constructor(node){
+		super(node);
+	}
 
-	iface.init = function(){
+	init(){
+		let node = this.node;
+
 		var sprite = new PIXI.Sprite();
-		node.outputs.Sprite = sprite;
+		node.output.Sprite = sprite;
 
 		// For replacing when texture source is disconnected
 		sprite._emptyTexture = sprite.texture;
-	}
 
-	iface.inputs.Source.off('value').on('value', function(){
-		node.outputs.Sprite.texture = PIXI.Texture.from(node.inputs.Source);
-		node.update();
-	});
-
-	iface.inputs.Source.off('disconnect').on('disconnect', function(){
-		var sprite = node.outputs.Sprite;
-		sprite.texture = sprite._emptyTexture;
-	});
-
-	node.update = function(){
-		if(iface.inputs.Source.cables.length === 0)
-			return;
-
-		node.outputs.Sprite.setTransform(
-			node.inputs.x,
-			node.inputs.y,
-			node.inputs.ScaleX,
-			node.inputs.ScaleY,
-			node.inputs.Rotate,
-			// node.inputs.SkewX,
-			// node.inputs.SkewY,
-			// node.inputs.PivotX,
-			// node.inputs.PivotY,
-		);
+		this.input.Source
+			.off('value')
+			.on('value', function(){
+				node.output.Sprite.texture = PIXI.Texture.from(node.input.Source);
+				node.update();
+			})
+			.off('disconnect')
+			.on('disconnect', function(){
+				var sprite = node.output.Sprite;
+				sprite.texture = sprite._emptyTexture;
+			});
 	}
 });

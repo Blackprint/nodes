@@ -1,41 +1,48 @@
-// Just some logic to handle, can be used for browser/non-browser
-Blackprint.registerNode('WebAudio/Effect/DubDelay', function(node, iface){
-	iface.title = 'DubDelay';
-	iface.description = 'WebAudio Effect';
-	iface.interface = 'BPAO/WebAudio/Effect/DubDelay';
+Blackprint.registerNode('WebAudio/Effect/Fade',
+class FadeNode extends Blackprint.Node {
+	constructor(instance){
+		super(instance);
+		let iface = this.setInterface('BPIC/WebAudio/Effect/Fade');
 
-	iface.data = {
-		volume: 0.5, // First volume
-		time: 0.7, // seconds
-	};
+		iface.title = 'Fade';
+		iface.description = 'WebAudio Effect';
 
-	node.inputs = {
-		In: Blackprint.PortArrayOf(AudioNode),
-		Start: Blackprint.PortTrigger(function(){
-			iface.effect.in(iface.data.volume, iface.data.time, node.outputs.Finish);
-		})
-	};
+		iface.data = {
+			volume: 0.5, // First volume
+			time: 0.7, // seconds
+		};
 
-	node.outputs = {
-		Out: AudioNode,
-		Finish: Function
-	};
+		let node = this;
+		this.input = {
+			In: Blackprint.Port.ArrayOf(AudioNode),
+			Start: Blackprint.Port.Trigger(function(){
+				iface.effect.in(iface.data.volume, iface.data.time, node.output.Finish);
+			})
+		};
+
+		this.output = {
+			Out: AudioNode,
+			Finish: Function
+		};
+	}
 });
 
-Blackprint.registerInterface('BPAO/WebAudio/Effect/DubDelay', {
-	template: 'Blackprint/nodes/default.sf',
-	extend: Context.MediaEffect
-}, function(iface){
-	iface.effect = ScarletsMediaEffect.dubDelay();
-	iface.input = iface.effect.input;
-	iface.output = iface.effect.output;
+Blackprint.registerInterface('BPIC/WebAudio/Effect/Fade',
+Context.IFace.Fade = class FadeIFace extends Context.MediaEffect {
+	constructor(node){
+		super(node);
 
-	// Custom bind for ScarletsFrame with ScarletsMediaEffect object
-	customEffectFunctionBind(iface);
+		// Constructor for Interface can be executed twice when using Cloned Container
+		this.effect = ScarletsMediaEffect.dubDelay();
+		this.audioInput = this.effect.input;
+		this.audioOutput = this.effect.output;
+	}
 
-	iface.init = function(){
-		iface.super(); // Call parent function
+	init(){
+		super.init(); // Call parent function
+		this.node.output.Out = this.audioOutput;
 
-		iface.node.outputs.Out = iface.output;
+		// Custom bind for ScarletsFrame with ScarletsMediaEffect object
+		customEffectFunctionBind(this);
 	}
 });

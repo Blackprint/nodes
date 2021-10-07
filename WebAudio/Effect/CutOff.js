@@ -1,38 +1,44 @@
-// Just some logic to handle, can be used for browser/non-browser
-Blackprint.registerNode('WebAudio/Effect/CutOff', function(node, iface){
-	iface.title = 'CutOff';
-	iface.description = 'WebAudio Effect';
-	iface.interface = 'BPAO/WebAudio/Effect/CutOff';
+Blackprint.registerNode('WebAudio/Effect/CutOff',
+class CutOffNode extends Blackprint.Node {
+	constructor(instance){
+		super(instance);
+		let iface = this.setInterface('BPIC/WebAudio/Effect/CutOff');
 
-	iface.data = {
-		type: String, // lowpass | highpass | midpass
-		frequency: 350, // Filter node's frequency value
-		width: 1, // Filter node's Q value
-	};
+		iface.title = 'CutOff';
+		iface.description = 'WebAudio Effect';
 
-	node.inputs = {
-		In: Blackprint.PortArrayOf(AudioNode)
-	};
+		iface.data = {
+			type: String, // lowpass | highpass | midpass
+			frequency: 350, // Filter node's frequency value
+			width: 1, // Filter node's Q value
+		};
 
-	node.outputs = {
-		Out: AudioNode
-	};
+		this.input = {
+			In: Blackprint.Port.ArrayOf(AudioNode)
+		};
+
+		this.output = {
+			Out: AudioNode
+		};
+	}
 });
 
-Blackprint.registerInterface('BPAO/WebAudio/Effect/CutOff', {
-	template: 'Blackprint/nodes/default.sf',
-	extend: Context.MediaEffect
-}, function(iface){
-	iface.effect = ScarletsMediaEffect.cutOff();
-	iface.input = iface.effect.input;
-	iface.output = iface.effect.output;
+Blackprint.registerInterface('BPIC/WebAudio/Effect/CutOff',
+Context.IFace.CutOff = class CutOffIFace extends Context.MediaEffect {
+	constructor(node){
+		super(node);
 
-	// Custom bind for ScarletsFrame with ScarletsMediaEffect object
-	customEffectFunctionBind(iface);
+		// Constructor for Interface can be executed twice when using Cloned Container
+		this.effect = ScarletsMediaEffect.cutOff();
+		this.audioInput = this.effect.input;
+		this.audioOutput = this.effect.output;
+	}
 
-	iface.init = function(){
-		iface.super(); // Call parent function
+	init(){
+		super.init(); // Call parent function
+		this.node.output.Out = this.audioOutput;
 
-		iface.node.outputs.Out = iface.output;
+		// Custom bind for ScarletsFrame with ScarletsMediaEffect object
+		customEffectFunctionBind(this);
 	}
 });

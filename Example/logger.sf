@@ -1,0 +1,62 @@
+## html
+<div class="node function" style="transform: translate({{ x }}px, {{ y }}px)">
+  <sf-template path="Blackprint/nodes/template/header.sf"></sf-template>
+
+  <div class="content">
+    <textarea value="{{ log }}"></textarea>
+
+    <div class="left-port">
+      <sf-template path="Blackprint/nodes/template/input-port.sf"></sf-template>
+    </div>
+  </div>
+</div>
+
+## scss-global
+bpic-example-logger{
+	textarea{
+		width: 100px;
+	}
+}
+
+## js-global
+Blackprint.Sketch.registerInterface('BPIC/Example/logger', class extends Blackprint.Interface {
+	// This implementation can be changed into a function
+
+	// Property of this scope
+	/* iface == {
+		x: 0,
+		y: 0,
+		input: [],
+		output: [],
+		property: [],
+	} */
+
+	constructor(scope){
+		super(scope);
+
+		// Constructor for Interface can be executed twice when using Cloned Container
+		if(this.log !== void 0) return;
+
+		// Template Binding -> https://github.com/ScarletsFiction/ScarletsFrame/wiki/Input-Binding
+		this.log = '...';
+	}
+
+	// Listener when log value is being send to HTML input element by the framework
+	// I'm using this for auto scale the width/height of the textarea
+	m2v$log(now){
+		// Scale the input box depend on character length
+		var el = this.$el('textarea');
+
+		// Skip if textarea was larger than our auto control
+		// I mean, if user have change the size manually
+		if(el[0].offsetWidth > 150 || el[0].offsetHeight > 60)
+			return;
+
+		if(now.length < 8)
+			el.attr('style', '');
+		else if(now.length >= 8 && now.length < 14)
+			el.attr('style', 'width:'+(10*now.length)+'px');
+		else if(now.length >= 14)
+			el.attr('style', 'width:140px;height:50px');
+	}
+});

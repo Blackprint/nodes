@@ -1,39 +1,45 @@
-// Just some logic to handle, can be used for browser/non-browser
-Blackprint.registerNode('WebAudio/Effect/Reverb', function(node, iface){
-	iface.title = 'Reverb';
-	iface.description = 'WebAudio Effect';
-	iface.interface = 'BPAO/WebAudio/Effect/Reverb';
+Blackprint.registerNode('WebAudio/Effect/Reverb',
+class ReverbNode extends Blackprint.Node {
+	constructor(instance){
+		super(instance);
+		let iface = this.setInterface('BPIC/WebAudio/Effect/Reverb');
 
-	iface.data = {
-		mix: 1, // 0 ~ 1
-		time: 1, // 0 ~ 3
-		decay: 0.1, // 0 ~ 3
-		reverse: false, // boolean
-	};
+		iface.title = 'Reverb';
+		iface.description = 'WebAudio Effect';
 
-	node.inputs = {
-		In: Blackprint.PortArrayOf(AudioNode)
-	};
+		iface.data = {
+			mix: 1, // 0 ~ 1
+			time: 1, // 0 ~ 3
+			decay: 0.1, // 0 ~ 3
+			reverse: false, // boolean
+		};
 
-	node.outputs = {
-		Out: AudioNode
-	};
+		this.input = {
+			In: Blackprint.Port.ArrayOf(AudioNode)
+		};
+
+		this.output = {
+			Out: AudioNode
+		};
+	}
 });
 
-Blackprint.registerInterface('BPAO/WebAudio/Effect/Reverb', {
-	template: 'Blackprint/nodes/default.sf',
-	extend: Context.MediaEffect
-}, function(iface){
-	iface.effect = ScarletsMediaEffect.reverb();
-	iface.input = iface.effect.input;
-	iface.output = iface.effect.output;
+Blackprint.registerInterface('BPIC/WebAudio/Effect/Reverb',
+Context.IFace.Reverb = class ReverbIFace extends Context.MediaEffect {
+	constructor(node){
+		super(node);
 
-	// Custom bind for ScarletsFrame with ScarletsMediaEffect object
-	customEffectFunctionBind(iface);
+		// Constructor for Interface can be executed twice when using Cloned Container
+		this.effect = ScarletsMediaEffect.reverb();
+		this.audioInput = this.effect.input;
+		this.audioOutput = this.effect.output;
+	}
 
-	iface.init = function(){
-		iface.super(); // Call parent function
+	init(){
+		super.init(); // Call parent function
+		this.node.output.Out = this.audioOutput;
 
-		iface.node.outputs.Out = iface.output;
+		// Custom bind for ScarletsFrame with ScarletsMediaEffect object
+		customEffectFunctionBind(this);
 	}
 });

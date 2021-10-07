@@ -1,0 +1,7 @@
+## js-global
+Blackprint.Sketch.registerInterface('BPIC/Graphics/Converter/GIF', {
+	template: 'Blackprint/nodes/default.sf'
+},
+class PlayerSketch extends Context.IFace.GIF {
+  /* Only transform Context.IFace.GIF for SketchInterface */
+});

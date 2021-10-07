@@ -1,0 +1,7 @@
+## js-global
+Blackprint.Sketch.registerInterface('BPIC/WebAudio/Output/Destination', {
+	template: 'Blackprint/nodes/default.sf'
+},
+class VideoSketch extends Context.IFace.Destination {
+  /* Only transform Context.IFace.Destination for SketchInterface */
+});

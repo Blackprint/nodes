@@ -8,8 +8,8 @@
 </div>
 
 ## scss-global
-// Element name based on current path, BPAO/Decoration/Text/Notes.sf
-sf-space[blackprint] bpao-decoration-text-notes .node {
+// Element name based on current path, BPIC/Decoration/Text/Notes.sf
+sf-space[blackprint] bpic-decoration-text-notes .node {
 	textarea{
 		width: 249px;
 		height: 87px;
@@ -19,28 +19,40 @@ sf-space[blackprint] bpao-decoration-text-notes .node {
 
 
 ## js-global
-Blackprint.registerNode('Decoration/Text/Notes', function(node, iface){
+Blackprint.registerNode('Decoration/Text/Notes', function(node){
+	let iface = node.setInterface('BPIC/Decoration/Text/Notes'); // Interface path
 	iface.title = 'Notes';
-	iface.interface = 'BPAO/Decoration/Text/Notes'; // Interface path
+
+	var waitRepaint = false;
+	async function refreshHeight(){
+		waitRepaint = true;
+		await $.afterRepaint();
+
+		var el = iface.$el('textarea');
+		el.css('height', (el[0].scrollHeight)+"px");
+		waitRepaint = false;
+	}
 
 	iface.data = {
 		value:'',
 
 		// Triggered when 'value' was changed from view/model
 		on$value(now){
-			var el = iface.$el('textarea');
-		    el.css('height', "5px");
-		    el.css('height', (el[0].scrollHeight)+"px");
+			if(waitRepaint) return;
+			iface.$el('textarea').css('height', "5px");
+			refreshHeight();
 		}
 	};
 
 	node.imported = function(data){
+		if(data === void 0) return;
+
 		// When this node was successfully imported
 		iface.data.value = data.value;
 	}
 });
 
-Blackprint.registerInterface('BPAO/Decoration/Text/Notes', function(iface){
+Blackprint.Sketch.registerInterface('BPIC/Decoration/Text/Notes', function(iface){
 	iface.init = function(){
 		setTimeout(function(){
 			iface.data.on$value(); // Refresh size

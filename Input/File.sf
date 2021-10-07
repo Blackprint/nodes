@@ -4,8 +4,7 @@
 
   <div class="content">
   	<div class="file-place" @click="browseFile" @filedrop="dropFile">
-  		<input type="file" sf-bind="file">
-  		{{ name || 'Drag file here'}}
+  		{{ name || 'Drop file here'}}
   	</div>
 
     <div class="right-port">
@@ -15,7 +14,7 @@
 </div>
 
 ## scss-global
-bpao-input-file {
+bpic-input-file {
   .file-place{
     margin: 5px;
     border: 1px dashed white;
@@ -32,33 +31,15 @@ bpao-input-file {
 }
 
 ## js-global
-// Node's logic, don't use browser's API or library here
-Blackprint.registerNode('Input/file', function(node, iface){
-  iface.title = 'File loader';
-  iface.interface = 'BPAO/Input/file';
+Blackprint.Sketch.registerInterface('BPIC/Input/File',
+class FileIFace extends Context.IFace.File {
+  constructor(node){
+    super(node);
 
-  node.outputs = {
-    URL: String
-  }
-});
-
-// For Browser Interface, let ScarletsFrame handle this (HotReload available here)
-Blackprint.registerInterface('BPAO/Input/file', function(iface){
-  var node = iface.node;
-  iface.file = null;
-  iface.name = '';
-
-  iface.browseFile = function(ev){
-    iface.$el('input').click();
-  }
-
-  iface.dropFile = function(list){
-    iface.file = list;
-  }
-
-  iface.on$file = function(now){
-    URL.revokeObjectURL(node.outputs.URL);
-    node.outputs.URL = URL.createObjectURL(now[0]);
-    this.name = now[0].name;
+    // Constructor for Interface can be executed twice when using Cloned Container
+    let that = this;
+    this.dropFile ??= function(file){
+      that.setFile(file[0]);
+    }
   }
 });

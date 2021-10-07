@@ -6,7 +6,7 @@
 // maybe like loading our dependencies for the nodes
 
 // Load dependencies
-await sf.loader.js([
+await imports([
 	"https://cdn.jsdelivr.net/npm/marked/marked.min.js",
 	"https://cdn.jsdelivr.net/gh/liyasthomas/marcdown/marcdown.min.js",
 ]);

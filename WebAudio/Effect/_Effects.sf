@@ -1,0 +1,142 @@
+## js-global
+Blackprint.Sketch.registerInterface('BPIC/WebAudio/Effect/Tremolo', {
+	template: 'Blackprint/nodes/default.sf',
+},
+class TremoloIFace extends Context.IFace.Tremolo {
+  /* Only transform Context.IFace.Tremolo for SketchInterface */
+});
+
+
+
+Blackprint.Sketch.registerInterface('BPIC/WebAudio/Effect/StereoPanner', {
+	template: 'Blackprint/nodes/default.sf',
+},
+class StereoPannerIFace extends Context.IFace.StereoPanner {
+  /* Only transform Context.IFace.StereoPanner for SketchInterface */
+});
+
+
+
+Blackprint.Sketch.registerInterface('BPIC/WebAudio/Effect/Reverb', {
+	template: 'Blackprint/nodes/default.sf',
+},
+class ReverbIFace extends Context.IFace.Reverb {
+  /* Only transform Context.IFace.Reverb for SketchInterface */
+});
+
+
+
+Blackprint.Sketch.registerInterface('BPIC/WebAudio/Effect/PitchShift', {
+	template: 'Blackprint/nodes/default.sf',
+},
+class PitchShiftIFace extends Context.IFace.PitchShift {
+  /* Only transform Context.IFace.PitchShift for SketchInterface */
+});
+
+
+
+Blackprint.Sketch.registerInterface('BPIC/WebAudio/Effect/PingPongDelay', {
+	template: 'Blackprint/nodes/default.sf',
+},
+class PingPongDelayIFace extends Context.IFace.PingPongDelay {
+  /* Only transform Context.IFace.PingPongDelay for SketchInterface */
+});
+
+
+
+Blackprint.Sketch.registerInterface('BPIC/WebAudio/Effect/Noise', {
+	template: 'Blackprint/nodes/default.sf',
+},
+class NoiseIFace extends Context.IFace.Noise {
+  /* Only transform Context.IFace.Noise for SketchInterface */
+});
+
+
+
+Blackprint.Sketch.registerInterface('BPIC/WebAudio/Effect/Harmonizer', {
+	template: 'Blackprint/nodes/default.sf',
+},
+class HarmonizerIFace extends Context.IFace.Harmonizer {
+  /* Only transform Context.IFace.Harmonizer for SketchInterface */
+});
+
+
+
+Blackprint.Sketch.registerInterface('BPIC/WebAudio/Effect/Flanger', {
+	template: 'Blackprint/nodes/default.sf',
+},
+class FlangerIFace extends Context.IFace.Flanger {
+  /* Only transform Context.IFace.Flanger for SketchInterface */
+});
+
+
+
+Blackprint.Sketch.registerInterface('BPIC/WebAudio/Effect/Fade', {
+	template: 'Blackprint/nodes/default.sf',
+},
+class FadeIFace extends Context.IFace.Fade {
+  /* Only transform Context.IFace.Fade for SketchInterface */
+});
+
+
+
+Blackprint.Sketch.registerInterface('BPIC/WebAudio/Effect/Equalizer', {
+	template: 'Blackprint/nodes/default.sf',
+},
+class EqualizerIFace extends Context.IFace.Equalizer {
+  /* Only transform Context.IFace.Equalizer for SketchInterface */
+});
+
+
+
+Blackprint.Sketch.registerInterface('BPIC/WebAudio/Effect/DubDelay', {
+	template: 'Blackprint/nodes/default.sf',
+},
+class DubDelayIFace extends Context.IFace.DubDelay {
+  /* Only transform Context.IFace.DubDelay for SketchInterface */
+});
+
+
+
+Blackprint.Sketch.registerInterface('BPIC/WebAudio/Effect/Distortion', {
+	template: 'Blackprint/nodes/default.sf',
+},
+class DistortionIFace extends Context.IFace.Distortion {
+  /* Only transform Context.IFace.Distortion for SketchInterface */
+});
+
+
+
+Blackprint.Sketch.registerInterface('BPIC/WebAudio/Effect/Delay', {
+	template: 'Blackprint/nodes/default.sf',
+},
+class DelayIFace extends Context.IFace.Delay {
+  /* Only transform Context.IFace.Delay for SketchInterface */
+});
+
+
+
+Blackprint.Sketch.registerInterface('BPIC/WebAudio/Effect/CutOff', {
+	template: 'Blackprint/nodes/default.sf',
+},
+class CutOffIFace extends Context.IFace.CutOff {
+  /* Only transform Context.IFace.CutOff for SketchInterface */
+});
+
+
+
+Blackprint.Sketch.registerInterface('BPIC/WebAudio/Effect/ConReverb', {
+	template: 'Blackprint/nodes/default.sf',
+},
+class ConReverbIFace extends Context.IFace.ConReverb {
+  /* Only transform Context.IFace.ConReverb for SketchInterface */
+});
+
+
+
+Blackprint.Sketch.registerInterface('BPIC/WebAudio/Effect/Chorus', {
+	template: 'Blackprint/nodes/default.sf',
+},
+class ChorusIFace extends Context.IFace.Chorus {
+  /* Only transform Context.IFace.Chorus for SketchInterface */
+});

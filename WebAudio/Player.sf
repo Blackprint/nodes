@@ -1,72 +1,7 @@
-## html
-<div class="node" style="transform: translate({{ x }}px, {{ y }}px)">
-  <sf-template path="Blackprint/nodes/template/header.sf"></sf-template>
-
-  <div class="content">
-    <video crossorigin="anonymous" height="0" width="0"></video>
-
-    <div class="left-port">
-      <sf-template path="Blackprint/nodes/template/input-port.sf"></sf-template>
-    </div>
-
-    <div class="right-port">
-      <sf-template path="Blackprint/nodes/template/output-port.sf"></sf-template>
-    </div>
-  </div>
-</div>
-
 ## js-global
-// Node's logic, don't use browser's API or library here
-Blackprint.registerNode('WebAudio/Player', function(node, iface){
-  iface.title = 'Media Player';
-  iface.description = 'WebAudio media player';
-  iface.interface = 'BPAO/WebAudio/Player';
-
-  node.outputs = {
-    AudioNode: AudioNode,
-    Element: HTMLVideoElement,
-    VideoTrack: MediaStreamTrack,
-    AudioTrack: MediaStreamTrack
-  };
-
-  node.inputs = {
-    URL: String,
-    Play: Blackprint.PortTrigger(function(){
-      iface.player.play();
-    }),
-    Pause: Blackprint.PortTrigger(function(){
-      iface.player.pause();
-    }),
-  }
-});
-
-// For Browser Interface, let ScarletsFrame handle this (HotReload available here)
-Blackprint.registerInterface('BPAO/WebAudio/Player', function(iface){
-  iface.player = null;
-
-  iface.init = function(){
-    iface.player = document.createElement('video');
-    iface.player.crossOrigin = 'anonymouse';
-    iface.player.preload = 'auto';
-    iface.player.autoload = true;
-
-    iface.node.outputs.Element = iface.player;
-    iface.node.outputs.AudioNode = ScarletsMedia.audioContext.createMediaElementSource(iface.player);
-
-    // Fix video sync
-    iface.node.outputs.AudioNode.connect(fakeDestination);
-
-    // Update tracks after the file is playable
-    iface.player.oncanplay = function(){
-      var mediaStream = iface.player.captureStream();
-      iface.node.outputs.AudioTrack = mediaStream.getAudioTracks()[0];
-      iface.node.outputs.VideoTrack = mediaStream.getVideoTracks()[0];
-
-      iface.player.pause();
-    }
-  }
-
-  iface.inputs.URL.on('value', function(port){
-    iface.player.src = port.value;
-  })
+Blackprint.Sketch.registerInterface('BPIC/WebAudio/Player', {
+  template: 'Blackprint/nodes/default.sf'
+},
+class PlayerIFace extends Context.IFace.Player {
+  /* Only transform Context.IFace.Player for SketchInterface */
 });

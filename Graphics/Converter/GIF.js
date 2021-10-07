@@ -1,47 +1,58 @@
-// Node's logic, don't use browser's API or library here
-Blackprint.registerNode('Graphics/Converter/GIF', function(node, iface){
-	iface.title = 'GIF Player';
-	iface.interface = 'BPAO/Graphics/Converter/GIF';
+Blackprint.registerNode('Graphics/Converter/GIF',
+class GIFNode extends Blackprint.Node {
+	constructor(instance){
+		super(instance);
 
-	node.inputs = {
-		URL: String
-	}
+		let iface = this.setInterface('BPIC/Graphics/Converter/GIF');
+		iface.title = 'GIF Player';
 
-	node.outputs = {
-		Canvas: PIXI.resources.CanvasResource
+		this.input = {
+			URL: String
+		}
+
+		this.output = {
+			Canvas: PIXI.CanvasResource
+		}
 	}
 });
 
-// For Browser Interface, let ScarletsFrame handle this (HotReload available here)
-Blackprint.registerInterface('BPAO/Graphics/Converter/GIF', {
-	template: 'Blackprint/nodes/default.sf'
-}, function(iface){
-	var node = iface.node;
-	iface.canvas = null;
-	iface.gif = null;
-	iface.pixi = null;
+Blackprint.registerInterface('BPIC/Graphics/Converter/GIF',
+Context.IFace.GIF = class GIFIFace extends Blackprint.Interface {
+	constructor(node){
+		super(node);
 
-	iface.init = function(){
-		iface.canvas = document.createElement('canvas');
-		iface.pixi = new PIXI.resources.CanvasResource(iface.canvas);
+		// Constructor for Interface can be executed twice when using Cloned Container
+		if(this.canvas !== void 0) return;
 
-		// This should be on properties
-		node.outputs.Canvas = iface.pixi;
+		this.canvas = null;
+		this.gif = null;
+		this.pixi = null;
 	}
 
-	iface.inputs.URL.off('value').on('value', function(port){
-		gifler(port.value).get(function(anim){
-			iface.gif = anim;
-			anim.onDrawFrame = function(ctx, frame){
-				ctx.drawImage(frame.buffer, 0, 0);
-				iface.pixi.update();
-			}
+	init(){
+		let iface = this;
+		let node = this.node;
 
-			anim.animateInCanvas(iface.canvas);
+		this.canvas = document.createElement('canvas');
+		this.pixi = new PIXI.CanvasResource(this.canvas);
+
+		// This should be on property
+		node.output.Canvas = this.pixi;
+
+		this.input.URL.off('value').on('value', function(port){
+			gifler(port.value).get(function(anim){
+				iface.gif = anim;
+				anim.onDrawFrame = function(ctx, frame){
+					ctx.drawImage(frame.buffer, 0, 0);
+					iface.pixi.update();
+				}
+
+				anim.animateInCanvas(iface.canvas);
+			});
 		});
-	});
 
-	iface.inputs.URL.off('disconnect').on('disconnect', function(port){
-		iface.gif.stop();
-	});
+		this.input.URL.off('disconnect').on('disconnect', function(port){
+			iface.gif.stop();
+		});
+	}
 });

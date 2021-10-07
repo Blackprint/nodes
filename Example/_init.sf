@@ -4,16 +4,7 @@
 // This script will run first, and then the other .sf files
 // depends on blackprint.config.js configuration
 
-// Load dependencies and wait until everything ready
-// This will return same module reference if already being loaded on ./init.js
-// And only being loaded once
-var [  , PIXI] = await imports([
-    "https://cdn.jsdelivr.net/npm/gifler@0.1.0/gifler.min.js",
-    "https://cdn.jsdelivr.net/npm/pixi.js-legacy@6.1.2/dist/browser/pixi-legacy.min.mjs",
-]);
-
 // Wait until all dependencies ready
-// ./init.js is loading Pixi.js
 await imports.task();
 
 // Because .js and .sf is separated
@@ -25,4 +16,4 @@ let Blackprint = window.Blackprint.loadScope({
 });
 
 // Global shared context
-let Context = Blackprint.getContext('Graphics');
+let Context = Blackprint.getContext('Example');

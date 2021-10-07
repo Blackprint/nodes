@@ -1,0 +1,6 @@
+## js-global
+Blackprint.Sketch.registerInterface('BPIC/Graphics/Sprite', {
+	template: 'Blackprint/nodes/default.sf'
+}, class SpriteIFace extends Context.IFace.Sprite {
+  /* Only transform Context.IFace.Player for SketchInterface */
+});

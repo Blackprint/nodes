@@ -1,24 +1,31 @@
 module.exports = {
 	// Your unique package name, will be the prefix on the Blackprint editor
-	name: "Empty Template",
-	description: "Your awesome nodes",
+	name: "Example",
+	description: "Just an example nodes",
 
 	// This must be set to false if you want to compile this nodes
-	disabled: true,
+	disabled: false,
+
+	// Uncomment this if you want to copy /dist/... files to current folder
+	// Especially if you want to publish it to NPM Registry
+	// hardlinkTo: "./dist",
 
 	// Unique prefix for .html or .sf template
-	// Please use format 'BPAO/LibraryName'
-	templatePrefix: "BPAO/LibraryName",
+	// Please use format 'BPIC/LibraryName'
+	templatePrefix: "BPIC/Example",
 
 	// Optional: Add header to every combined file
-	header: "/* Your Nodes \n MIT Licensed */",
+	header: "/* Blackprint \n MIT Licensed */",
 
 	// The .js file probably can be imported for non-browser too
 	// Maybe you want to write Node.js compatible node on ".js"
 	// and browser compatible node on ".sf" file extension
 	js:{
-		file:'@cwd/dist/nodes-yours.js', // @cwd = directory where you start the Node.js
-		wrapped: 'async', // Wrap the entire .js with async function
+		file:'@cwd/dist/nodes-example.min.mjs', // @cwd = directory where you start the Node.js
+
+		// We're not using `await imports.task()` so let's just use `mjs`
+		wrapped: 'mjs', // Wrap the entire .js to .mjs
+
 		combine:[ // Relative to this config's directory
 			'./_init.js', // First rule = first priority
 			'**/*.js',
@@ -28,8 +35,11 @@ module.exports = {
 	// This extension can contain html, scss, and js
 	// But only use this if you only develop for browser API
 	sf:{
-		file:'@cwd/dist/nodes-yours.sf', // will have sf.css and sf.js
-		wrapped: 'async', // Wrap the entire .sf JavaScript with async function
+		file:'@cwd/dist/nodes-example.sf', // will have sf.css and sf.js
+
+		// Use `async-mjs` if we want to use `await imports.task()` to avoid waiting this module
+		wrapped: 'async-mjs', // Wrap the entire .js in async IIFE to .mjs file
+
 		combine:[ // Relative to this config's directory
 			'./_init.sf', // First rule = first priority
 			'**/*.sf',
