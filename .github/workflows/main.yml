@@ -31,10 +31,11 @@ jobs:
         with:
           version: 6.0.2
           run_install: true
+
       - run: pnpm i -g @blackprint/cli-tools@0.3
 
       - name: 🛠 Compiling Blackprint
-      - run: blackprint build production
+        run: blackprint build production
 
       # ToDo, add Blackprint node testing (for Browser/Node.js/Deno)
 
