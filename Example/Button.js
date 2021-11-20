@@ -1,9 +1,9 @@
-Blackprint.registerNode('Example/Button/Simple', class extends Blackprint.Node {
+Blackprint.registerNode('Example/Button/Simple',
+class extends Blackprint.Node {
   constructor(instance){
     super(instance);
 
-    // Let's use ./button.js
-    let iface = this.setInterface('BPIC/Example/button'); // Can only being called once
+    let iface = this.setInterface('BPIC/Example/Button'); // Can only being called once
 
     // iface only exist after setInterface
     iface.title = "Button";
@@ -20,7 +20,9 @@ Blackprint.registerNode('Example/Button/Simple', class extends Blackprint.Node {
   }
 });
 
-Blackprint.registerInterface('BPIC/Example/button', class extends Blackprint.Interface {
+
+Blackprint.registerInterface('BPIC/Example/Button',
+class extends Blackprint.Interface {
   clicked(ev){
     console.log("Engine: 'Trigger' button clicked, going to run the handler");
     this.node.clicked && this.node.clicked(ev);

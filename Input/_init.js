@@ -11,6 +11,12 @@ let Blackprint = window.Blackprint.loadScope({
 
 // Global shared context
 let Context = Blackprint.getContext('Input');
+
+// This is needed to avoid duplicated event listener when using hot reload
+// Event listener that registered with same slot will be replaced
+Context.EventSlot = {slot: 'my-private-event-slot'};
+
+// Shared function
 let objLength = Context.objLength = function(obj){
 	var i = 0;
 	for(var k in obj)

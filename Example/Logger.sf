@@ -9,6 +9,8 @@
       <sf-template path="Blackprint/nodes/template/input-port.sf"></sf-template>
     </div>
   </div>
+
+  <sf-template path="Blackprint/nodes/template/other.sf"></sf-template>
 </div>
 
 ## scss-global
@@ -19,7 +21,8 @@ bpic-example-logger{
 }
 
 ## js-global
-Blackprint.Sketch.registerInterface('BPIC/Example/logger', class extends Blackprint.Interface {
+Blackprint.Sketch.registerInterface('BPIC/Example/Logger',
+class extends Blackprint.Interface {
 	// This implementation can be changed into a function
 
 	// Property of this scope

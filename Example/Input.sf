@@ -9,6 +9,8 @@
       <sf-template path="Blackprint/nodes/template/output-port.sf"></sf-template>
     </div>
   </div>
+
+  <sf-template path="Blackprint/nodes/template/other.sf"></sf-template>
 </div>
 
 ## scss-global
@@ -19,7 +21,7 @@ bpic-example-input{
 }
 
 ## js-global
-Blackprint.Sketch.registerInterface('BPIC/Example/input', function(iface){
+Blackprint.Sketch.registerInterface('BPIC/Example/Input', function(iface){
 	// Property of this scope
 	/* iface == {
 		x: 0,

@@ -1,5 +1,5 @@
 Blackprint.registerNode('Example/Display/Logger', function(node){
-	let iface = node.setInterface('BPIC/Example/logger'); // Let's use ./logger.js
+	let iface = node.setInterface('BPIC/Example/Logger'); // Let's use ./logger.js
 	iface.title = "Logger";
 	iface.description = 'Print anything into text';
 
@@ -37,7 +37,7 @@ Blackprint.registerNode('Example/Display/Logger', function(node){
 	}
 });
 
-Blackprint.registerInterface('BPIC/Example/logger', function(iface, bind){
+Blackprint.registerInterface('BPIC/Example/Logger', function(iface, bind){
 	var log = '...';
 	bind({
 		get log(){

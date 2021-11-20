@@ -32,7 +32,7 @@ Blackprint.registerInterface('BPIC/Example/input', class {
 */
 
 Blackprint.registerNode('Example/Input/Simple', function(node){
-	let iface = node.setInterface('BPIC/Example/input'); // Let's use ./input.js
+	let iface = node.setInterface('BPIC/Example/Input'); // Let's use ./input.js
 	iface.title = "Input";
 
 	// node = under Blackprint node flow control
@@ -72,7 +72,7 @@ Blackprint.registerNode('Example/Input/Simple', function(node){
 	}
 });
 
-Blackprint.registerInterface('BPIC/Example/input', function(iface){
+Blackprint.registerInterface('BPIC/Example/Input', function(iface){
 	var theValue = '...';
 	iface.data = {
 		set value(val){

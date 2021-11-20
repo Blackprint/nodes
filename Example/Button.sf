@@ -12,6 +12,8 @@
       <sf-template path="Blackprint/nodes/template/output-port.sf"></sf-template>
     </div>
   </div>
+
+  <sf-template path="Blackprint/nodes/template/other.sf"></sf-template>
 </div>
 
 ## scss-global
@@ -68,7 +70,7 @@ bpic-example-button{
 
 ## js-global
 // == Blackprint Visual Engine ==
-Blackprint.Sketch.registerInterface('BPIC/Example/button', function(iface){
+Blackprint.Sketch.registerInterface('BPIC/Example/Button', function(iface){
   // This implentation can be changed into a class
 
   // Property of this scope
@@ -89,6 +91,6 @@ Blackprint.Sketch.registerInterface('BPIC/Example/button', function(iface){
   // Element event binding-> https://github.com/ScarletsFiction/ScarletsFrame/wiki/Element-Event
   iface.clicked = function(ev){
     console.log("Element: 'Trigger' button clicked, going to run the handler");
-    iface.node.clicked && iface.node.clicked(ev);
+    iface.node.clicked?.(ev);
   }
 });

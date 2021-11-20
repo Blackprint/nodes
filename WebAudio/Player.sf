@@ -1,7 +1,0 @@
-## js-global
-Blackprint.Sketch.registerInterface('BPIC/WebAudio/Player', {
-  template: 'Blackprint/nodes/default.sf'
-},
-class PlayerIFace extends Context.IFace.Player {
-  /* Only transform Context.IFace.Player for SketchInterface */
-});

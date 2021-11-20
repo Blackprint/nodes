@@ -69,11 +69,13 @@ class SliderBoxNode extends Blackprint.Node {
 			}
 		}];
 
-		iface.on('port.menu', function(port, menu){
+		iface.on('port.menu', function({ port, menu }){
 			for (var i = 0; i < portMenu.length; i++) {
 				// Change every callback context to refer current port
-				portMenu[i].context = port;
-				menu.push(portMenu[i]);
+				let temp = portMenu[i];
+
+				temp.context = port;
+				menu.push(temp);
 			}
 		});
 	}
