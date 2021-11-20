@@ -7,16 +7,17 @@ on:
       - main
 
 jobs:
-  runs-on: ubuntu-latest
+  build:
+    name: Build Blackprint Modules
+    runs-on: ubuntu-latest
 
-  steps:
-    build:
+    steps:
       - uses: actions/checkout@v2
 
       - name: ⚙ Setup Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '16'
+          node-version: 16
 
       - name: 🔃 Setup PNPM modules
         uses: actions/cache@v2
@@ -30,9 +31,10 @@ jobs:
         with:
           version: 6.0.2
           run_install: true
+      - run: pnpm i -g @blackprint/cli-tools@0.3
 
       - name: 🛠 Compiling Blackprint
-      - run: npm run build-prod
+      - run: blackprint build production
 
       # ToDo, add Blackprint node testing (for Browser/Node.js/Deno)
 
@@ -48,6 +50,7 @@ jobs:
             src/**/*
             blackprint.config.js
             package.json
+            LICENSE
             README.md
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
