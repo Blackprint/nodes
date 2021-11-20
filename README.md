@@ -9,7 +9,7 @@ General nodes like:<br>
 
 General nodes can be compatible for different programming language, so it will not adding nodes for third-party library.
 
-Nodes for specific library must have different repository instead.
+Nodes for specific library should have different repository instead.
 
 If you used these nodes (before v1.0), please prepare for the breaking changes:
 - Node name changes
@@ -24,3 +24,17 @@ If you want to create your own node please use one of these template instead, it
 - Golang (Will be added soon)
 - Python (Will be added soon)
 - C# (Will be added soon)
+
+## Build Blackprint nodes
+If you're trying to build this repository, you can also clone this repository and put it in<br>
+`https://github.com/Blackprint/Blackprint/tree/master/nodes`
+
+You can also built the modules with `@blackprint/cli-tools`
+
+```sh
+$ npm i -g @blackprint/cli-tools
+$ git clone --depth 1 https://github.com/Blackprint/nodes .
+$ blackprint serve
+```
+
+After you run `blackprint serve`, the modules server will be running and you can connect to it from the [Blackprint Editor](https://blackprint.github.io) (development mode).
