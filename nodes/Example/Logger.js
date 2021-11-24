@@ -1,13 +1,20 @@
-Blackprint.registerNode('Example/Display/Logger', function(node){
-	let iface = node.setInterface('BPIC/Example/Logger'); // Let's use ./logger.js
-	iface.title = "Logger";
-	iface.description = 'Print anything into text';
-
-	const Input = node.input = {
+Blackprint.registerNode('Example/Display/Logger',
+class extends Blackprint.Node {
+	input = {
 		Any: Blackprint.Port.ArrayOf(null) // Any data type, and can be used for many cable
 	};
 
-	function refreshLogger(val){
+	constructor(instance){
+		super(instance);
+
+		let iface = this.setInterface('BPIC/Example/Logger');
+		iface.title = "Logger";
+		iface.description = 'Print anything into text';
+	}
+
+	_refreshLogger(val){
+		let iface = this.iface;
+
 		if(val === null)
 			iface.log = 'null';
 		else if(val === undefined)
@@ -20,32 +27,35 @@ Blackprint.registerNode('Example/Display/Logger', function(node){
 			iface.log = JSON.stringify(val);
 	}
 
-	node.init = function(){
+	init(){
+		let node = this;
+		let iface = this.iface;
+
+		let Input = node.input;
+
 		// Let's show data after new cable was connected or disconnected
 		iface.on('cable.connect cable.disconnect', function(){
-			console.log("A cable was changed on Logger, now refresing the input element");
-			refreshLogger(Input.Any);
+			Context.log('Example/Display/Logger', "A cable was changed on Logger, now refresing the input element");
+			node._refreshLogger(Input.Any);
 		});
 
 		iface.input.Any.on('value', function(port){
-			console.log("I connected to", port.name, "port from", port.iface.title, "that have new value:", port.value);
+			Context.log('Example/Display/Logger', "I connected to", port.name, "port from", port.iface.title, "that have new value:", port.value);
 
 			// Let's take all data from all connected nodes
 			// Instead showing new single data-> val
-			refreshLogger(Input.Any);
+			node._refreshLogger(Input.Any);
 		});
 	}
 });
 
-Blackprint.registerInterface('BPIC/Example/Logger', function(iface, bind){
-	var log = '...';
-	bind({
-		get log(){
-			return log;
-		},
-		set log(val){
-			log = val;
-			console.log("Logger:", val);
-		}
-	});
+Blackprint.registerInterface('BPIC/Example/Logger',
+Context.IFace.Logger = class extends Blackprint.Interface {
+	_log = '...';
+
+	get log(){ return this._log }
+	set log(val){
+		this._log = val;
+		Context.log("Logger Data:", val);
+	}
 });

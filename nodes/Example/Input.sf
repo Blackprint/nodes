@@ -3,7 +3,7 @@
   <sf-template path="Blackprint/nodes/template/header.sf"></sf-template>
 
   <div class="content">
-    <textarea sf-bind="data.value" @input="textChanged"></textarea>
+    <textarea sf-bind="data.value" @input="textChanged(event)"></textarea>
 
     <div class="right-port">
       <sf-template path="Blackprint/nodes/template/output-port.sf"></sf-template>
@@ -21,26 +21,24 @@ bpic-example-input{
 }
 
 ## js-global
-Blackprint.Sketch.registerInterface('BPIC/Example/Input', function(iface){
-	// Property of this scope
-	/* iface == {
-		x: 0,
-		y: 0,
-		input: [],
-		output: [],
-		property: [],
-	} */
+// Register Sketch Interface
+// This Interface will extends Interface from Button.js
+// and add additional feature to control the User Interface for Sketch Editor
+Blackprint.Sketch.registerInterface('BPIC/Example/Input',
+class InputIFace extends Context.IFace.Input {
+	constructor(node){
+		super(node);
 
-	let waitRepaint = false;
+		let iface = this;
+		let waitRepaint = false;
 
-	// Must be placed on 'data' if we want to export the property as JSON
-	iface.data = {
+		// iface.data already being constructed fro Input.js
+		// Let's just attach an two way binding event listener
 		// Two way binding-> https://github.com/ScarletsFiction/ScarletsFrame/wiki/Input-Binding
-		value:'',
 
 		// Listener for two way binding when value from HTML input element is being received by the framework
 		// I'm using this for auto scale the width/height of the textarea
-		on$value(now){
+		iface.data.on$value = function(now){
 			if(waitRepaint) return;
 
 			waitRepaint = true;
@@ -63,9 +61,11 @@ Blackprint.Sketch.registerInterface('BPIC/Example/Input', function(iface){
 					el.attr('style', 'width:140px;height:50px');
 			});
 		}
-	};
+	}
 
-	iface.textChanged = function(ev){
+	textChanged(ev){
+		let iface = this;
+
 		setTimeout(()=> {
 			iface.node.changed(ev.target.value);
 		}, 1);

@@ -3,6 +3,7 @@
   <sf-template path="Blackprint/nodes/template/header.sf"></sf-template>
 
   <div class="content">
+    <!-- Element event binding-> https://github.com/ScarletsFiction/ScarletsFrame/wiki/Element-Event -->
     <div class="button" @click="clicked(event)">
       <div class="arrow"><img src="/assets/img/icon/trigger-button.png" alt="" /></div>
       <a>Trigger</a>
@@ -69,28 +70,23 @@ bpic-example-button{
 }
 
 ## js-global
-// == Blackprint Visual Engine ==
-Blackprint.Sketch.registerInterface('BPIC/Example/Button', function(iface){
-  // This implentation can be changed into a class
+// Register Sketch Interface
+// This Interface will extends Interface from Button.js
+// and add additional feature to control the User Interface for Sketch Editor
+Blackprint.Sketch.registerInterface('BPIC/Example/Button',
+class ButtonIFace extends Context.IFace.Button {
+  // Life cycle: this will run after the element was attached on DOM
+  init(){
+    // To get the button element
+    // this.$el('.button')
+  }
 
-  // Property of this scope
-  /* iface == {
-    x: 0,
-    y: 0,
-    input: [],
-    output: [],
-    property: [],
-  } */
+  // Override clicked function from Button.js
+  clicked(ev){
+    Context.log('BPIC/Example/Button (HTML Element)', "'Trigger' button clicked, going to run the handler");
+    this.node.clicked?.(ev);
 
-  // To get the button element
-  // iface.$el('.button')
-
-  // iface.$el only available after component was initialized
-  // iface.init = function(){ ... }
-
-  // Element event binding-> https://github.com/ScarletsFiction/ScarletsFrame/wiki/Element-Event
-  iface.clicked = function(ev){
-    console.log("Element: 'Trigger' button clicked, going to run the handler");
-    iface.node.clicked?.(ev);
+    // You can also
+    // super.clicked(ev);
   }
 });
