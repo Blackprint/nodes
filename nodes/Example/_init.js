@@ -16,3 +16,11 @@ let Context = Blackprint.getContext('Example');
 // This is needed to avoid duplicated event listener when using hot reload
 // Event listener that registered with same slot will be replaced
 Context.EventSlot = {slot: 'my-private-event-slot'};
+
+let consoleStyle = "color: yellow";
+Context.log = function(which, ...text){
+	if(Blackprint.Environment.isBrowser)
+		console.log(`%c${which}:`, consoleStyle, ...text);
+	else
+		console.log(`\x1b[1m\x1b[33m${which}:\x1b[0m`, ...text);
+}

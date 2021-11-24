@@ -1,5 +1,7 @@
-// Node here will use 'default' node interface
-// and only being used as an example, this may get removed
+// These registration is using function for constructing nodes
+// Using class is more recommended for better performance and memory usage
+
+// We will use 'default' node interface and only being used as an example
 Blackprint.registerNode('Example/Math/Multiply', function(node){
 	let iface = node.setInterface(); // Let's use default node interface
 	iface.title = "Multiply";
@@ -16,21 +18,26 @@ Blackprint.registerNode('Example/Math/Multiply', function(node){
 	const Input = node.input = {
 		Exec: Blackprint.Port.Trigger(function(){
 			Output.Result = multiply();
-			console.log("Result has been set:", Output.Result);
+			Context.log('Example/Math/Multiply', "Result has been set:", Output.Result);
+
+			if(iface._inactive !== false){
+				iface._inactive.destroy();
+				iface._inactive = false;
+			}
 		}),
 		A: Number,
 		B: Blackprint.Port.Validator(Number, function(val){
 			// Executed when input.B is being obtained
 			// And the output from other node is being assigned
 			// as current port value in this node
-			console.log(iface.title, '- Port B got input:', val);
+			Context.log('Example/Math/Multiply', iface.title, '- Port B got input:', val);
 			return Number(val);
 		}),
 	};
 
 	// Your own processing mechanism
 	function multiply(){
-		console.log('Multiplying', Input.A, 'with', Input.B);
+		Context.log('Example/Math/Multiply', 'Multiplying', Input.A, 'with', Input.B);
 		return Input.A * Input.B;
 	}
 
@@ -43,12 +50,17 @@ Blackprint.registerNode('Example/Math/Multiply', function(node){
 	// Event listener can only be registered after handle init
 	node.init = function(){
 		iface.on('cable.connect', function({ port, target }){
-			console.log(`Cable connected from ${port.iface.title} (${port.name}) to ${target.iface.title} (${target.name})`);
+			Context.log('Example/Math/Multiply', `Cable connected from ${port.iface.title} (${port.name}) to ${target.iface.title} (${target.name})`);
 		});
+
+		// $decoration only available for Sketch (Browser)
+		iface._inactive = iface.$decoration?.warn("Need activation") || false;
 	}
 
 	// If you want to test it or play around from the browser console
 	setTimeout(function(){
+		if(!Blackprint.Environment.isBrowser) return;
+
 		if(iface.x === undefined)
 			console.log('Node from Engine:', iface);
 		else
@@ -80,7 +92,7 @@ Blackprint.registerNode('Example/Math/Random', function(node){
 		if(executed === true)
 			return false;
 
-		console.warn('Value request for port:', port.name, "from node:", iface2.title);
+		Context.log('Example/Math/Random', 'Value request for port:', port.name, "from node:", iface2.title);
 
 		// Let's create the value for him
 		node.input['Re-seed']();
