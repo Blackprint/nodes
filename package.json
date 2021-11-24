@@ -1,0 +1,25 @@
+{
+  "name": "@blackprint/nodes",
+  "description": "Blackprint nodes for browser",
+  "version": "0.0.3",
+  "author": "Blackprint",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Blackprint/nodes.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Blackprint/nodes/issues"
+  },
+  "scripts": {
+    "start": "blackprint serve",
+    "compile": "blackprint build production"
+  },
+  "homepage": "http://stefansarya.gitbook.io/blackprint",
+  "devDependencies": {
+    "@blackprint/cli-tools": "0.3.11"
+  },
+  "keywords": [
+    "blackprint"
+  ]
+}
