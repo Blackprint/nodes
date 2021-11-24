@@ -25,7 +25,9 @@ class extends Blackprint.Node {
 		Context.log('Example/Input/Simple', "Imported data:", JSON.stringify(data));
 
 		if(data === undefined) return;
-		iface.data = data;
+
+		// Use object assign to avoid replacing the object reference
+		Object.assign(iface.data, data);
 		this.output.Value = data.value;
 	}
 
