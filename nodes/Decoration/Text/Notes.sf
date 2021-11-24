@@ -19,10 +19,21 @@ sf-space[blackprint] bpic-decoration-text-notes .node {
 
 
 ## js-global
+// These registration is using function for constructing nodes
+// Using class is more recommended for better performance and memory usage
 Blackprint.registerNode('Decoration/Text/Notes', function(node){
 	let iface = node.setInterface('BPIC/Decoration/Text/Notes'); // Interface path
 	iface.title = 'Notes';
 
+	node.imported = function(data){
+		if(data === void 0) return;
+
+		// When this node was successfully imported
+		iface.data.value = data.value;
+	}
+});
+
+Blackprint.Sketch.registerInterface('BPIC/Decoration/Text/Notes', function(iface){
 	var waitRepaint = false;
 	async function refreshHeight(){
 		waitRepaint = true;
@@ -44,15 +55,6 @@ Blackprint.registerNode('Decoration/Text/Notes', function(node){
 		}
 	};
 
-	node.imported = function(data){
-		if(data === void 0) return;
-
-		// When this node was successfully imported
-		iface.data.value = data.value;
-	}
-});
-
-Blackprint.Sketch.registerInterface('BPIC/Decoration/Text/Notes', function(iface){
 	iface.init = function(){
 		setTimeout(function(){
 			iface.data.on$value(); // Refresh size
