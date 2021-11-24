@@ -17,6 +17,23 @@ module.exports = {
 	// Optional: Add header to every combined file
 	header: "/* Blackprint \n MIT Licensed */",
 
+	// (Required)
+	// The .js file probably can be imported for non-browser too
+	// Maybe you want to write Node.js compatible node on ".js"
+	// and browser compatible node on ".sf" file extension
+	js:{
+		file:'@cwd/dist/nodes-decoration.min.mjs', // @cwd = directory where you start the Node.js
+
+		// We're not using `await imports.task()` so let's just use `mjs`
+		wrapped: 'mjs', // Wrap the entire .js to .mjs
+
+		combine:[ // Relative to this config's directory
+			'./_init.js', // First rule = first priority
+			'**/*.js',
+		],
+	},
+
+	// (Optional)
 	// This extension can contain html, scss, and js
 	// But only use this if you only develop for browser API
 	sf:{

@@ -17,6 +17,7 @@ module.exports = {
 	// Optional: Add header to every combined file
 	header: "/* Blackprint \n MIT Licensed */",
 
+	// (Required)
 	// The .js file probably can be imported for non-browser too
 	// Maybe you want to write Node.js compatible node on ".js"
 	// and browser compatible node on ".sf" file extension
@@ -32,6 +33,7 @@ module.exports = {
 		],
 	},
 
+	// (Optional)
 	// This extension can contain html, scss, and js
 	// But only use this if you only develop for browser API
 	sf:{
