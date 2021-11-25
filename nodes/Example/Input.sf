@@ -63,11 +63,9 @@ class InputIFace extends Context.IFace.Input {
 		}
 	}
 
+	// Event callback from @input
 	textChanged(ev){
-		let iface = this;
-
-		setTimeout(()=> {
-			iface.node.changed(ev.target.value);
-		}, 1);
+		// Do nothing, this is just an example
+		// console.log("Got Input:", ev);
 	}
 });

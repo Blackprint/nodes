@@ -1,7 +1,7 @@
 {
   "name": "@blackprint/nodes",
   "description": "Blackprint nodes for Browser/Node.js/Deno",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "author": "Blackprint",
   "license": "MIT",
   "repository": {
@@ -17,7 +17,7 @@
   },
   "homepage": "http://stefansarya.gitbook.io/blackprint",
   "devDependencies": {
-    "@blackprint/cli-tools": "0.3.11"
+    "@blackprint/cli-tools": "0.3.13"
   },
   "keywords": [
     "blackprint"
