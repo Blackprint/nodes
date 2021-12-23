@@ -15,5 +15,5 @@ let Blackprint = window.Blackprint.loadScope({
 	url: import.meta.url,
 });
 
-// Global shared context
-let Context = Blackprint.getContext('Example');
+// Global shared context (wait it to avoid race condition)
+let Context = await Blackprint.getContext('Example');

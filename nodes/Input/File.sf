@@ -38,9 +38,8 @@ class FileIFace extends Context.IFace.File {
   constructor(node){
     super(node);
 
-    // Constructor for Interface can be executed twice when using Cloned Container
     let that = this;
-    this.dropFile ??= function(file){
+    this.dropFile = function(file){
       that.setFile(file[0]);
     }
   }

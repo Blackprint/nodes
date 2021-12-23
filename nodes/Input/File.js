@@ -19,9 +19,6 @@ Context.IFace.File = class FileIFace extends Blackprint.Interface {
 	constructor(node){
 		super(node);
 
-		// Constructor for Interface can be executed twice when using Cloned Container
-		if(this.inputEl !== void 0) return;
-
 		this.file = null;
 		this.name = '';
 

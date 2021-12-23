@@ -2,8 +2,15 @@
 // This script will run first, and then the other files
 // depends on blackprint.config.js configuration
 
-// Wait until all dependencies ready before running all .sf files
-await imports.task();
+// Prepare stuff when the page is loading
+// maybe like loading our dependencies for the nodes
+
+// Load dependencies
+// await imports([
+// ]);
+
+// Prepare stuff after all dependencies was loaded
+// https://guides.github.com/features/mastering-markdown/
 
 
 // Because .js and .sf is separated
@@ -15,5 +22,4 @@ let Blackprint = window.Blackprint.loadScope({
 });
 
 // Global shared context (wait it to avoid race condition)
-let Context = await Blackprint.getContext('Input');
-let {objLength} = Context;
+let Context = await Blackprint.getContext('Console');

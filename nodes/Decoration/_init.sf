@@ -22,3 +22,6 @@ let Blackprint = window.Blackprint.loadScope({
 	// This will also be exported to JSON if this module's nodes is being used
 	url: import.meta.url,
 });
+
+// Global shared context (wait it to avoid race condition)
+let Context = await Blackprint.getContext('Decoration');

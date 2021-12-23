@@ -38,3 +38,19 @@ $ blackprint serve
 ```
 
 After you run `blackprint serve`, the modules server will be running and you can connect to it from the [Blackprint Editor](https://blackprint.github.io) (development mode).
+
+## Import this nodes from URL
+Please specify the version to avoid breaking changes.
+
+```js
+Blackprint.loadModuleFromURL([
+	'https://cdn.jsdelivr.net/npm/@blackprint/nodes@0.0.6/dist/nodes-console.min.mjs',
+	'https://cdn.jsdelivr.net/npm/@blackprint/nodes@0.0.6/dist/nodes-decoration.min.mjs',
+	'https://cdn.jsdelivr.net/npm/@blackprint/nodes@0.0.6/dist/nodes-example.min.mjs',
+	'https://cdn.jsdelivr.net/npm/@blackprint/nodes@0.0.6/dist/nodes-input.min.mjs',
+], {
+	// Turn this on if you want to load .sf.js, and .sf.css
+	// only with single .min.mjs
+	loadBrowserInterface: true // set to "false" for Node.js/Deno
+});
+```

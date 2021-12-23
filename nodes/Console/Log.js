@@ -1,4 +1,4 @@
-Blackprint.registerNode('Example/Display/Logger',
+Blackprint.registerNode('Console/Log',
 class extends Blackprint.Node {
 	input = {
 		Any: Blackprint.Port.ArrayOf(null) // Any data type, and can be used for many cable
@@ -7,8 +7,8 @@ class extends Blackprint.Node {
 	constructor(instance){
 		super(instance);
 
-		let iface = this.setInterface('BPIC/Example/Logger');
-		iface.title = "Logger";
+		let iface = this.setInterface('BPIC/Console/Log');
+		iface.title = "Log";
 		iface.description = 'Print anything into text';
 	}
 
@@ -35,13 +35,10 @@ class extends Blackprint.Node {
 
 		// Let's show data after new cable was connected or disconnected
 		iface.on('cable.connect cable.disconnect', function(){
-			Context.log('Example/Display/Logger', "A cable was changed on Logger, now refresing the input element");
 			node._refreshLogger(Input.Any);
 		});
 
-		iface.input.Any.on('value', function({ target, cable }){
-			Context.log('Example/Display/Logger', "I connected to", target.name, "port from", target.iface.title, "that have new value:", cable.value);
-
+		iface.input.Any.on('value', function(ev){
 			// Let's take all data from all connected nodes
 			// Instead showing new single data-> val
 			node._refreshLogger(Input.Any);
@@ -49,13 +46,10 @@ class extends Blackprint.Node {
 	}
 });
 
-Blackprint.registerInterface('BPIC/Example/Logger',
+Blackprint.registerInterface('BPIC/Console/Log',
 Context.IFace.Logger = class extends Blackprint.Interface {
 	_log = '...';
 
 	get log(){ return this._log }
-	set log(val){
-		this._log = val;
-		Context.log("Logger Data:", val);
-	}
+	set log(val){ this._log = val }
 });

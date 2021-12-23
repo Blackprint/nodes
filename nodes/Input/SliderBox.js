@@ -87,9 +87,6 @@ Context.IFace.SliderBoxIFace = class SliderBoxIFace extends Blackprint.Interface
 	constructor(node){
 		super(node);
 
-		// Constructor for Interface can be executed twice when using Cloned Container
-		if(this.data !== void 0) return;
-
 		this.focusIndex = void 0;
 		this.data = [{
 			value: 0,

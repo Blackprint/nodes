@@ -1,0 +1,57 @@
+## html
+<div class="node input" style="transform: translate({{ x }}px, {{ y }}px)">
+  <sf-template path="Blackprint/nodes/template/header.sf"></sf-template>
+
+  <div class="content">
+    <textarea sf-bind="data.value"></textarea>
+
+    <div class="right-port">
+      <sf-template path="Blackprint/nodes/template/output-port.sf"></sf-template>
+    </div>
+  </div>
+
+  <sf-template path="Blackprint/nodes/template/other.sf"></sf-template>
+</div>
+
+## scss-global
+bpic-input-textbox{
+	textarea{
+		width: 100px;
+	}
+}
+
+## js-global
+Blackprint.Sketch.registerInterface('BPIC/Input/TextBox',
+class InputIFace extends Context.IFace.Input {
+	constructor(node){
+		super(node);
+
+		let iface = this;
+		let waitRepaint = false;
+
+		// Auto scale the width/height of the textarea
+		iface.data.on$value = function(now){
+			if(waitRepaint) return;
+
+			waitRepaint = true;
+			$.afterRepaint().then(function(){
+				waitRepaint = false;
+
+				// Scale the input box depend on character length
+				var el = iface.$el('textarea');
+
+				// Skip if textarea was larger than our auto control
+				// I mean, if user have change the size manually
+				if(el[0].offsetWidth > 150 || el[0].offsetHeight > 60)
+					return;
+
+				if(now.length < 8)
+					el.attr('style', '');
+				else if(now.length >= 8 && now.length < 14)
+					el.attr('style', 'width:'+(10*now.length)+'px');
+				else if(now.length >= 14)
+					el.attr('style', 'width:140px;height:50px');
+			});
+		}
+	}
+});

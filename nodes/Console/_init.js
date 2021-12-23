@@ -11,7 +11,7 @@ let Blackprint = window.Blackprint.loadScope({
 });
 
 // Global shared context
-let Context = Blackprint.createContext('Decoration');
+let Context = Blackprint.createContext('Console');
 
 // This is needed to avoid duplicated event listener when using hot reload
 // Event listener that registered with same slot will be replaced
