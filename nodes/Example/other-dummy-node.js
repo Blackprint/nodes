@@ -44,6 +44,7 @@ Blackprint.registerNode('Example/Math/Multiply', function(node){
 	// When any output value from other node are updated
 	// Let's immediately change current node result
 	node.update = function(cable){
+		if(this.iface._inactive) return;
 		Output.Result = multiply();
 	}
 
