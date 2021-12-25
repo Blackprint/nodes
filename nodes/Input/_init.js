@@ -24,3 +24,7 @@ let objLength = Context.objLength = function(obj){
 
 	return i;
 }
+
+let Blob = window.Blob; // Browser/Deno
+if(Blob === void 0) // Node.js
+	Blob = require('buffer').Blob;

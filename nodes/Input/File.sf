@@ -24,6 +24,9 @@ bpic-input-file {
     max-height: 20px;
     overflow: hidden;
     word-break: break-all;
+    display: flex;
+    float: left;
+    margin-right: -20px;
   }
   input{
     opacity: 0;

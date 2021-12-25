@@ -9,7 +9,8 @@ class FileNode extends Blackprint.Node {
 
 		// Let's declare the Node port's outputs
 		this.output = {
-			URL: String
+			URL: String,
+			Blob: Blob,
 		}
 	}
 });
@@ -34,11 +35,11 @@ Context.IFace.File = class FileIFace extends Blackprint.Interface {
 	}
 
 	setFile(file){
-		this.file = file;
+		this.name = file.name;
+		this.node.output.Blob = file;
 
 		URL.revokeObjectURL(this.node.output.URL);
 		this.node.output.URL = URL.createObjectURL(file);
-		this.name = file.name;
 	}
 
 	browseFile(ev){
