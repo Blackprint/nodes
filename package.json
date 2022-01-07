@@ -13,6 +13,7 @@
   },
   "scripts": {
     "start": "blackprint serve",
+    "test": "echo not implemented",
     "build-prod": "blackprint build production"
   },
   "homepage": "http://stefansarya.gitbook.io/blackprint",
