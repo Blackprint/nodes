@@ -22,7 +22,7 @@ module.exports = {
 	// Maybe you want to write Node.js compatible node on ".js"
 	// and browser compatible node on ".sf" file extension
 	js:{
-		file:'@cwd/dist/nodes-console.min.mjs', // @cwd = directory where you start the Node.js
+		file:'@cwd/dist/nodes-console.mjs', // @cwd = directory where you start the Node.js
 
 		// We're not using `await imports.task()` so let's just use `mjs`
 		wrapped: 'mjs', // Wrap the entire .js to .mjs
