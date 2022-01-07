@@ -15,5 +15,8 @@ let Blackprint = window.Blackprint.loadScope({
 	url: import.meta.url,
 });
 
+// Use sQuery
+let $ = sf.$;
+
 // Global shared context (wait it to avoid race condition)
 let Context = await Blackprint.getContext('Example');
