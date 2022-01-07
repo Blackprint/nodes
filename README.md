@@ -44,13 +44,22 @@ Please specify the version to avoid breaking changes.
 
 ```js
 Blackprint.loadModuleFromURL([
-	'https://cdn.jsdelivr.net/npm/@blackprint/nodes@0.0.6/dist/nodes-console.min.mjs',
-	'https://cdn.jsdelivr.net/npm/@blackprint/nodes@0.0.6/dist/nodes-decoration.min.mjs',
-	'https://cdn.jsdelivr.net/npm/@blackprint/nodes@0.0.6/dist/nodes-example.min.mjs',
-	'https://cdn.jsdelivr.net/npm/@blackprint/nodes@0.0.6/dist/nodes-input.min.mjs',
+	'https://cdn.jsdelivr.net/npm/@blackprint/nodes@0.1.0/dist/nodes-console.mjs',
+	'https://cdn.jsdelivr.net/npm/@blackprint/nodes@0.1.0/dist/nodes-decoration.mjs',
+	'https://cdn.jsdelivr.net/npm/@blackprint/nodes@0.1.0/dist/nodes-example.mjs',
+	'https://cdn.jsdelivr.net/npm/@blackprint/nodes@0.1.0/dist/nodes-input.mjs',
 ], {
 	// Turn this on if you want to load .sf.js, and .sf.css
-	// only with single .min.mjs
+	// only with single .mjs
 	loadBrowserInterface: true // set to "false" for Node.js/Deno
 });
 ```
+
+## Development URL
+You can use this link to load unpublished nodes and still under development on GitHub.
+> `https://cdn.jsdelivr.net/gh/Blackprint/nodes@dist/nodes-console.mjs?1`
+> `https://cdn.jsdelivr.net/gh/Blackprint/nodes@dist/nodes-decoration.mjs?1`
+> `https://cdn.jsdelivr.net/gh/Blackprint/nodes@dist/nodes-example.mjs?1`
+> `https://cdn.jsdelivr.net/gh/Blackprint/nodes@dist/nodes-input.mjs?1`
+
+Please append `/url-here?random-number` if your browser still using the cached files after the repository was updated.
