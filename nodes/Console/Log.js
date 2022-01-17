@@ -43,6 +43,8 @@ class extends Blackprint.Node {
 			// Instead showing new single data-> val
 			node._refreshLogger(Input.Any);
 		});
+
+		node._refreshLogger(Input.Any);
 	}
 });
 

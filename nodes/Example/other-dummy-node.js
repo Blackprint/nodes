@@ -26,13 +26,7 @@ Blackprint.registerNode('Example/Math/Multiply', function(node){
 			}
 		}),
 		A: Number,
-		B: Blackprint.Port.Validator(Number, function(val){
-			// Executed when input.B is being obtained
-			// And the output from other node is being assigned
-			// as current port value in this node
-			Context.log('Example/Math/Multiply', iface.title, '- Port B got input:', val);
-			return Number(val);
-		}),
+		B: null, // Any data type
 	};
 
 	// Your own processing mechanism
