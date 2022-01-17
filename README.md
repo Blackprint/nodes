@@ -44,10 +44,10 @@ Please specify the version to avoid breaking changes.
 
 ```js
 Blackprint.loadModuleFromURL([
-	'https://cdn.jsdelivr.net/npm/@blackprint/nodes@0.1.0/dist/nodes-console.mjs',
-	'https://cdn.jsdelivr.net/npm/@blackprint/nodes@0.1.0/dist/nodes-decoration.mjs',
-	'https://cdn.jsdelivr.net/npm/@blackprint/nodes@0.1.0/dist/nodes-example.mjs',
-	'https://cdn.jsdelivr.net/npm/@blackprint/nodes@0.1.0/dist/nodes-input.mjs',
+	'https://cdn.jsdelivr.net/npm/@blackprint/nodes@0.2.0/dist/nodes-console.mjs',
+	'https://cdn.jsdelivr.net/npm/@blackprint/nodes@0.2.0/dist/nodes-decoration.mjs',
+	'https://cdn.jsdelivr.net/npm/@blackprint/nodes@0.2.0/dist/nodes-example.mjs',
+	'https://cdn.jsdelivr.net/npm/@blackprint/nodes@0.2.0/dist/nodes-input.mjs',
 ], {
 	// Turn this on if you want to load .sf.js, and .sf.css
 	// only with single .mjs
