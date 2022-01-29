@@ -6,8 +6,9 @@ class EmptyNode extends Blackprint.Node {
 	constructor(instance){
 		super(instance);
 
-		let iface = this.setInterface();
+		let iface = this.setInterface('BPIC/Data/Minimal');
 		iface.title = "Number: Modulo";
+		iface.element = $('<i class="fa fa-percentage"></i>')[0];
 	}
 
 	update(){

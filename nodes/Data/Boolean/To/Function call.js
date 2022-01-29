@@ -1,4 +1,4 @@
-Blackprint.registerNode("Data/Boolean/To/Function call",
+Blackprint.registerNode("Data/Boolean/To/Trigger",
 class EmptyNode extends Blackprint.Node {
 	static input = { Value: Boolean };
 	static output = { Call: Function };
@@ -7,7 +7,8 @@ class EmptyNode extends Blackprint.Node {
 		super(instance);
 
 		let iface = this.setInterface('BPIC/Data/Minimal');
-		iface.title = "Boolean to function call";
+		iface.title = "Trigger on true";
+		iface.element = document.createTextNode('Fx()');
 
 		iface.data = {signal: true};
 	}

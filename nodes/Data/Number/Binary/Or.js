@@ -6,8 +6,10 @@ class EmptyNode extends Blackprint.Node {
 	constructor(instance){
 		super(instance);
 
-		let iface = this.setInterface();
+		let iface = this.setInterface('BPIC/Data/Minimal');
 		iface.title = "Binary: Or";
+		iface.element = document.createTextNode('Bin Or');
+		iface.w = 95;
 	}
 
 	update(){
