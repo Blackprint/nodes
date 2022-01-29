@@ -6,10 +6,9 @@
 // maybe like loading our dependencies for the nodes
 
 // Load dependencies
-await imports([
-	"https://cdn.jsdelivr.net/npm/marked/marked.min.js",
-	"https://cdn.jsdelivr.net/gh/liyasthomas/marcdown/marcdown.min.js",
-]);
+// await imports([
+// 	"https://cdn.jsdelivr.net/gh/liyasthomas/marcdown/marcdown.min.js",
+// ]);
 
 // Prepare stuff after all dependencies was loaded
 // https://guides.github.com/features/mastering-markdown/
