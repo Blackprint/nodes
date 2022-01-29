@@ -1,0 +1,23 @@
+## html
+<div class="node" style="transform: translate({{ x }}px, {{ y }}px)">
+  <div class="content">
+    <div class="left-port">
+      <sf-template path="Blackprint/nodes/template/input-port.sf"></sf-template>
+    </div>
+
+    <div class="right-port">
+      <sf-template path="Blackprint/nodes/template/output-port.sf"></sf-template>
+    </div>
+  </div>
+</div>
+
+## scss-global
+bpic-converter-minimal {
+
+}
+
+## js-global
+// Register with default interface
+Blackprint.Sketch.registerInterface("BPIC/Data/Minimal", class extends Blackprint.Interface {
+
+});
