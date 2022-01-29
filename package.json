@@ -18,8 +18,8 @@
   },
   "homepage": "http://stefansarya.gitbook.io/blackprint",
   "dependencies": {
-    "@blackprint/engine": "0.5.x",
-    "@blackprint/sketch": "0.5.x",
+    "@blackprint/engine": "0.6.x",
+    "@blackprint/sketch": "0.6.x",
     "scarletsframe": "0.35.x"
   },
   "devDependencies": {

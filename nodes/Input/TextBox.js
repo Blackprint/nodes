@@ -5,10 +5,10 @@
 Blackprint.registerNode('Input/TextBox',
 class extends Blackprint.Node {
 	// Output Port's Template (This will be transformed to it's type after initialized)
-	output = {
+	static output = {
 		Changed: Function,
 		Value: String, // Default to empty string
-	}
+	};
 
 	constructor(instance){
 		super(instance);

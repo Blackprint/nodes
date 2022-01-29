@@ -1,6 +1,6 @@
 Blackprint.registerNode('Console/Log',
 class extends Blackprint.Node {
-	input = {
+	static input = {
 		Any: Blackprint.Port.ArrayOf(null) // Any data type, and can be used for many cable
 	};
 
@@ -34,11 +34,11 @@ class extends Blackprint.Node {
 		let Input = node.input;
 
 		// Let's show data after new cable was connected or disconnected
-		iface.on('cable.connect cable.disconnect', function(){
+		iface.on('cable.connect cable.disconnect', Context.EventSlot, function(){
 			node._refreshLogger(Input.Any);
 		});
 
-		iface.input.Any.on('value', function(ev){
+		iface.input.Any.on('value', Context.EventSlot, function(ev){
 			// Let's take all data from all connected nodes
 			// Instead showing new single data-> val
 			node._refreshLogger(Input.Any);

@@ -1,17 +1,17 @@
 Blackprint.registerNode('Input/File',
 class FileNode extends Blackprint.Node {
+	// Let's declare the Node port's outputs
+	static output = {
+		URL: String,
+		Blob: Blob,
+	}
+
 	constructor(instance){
 		super(instance);
 
 		// Let's use an Interface
 		let iface = this.setInterface('BPIC/Input/File');
 		iface.title = 'File loader'; // Give it a name
-
-		// Let's declare the Node port's outputs
-		this.output = {
-			URL: String,
-			Blob: Blob,
-		}
 	}
 });
 

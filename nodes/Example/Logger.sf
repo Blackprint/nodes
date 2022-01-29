@@ -1,5 +1,5 @@
 ## html
-<div class="node function" style="transform: translate({{ x }}px, {{ y }}px)">
+<div class="node" style="transform: translate({{ x }}px, {{ y }}px)">
   <sf-template path="Blackprint/nodes/template/header.sf"></sf-template>
 
   <div class="content">
@@ -49,7 +49,7 @@ class extends Blackprint.Interface {
 
 		// Skip if textarea was larger than our auto control
 		// I mean, if user have change the size manually
-		if(el[0].offsetWidth > 150 || el[0].offsetHeight > 60)
+		if(el[0] == null || el[0].offsetWidth > 150 || el[0].offsetHeight > 60)
 			return;
 
 		if(now.length < 8)

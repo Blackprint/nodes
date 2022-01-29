@@ -1,6 +1,6 @@
 Blackprint.registerNode('Example/Display/Logger',
 class extends Blackprint.Node {
-	input = {
+	static input = {
 		Any: Blackprint.Port.ArrayOf(null) // Any data type, and can be used for many cable
 	};
 
@@ -13,18 +13,7 @@ class extends Blackprint.Node {
 	}
 
 	_refreshLogger(val){
-		let iface = this.iface;
-
-		if(val === null)
-			iface.log = 'null';
-		else if(val === undefined)
-			iface.log = 'undefined';
-		else if(val.constructor === Function)
-			iface.log = val.toString();
-		else if(val.constructor === String || val.constructor === Number)
-			iface.log = val;
-		else
-			iface.log = JSON.stringify(val);
+		this.iface.log = JSON.stringify(val);
 	}
 
 	init(){
@@ -34,12 +23,12 @@ class extends Blackprint.Node {
 		let Input = node.input;
 
 		// Let's show data after new cable was connected or disconnected
-		iface.on('cable.connect cable.disconnect', function(){
+		iface.on('cable.connect cable.disconnect', Context.EventSlot, function(){
 			Context.log('Example/Display/Logger', "A cable was changed on Logger, now refresing the input element");
 			node._refreshLogger(Input.Any);
 		});
 
-		iface.input.Any.on('value', function({ target, cable }){
+		iface.input.Any.on('value', Context.EventSlot, function({ target, cable }){
 			Context.log('Example/Display/Logger', "I connected to", target.name, "port from", target.iface.title, "that have new value:", cable.value);
 
 			// Let's take all data from all connected nodes

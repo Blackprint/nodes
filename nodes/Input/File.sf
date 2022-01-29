@@ -3,7 +3,7 @@
   <sf-template path="Blackprint/nodes/template/header.sf"></sf-template>
 
   <div class="content">
-  	<div class="file-place" @click="browseFile" @filedrop="dropFile">
+  	<div class="file-place" @click="browseFile(event)" @filedrop="dropFile">
   		{{ name || 'Drop file here'}}
   	</div>
 

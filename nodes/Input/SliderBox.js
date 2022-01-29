@@ -1,14 +1,14 @@
 Blackprint.registerNode('Input/SliderBox',
 class SliderBoxNode extends Blackprint.Node {
+	static output = {
+		"0": Blackprint.Port.Default(Number, 0)
+	};
+
 	constructor(instance){
 		super(instance);
 
 		let iface = this.setInterface('BPIC/Input/SliderBox');
 		iface.title = 'Slider Box';
-
-		this.output = {
-			"0": Blackprint.Port.Default(Number, 0)
-		};
 	}
 
 	// Callback when this single node was loaded
@@ -35,14 +35,17 @@ class SliderBoxNode extends Blackprint.Node {
 			// Equal to 'iface.data.push({...})'
 			iface.createPort();
 
+			let key = i+'';
+
 			// Because it object property, we need to cast as string
-			var val = data[i+''];
+			var val = data[key];
 
 			// Assign object values into data
 			Object.assign(iface.data[i], val);
 
 			// Add new port and set current port value
-			node.output.add(i, val.value);
+			node.createPort('output', i, Number);
+			node.output[key] = val.value;
 		}
 	}
 
@@ -55,7 +58,7 @@ class SliderBoxNode extends Blackprint.Node {
 		var portMenu = [{
 			title:"Create port", context:null, callback(){
 				// Always create on last position -> (key, default value)
-				node.output.add(iface.data.length, 0);
+				node.createPort('output', iface.data.length, Number);
 				iface.createPort();
 			}
 		}, {
@@ -64,12 +67,12 @@ class SliderBoxNode extends Blackprint.Node {
 				if(length === 1)
 					return;
 
-				node.output.delete(length - 1);
+				node.deletePort('output', length - 1);
 				iface.data.pop();
 			}
 		}];
 
-		iface.on('port.menu', function({ port, menu }){
+		iface.on('port.menu', Context.EventSlot, function({ port, menu }){
 			for (var i = 0; i < portMenu.length; i++) {
 				// Change every callback context to refer current port
 				let temp = portMenu[i];

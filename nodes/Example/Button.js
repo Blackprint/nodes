@@ -4,9 +4,9 @@
 // Just like creating a template/base and attach an interface for extra control
 Blackprint.registerNode('Example/Button/Simple',
 class extends Blackprint.Node {
-  output = {
+  static output = {
     Clicked: Function
-  }
+  };
 
   constructor(instance){
     super(instance);
