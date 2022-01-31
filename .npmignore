@@ -3,6 +3,6 @@ node_modules
 .*
 src
 .github
-vercel.json
-tests
+tests/
 jest.config.js
+nodes/

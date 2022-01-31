@@ -8,9 +8,10 @@ assignees: ''
 ---
 
 Make sure to check open/closed issue to avoid duplicate.
-If you want to report bug for the engine, or library please fill issue to it's repository.
+If you want to report bug for the engine, or other library please fill issue into it's repository.
 
 Make sure to remove this header message.
+> And also remove any comments like this line
 
 ---
 
@@ -25,14 +26,17 @@ Make sure to remove this header message.
 **To Reproduce**
 > If applicable, please create an minimal example about the problem on Blackprint Editor.
 Steps to reproduce the behavior:
+
 1. Go to '...'
 2. Click on '....'
 3. Scroll down to '....'
 4. See error
 
 > If applicable and the modules can be loaded online, please export your JSON to help us reproduce the bugs.
+
 <details>
   <summary>Exported Blackprint Editor's JSON</summary>
+
   {...Replace this text with your JSON...}
 </details>
 
