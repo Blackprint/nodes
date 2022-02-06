@@ -7,6 +7,7 @@
 		@pointerdown="swapZIndex(event)"
 		@pointerover="nodeHovered(event)"
 	  	@pointerout="nodeUnhovered(event)"
+	  	title="{{ title }}"
 	><sf-slot for="element"></div>
 
     <div class="left-port">
