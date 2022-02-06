@@ -8,12 +8,12 @@ class EmptyNode extends Blackprint.Node {
 
 		let iface = this.setInterface('BPIC/Data/Minimal');
 		iface.title = "String: Equal";
-		iface.element = $('<i class="fa fa-equal"></i>')[0];
+		iface.element = $('<i class="fa fa-equals"></i>')[0];
 	}
 
 	update(){
 		let ref = this.ref;
-		let {A, B} = ref.Input;
+		let { A, B } = ref.Input;
 
 		if(A == null || B == null) return;
 		ref.Output.Value = A === B;
