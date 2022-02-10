@@ -1,7 +1,7 @@
 {
   "name": "@blackprint/nodes",
   "description": "Blackprint nodes for Browser/Node.js/Deno",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "author": "Blackprint",
   "license": "MIT",
   "repository": {
@@ -17,13 +17,21 @@
     "build-prod": "blackprint build production"
   },
   "homepage": "http://stefansarya.gitbook.io/blackprint",
-  "dependencies": {
+  "devDependencies": {
+    "scarletsframe": "0.35.x",
     "@blackprint/engine": "0.6.x",
     "@blackprint/sketch": "0.6.x",
-    "scarletsframe": "0.35.x"
+    "@blackprint/cli-tools": "0.3.x",
+    "jest": "^27.4"
   },
-  "devDependencies": {
-    "@blackprint/cli-tools": "0.3.x"
+  "blackprint": {
+    "bundle": [
+      "dist/nodes-console.mjs",
+      "dist/nodes-data.mjs",
+      "dist/nodes-decoration.mjs",
+      "dist/nodes-example.mjs",
+      "dist/nodes-input.mjs"
+    ]
   },
   "keywords": [
     "blackprint"
