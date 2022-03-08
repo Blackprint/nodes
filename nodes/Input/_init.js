@@ -30,4 +30,9 @@ let objLength = Context.objLength = function(obj){
 
 let Blob = window.Blob; // Browser/Deno
 if(Blob === void 0) // Node.js
-	Blob = require('buffer').Blob;
+	Blob = (await import('node:buffer')).Blob;
+
+// Fix for Node.js
+let HTMLElement = window.HTMLElement || null;
+let Event = window.Event || null;
+let KeyboardEvent = window.KeyboardEvent || null;

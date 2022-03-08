@@ -18,3 +18,7 @@ let Context = Blackprint.createContext('Data');
 // This is needed to avoid duplicated event listener when using hot reload
 // Event listener that registered with same slot will be replaced
 Context.EventSlot = {slot: 'my-private-event-slot'};
+
+let $ = globalThis.sf?.$;
+if(!Blackprint.Environment.isBrowser)
+	$ = ()=> [];
