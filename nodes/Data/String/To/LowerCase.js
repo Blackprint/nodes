@@ -1,7 +1,7 @@
 Blackprint.registerNode("Data/String/To/LowerCase",
-class EmptyNode extends Blackprint.Node {
-	static input = { String: String };
-	static output = { Result: String };
+class LowerCase extends Blackprint.Node {
+	static input = { In: String };
+	static output = { Out: String };
 
 	constructor(instance){
 		super(instance);
@@ -13,9 +13,9 @@ class EmptyNode extends Blackprint.Node {
 
 	update(){
 		let ref = this.ref;
-		let {String} = ref.Input;
+		let { In } = ref.Input;
 
-		if(String == null) return;
-		ref.Output.Result = String.toUpperCase();
+		if(In == null) return;
+		ref.Output.Out = In.toUpperCase();
 	}
 });
