@@ -6,9 +6,10 @@ class NumString extends Blackprint.Node {
 	constructor(instance){
 		super(instance);
 
-		let iface = this.setInterface();
-		iface.title = "To String";
-		iface.description = "Number";
+		let iface = this.setInterface('BPIC/Data/Minimal');
+		iface.title = "Number to String";
+		iface.element = $('<i class="fa fa-magic"></i>')[0];
+		iface.showPortName = true;
 	}
 
 	update(){

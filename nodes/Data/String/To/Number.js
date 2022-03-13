@@ -6,10 +6,9 @@ class Str2Number extends Blackprint.Node {
 	constructor(instance){
 		super(instance);
 
-		let iface = this.setInterface();
-		iface.title = "To Number";
-		iface.description = "String";
-
+		let iface = this.setInterface('BPIC/Data/Minimal');
+		iface.title = "String To Number";
+		iface.element = $('<i class="fa fa-magic"></i>')[0];
 		this._toast = new NodeToast(iface);
 	}
 
