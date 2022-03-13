@@ -1,6 +1,10 @@
 ## html
-<div class="node" style="transform:translate({{ x }}px,{{ y }}px); width:{{ w }}px; height:{{ h }}px">
+<div class="node {{ showPortName ? 'show-port-name' : ''}}" style="transform:translate({{ x }}px,{{ y }}px); width:{{ w }}px">
   <div class="content">
+    <div class="left-port">
+      <sf-template path="Blackprint/nodes/template/input-port.sf"></sf-template>
+    </div>
+
   	<div class="center"
 		@contextmenu.stopAll.prevent="nodeMenu(event)"
 		@dragmove="moveNode(event)"
@@ -9,10 +13,6 @@
 	  	@pointerout="nodeUnhovered(event)"
 	  	title="{{ title }}"
 	><sf-slot for="element"></div>
-
-    <div class="left-port">
-      <sf-template path="Blackprint/nodes/template/input-port.sf"></sf-template>
-    </div>
 
     <div class="right-port">
       <sf-template path="Blackprint/nodes/template/output-port.sf"></sf-template>
@@ -24,6 +24,38 @@
 bpic-data-minimal {
 	.left-port .name, .right-port .name {
 		display: none !important;
+	}
+
+	.show-port-name {
+		width: auto !important;
+		.content{
+			display: flex !important;
+			margin-top: 0 !important;
+		}
+		.left-port .name, .right-port .name {
+			display: inline-flex !important;
+		}
+		.left-port {
+			margin-right: 0 !important;
+			width: auto;
+			.input {
+				padding-right: 10px !important;
+			}
+		}
+		.right-port {
+			margin-left: 0 !important;
+			.output {
+				padding-left: 10px !important;
+			}
+		}
+
+		.center {
+			position: relative;
+			text-align: center;
+			width: 15px;
+			align-self: center;
+			z-index: 1;
+		}
 	}
 
 	.left-port {
@@ -55,5 +87,6 @@ Blackprint.Sketch.registerInterface("BPIC/Data/Minimal", class extends Blackprin
 		this.h = 37;
 		this.w = 80;
 		this.element = null;
+		this.showPortName = false;
 	}
 });
