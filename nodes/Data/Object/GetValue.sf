@@ -1,0 +1,33 @@
+## html
+<div class="node" style="transform: translate({{ x }}px, {{ y }}px)">
+  <sf-template path="Blackprint/nodes/template/header.sf"></sf-template>
+
+  <div class="content">
+    <input sf-bind="data.props">
+
+    <div class="left-port">
+      <sf-template path="Blackprint/nodes/template/input-port.sf"></sf-template>
+    </div>
+
+    <div class="right-port">
+      <sf-template path="Blackprint/nodes/template/output-port.sf"></sf-template>
+    </div>
+  </div>
+
+  <sf-template path="Blackprint/nodes/template/other.sf"></sf-template>
+</div>
+
+## scss-global
+bpic-data-object-getvalue{
+	input{
+		display: block;
+		width: calc(100% - 10px);
+		padding: 5px;
+    outline: none;
+	}
+}
+
+## js-global
+Blackprint.Sketch.registerInterface('BPIC/Data/Object/GetValue',
+class extends Context.IFace.GetValue {
+});
