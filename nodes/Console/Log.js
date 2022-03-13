@@ -15,6 +15,9 @@ class extends Blackprint.Node {
 	_refreshLogger(val){
 		let iface = this.iface;
 
+		if(!Blackprint.Environment.isBrowser)
+			console.log(val);
+
 		if(val === null)
 			iface.log = 'null';
 		else if(val === undefined)
@@ -28,23 +31,26 @@ class extends Blackprint.Node {
 	}
 
 	init(){
-		let node = this;
-		let iface = this.iface;
-
-		let Input = node.input;
+		let { Input } = this.ref;
 
 		// Let's show data after new cable was connected or disconnected
-		iface.on('cable.connect cable.disconnect', Context.EventSlot, function(){
-			node._refreshLogger(Input.Any);
+		this.iface.on('cable.disconnect', Context.EventSlot, () => {
+			this._refreshLogger(Input.Any);
 		});
+	}
 
-		iface.input.Any.on('value', Context.EventSlot, function(ev){
-			// Let's take all data from all connected nodes
-			// Instead showing new single data-> val
-			node._refreshLogger(Input.Any);
-		});
+	update(){
+		let { Input } = this.ref;
 
-		node._refreshLogger(Input.Any);
+		// Let's take all data from all connected nodes
+		// Instead showing new single data-> val
+		this._refreshLogger(Input.Any);
+	}
+
+	// Remote sync in
+	syncIn(id, data){
+		if(id === 'log')
+			this.iface.log = data;
 	}
 });
 
@@ -53,5 +59,8 @@ Context.IFace.Logger = class extends Blackprint.Interface {
 	_log = '...';
 
 	get log(){ return this._log }
-	set log(val){ this._log = val }
+	set log(val){
+		this._log = val;
+		this.node.syncOut('log', val);
+	}
 });

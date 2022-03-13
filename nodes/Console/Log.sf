@@ -23,7 +23,7 @@ bpic-console-log{
 
 ## js-global
 Blackprint.Sketch.registerInterface('BPIC/Console/Log',
-class extends Blackprint.Interface {
+class extends Context.IFace.Logger {
 	constructor(scope){
 		super(scope);
 		this.log = '...';

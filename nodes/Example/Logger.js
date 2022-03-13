@@ -17,26 +17,30 @@ class extends Blackprint.Node {
 	}
 
 	init(){
-		let node = this;
-		let iface = this.iface;
-
-		let Input = node.input;
-
 		// Let's show data after new cable was connected or disconnected
-		iface.on('cable.connect cable.disconnect', Context.EventSlot, function(){
-			Context.log('Example/Display/Logger', "A cable was changed on Logger, now refresing the input element");
-			node._refreshLogger(Input.Any);
+		this.iface.on('cable.disconnect', Context.EventSlot, () => {
+			Context.log('Example/Display/Logger', "A cable was changed on Logger, manual update will be triggered");
+
+			this.update();
 		});
 
-		iface.input.Any.on('value', Context.EventSlot, function({ target, cable }){
-			Context.log('Example/Display/Logger', "I connected to", target.name, "port from", target.iface.title, "that have new value:", cable.value);
-
-			// Let's take all data from all connected nodes
-			// Instead showing new single data-> val
-			node._refreshLogger(Input.Any);
+		this.iface.input.Any.on('value', Context.EventSlot, ({ target }) => {
+			Context.log('Example/Display/Logger', `I connected to Result port from "${target.name}" that have value: ${target.value}`);
 		});
+	}
 
-		node._refreshLogger(Input.Any);
+	update(){
+		let { Input } = this.ref;
+
+		// Let's take all data from all connected nodes
+		// Instead showing new single data-> val
+		this._refreshLogger(Input.Any);
+	}
+
+	// Remote sync in
+	syncIn(id, data){
+		if(id === 'log')
+			this.iface.log = data;
 	}
 });
 
@@ -44,9 +48,11 @@ Blackprint.registerInterface('BPIC/Example/Logger',
 Context.IFace.Logger = class extends Blackprint.Interface {
 	_log = '...';
 
+	// Template Binding -> https://github.com/ScarletsFiction/ScarletsFrame/wiki/Input-Binding
 	get log(){ return this._log }
 	set log(val){
 		this._log = val;
-		Context.log("Logger Data:", val);
+		Context.log("Logger Data", val);
+		this.node.syncOut('log', val);
 	}
 });

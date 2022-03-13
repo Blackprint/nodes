@@ -39,9 +39,18 @@ class extends Blackprint.Node {
 
 		// iface.data.value === text;
 		this.output.Value = iface.data.value;
+		this.syncOut('data', {value: iface.data.value});
 
 		// This will call every connected node
 		this.output.Changed();
+	}
+
+	// Remote sync in
+	syncIn(id, data){
+		if(id === 'data'){
+			Object.assign(this.iface.data, data);
+			this.changed();
+		}
 	}
 });
 

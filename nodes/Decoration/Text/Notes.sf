@@ -38,6 +38,8 @@ Blackprint.Sketch.registerInterface('BPIC/Decoration/Text/Notes', function(iface
 			if(waitRepaint) return;
 			iface.$el('textarea').css('height', "5px");
 			refreshHeight();
+
+			iface.node.syncOut('value', now);
 		}
 	};
 

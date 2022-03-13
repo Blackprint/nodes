@@ -13,4 +13,9 @@ Blackprint.registerNode('Decoration/Text/Notes', function(node){
 		// When this node was successfully imported
 		iface.data.value = data.value;
 	}
+
+	node.syncIn = function(eventName, value){
+		if(eventName === 'value')
+			iface.data.value = value;
+	}
 });

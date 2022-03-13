@@ -82,6 +82,17 @@ class SliderBoxNode extends Blackprint.Node {
 			}
 		});
 	}
+
+	syncIn(evName, data){
+		if(evName === 'data'){
+			let iface = this.iface;
+			Object.assign(iface.data, data);
+
+			for (var i = 0; i < data.length; i++) {
+				iface.changed(i, data[i].value);
+			}
+		}
+	}
 });
 
 // Save it on Context, so we can also access it from .sf files
@@ -91,20 +102,15 @@ Context.IFace.SliderBoxIFace = class SliderBoxIFace extends Blackprint.Interface
 		super(node);
 
 		this.focusIndex = void 0;
-		this.data = [{
-			value: 0,
-			min: -100,
-			max: 100,
-			step: 0.1,
-			$iface: this, // For reference in valueListener
-
-			// Listener if value changed
-			on$value: this.valueListener,
-		}];
+		this.data = [];
+		this.createPort(); // port: 0
 	}
 
 	changed(index, val){
 		this.node.output[index] = val;
+
+		// Already throttled before being send to remote
+		this.node.syncOut('data', this.data);
 	}
 
 	// Put this here to reduce memory usage because of function creation
@@ -119,7 +125,11 @@ Context.IFace.SliderBoxIFace = class SliderBoxIFace extends Blackprint.Interface
 		else // Fix floating point
 			now = Math.round(now*100)/100;
 
-		this.$iface.changed && this.$iface.changed(this.$iface.focusIndex, now);
+		let iface = this._iface;
+
+		// Wait until the data has been changed
+		clearTimeout(this._wait);
+		this._wait = setTimeout(()=> iface.changed(iface.focusIndex, now), 1);
 		return now;
 	}
 
@@ -129,7 +139,7 @@ Context.IFace.SliderBoxIFace = class SliderBoxIFace extends Blackprint.Interface
 			min: -100,
 			max: 100,
 			step: 0.1,
-			$iface: this, // For reference in valueListener
+			_iface: this, // For reference in valueListener
 
 			// Listener if value changed
 			on$value: this.valueListener,

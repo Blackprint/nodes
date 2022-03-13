@@ -22,7 +22,7 @@ bpic-example-logger{
 
 ## js-global
 Blackprint.Sketch.registerInterface('BPIC/Example/Logger',
-class extends Blackprint.Interface {
+class extends Context.IFace.Logger {
 	// This implementation can be changed into a function
 
 	// Property of this scope
@@ -33,13 +33,6 @@ class extends Blackprint.Interface {
 		output: [],
 		property: [],
 	} */
-
-	constructor(scope){
-		super(scope);
-
-		// Template Binding -> https://github.com/ScarletsFiction/ScarletsFrame/wiki/Input-Binding
-		this.log = '...';
-	}
 
 	// Listener when log value is being send to HTML input element by the framework
 	// I'm using this for auto scale the width/height of the textarea
