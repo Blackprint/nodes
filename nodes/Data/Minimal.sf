@@ -1,5 +1,5 @@
 ## html
-<div class="node {{ showPortName ? 'show-port-name' : ''}}" style="transform:translate({{ x }}px,{{ y }}px); width:{{ w }}px">
+<div class="node {{ showPortName ? 'show-port-name' : ''}}" style="transform:translate({{ x }}px,{{ y }}px)">
   <div class="content">
     <div class="left-port">
       <sf-template path="Blackprint/nodes/template/input-port.sf"></sf-template>
@@ -27,7 +27,6 @@ bpic-data-minimal {
 	}
 
 	.show-port-name {
-		width: auto !important;
 		.content{
 			display: flex !important;
 			margin-top: 0 !important;
@@ -84,8 +83,6 @@ bpic-data-minimal {
 Blackprint.Sketch.registerInterface("BPIC/Data/Minimal", class extends Blackprint.Interface {
 	constructor(node){
 		super(node);
-		this.h = 37;
-		this.w = 80;
 		this.element = null;
 		this.showPortName = false;
 	}
