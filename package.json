@@ -1,7 +1,7 @@
 {
   "name": "@blackprint/nodes",
   "description": "Blackprint nodes for Browser/Node.js/Deno",
-  "version": "0.3.1",
+  "version": "0.4.0",
   "author": "Blackprint",
   "license": "MIT",
   "repository": {
@@ -25,13 +25,13 @@
     "jest": "^27.4"
   },
   "blackprint": {
-    "bundle": [
-      "dist/nodes-console.mjs",
-      "dist/nodes-data.mjs",
-      "dist/nodes-decoration.mjs",
-      "dist/nodes-example.mjs",
-      "dist/nodes-input.mjs"
-    ]
+    "source": {
+      "dist/nodes-console.mjs": "nodes/Console",
+      "dist/nodes-data.mjs": "nodes/Data",
+      "dist/nodes-decoration.mjs": "nodes/Decoration",
+      "dist/nodes-example.mjs": "nodes/Example",
+      "dist/nodes-input.mjs": "nodes/Input"
+    }
   },
   "keywords": [
     "blackprint"

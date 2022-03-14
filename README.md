@@ -3,9 +3,11 @@ This repository contains a collection of general Blackprint Nodes.<br>
 General nodes like:<br>
 - Example (for cross language testing)
 - Input (Button, Slider, etc)
-- RegExp (match, replace, etc)
-- Math (Arithmetic, Geometry, Matrix, etc)
-- Decoration (Notes, Picture, etc)
+- Data (String, Number, Boolean)
+  - RegExp (match, replace, etc)
+  - Math (Arithmetic, Geometry, Matrix, etc)
+  - Comparator
+- Decoration (Notes, other nodes only for browser UI)
 
 General nodes can be compatible for different programming language, so it will not adding nodes for third-party library.
 

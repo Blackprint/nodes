@@ -7,7 +7,7 @@ class Str2Number extends Blackprint.Node {
 		super(instance);
 
 		let iface = this.setInterface('BPIC/Data/Minimal');
-		iface.title = "String To Number";
+		iface.title = "String to Number";
 		iface.element = $('<i class="fa fa-magic"></i>')[0];
 		this._toast = new NodeToast(iface);
 	}
