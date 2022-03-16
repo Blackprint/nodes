@@ -1,21 +1,26 @@
 // These registration is using function for constructing nodes
-// Using class is more recommended for better performance and memory usage
-Blackprint.registerNode('Decoration/Text/Notes', function(node){
-	if(!Blackprint.Environment.isBrowser)
-		return node.setInterface(); // use default interface for Node.js/Deno
+Blackprint.registerNode('Decoration/Text/Notes',
+class extends Blackprint.Node {
+	constructor(instance){
+		super(instance);
 
-	let iface = node.setInterface('BPIC/Decoration/Text/Notes'); // Interface path
-	iface.title = 'Notes';
+		if(!Blackprint.Environment.isBrowser)
+			return this.setInterface(); // use default interface for Node.js/Deno
 
-	node.imported = function(data){
+		let iface = this.setInterface('BPIC/Decoration/Text/Notes'); // Interface path
+		iface.title = 'Notes';
+	}
+
+	imported(data){
+		if(!Blackprint.Environment.isBrowser) return;
 		if(data === void 0) return;
 
 		// When this node was successfully imported
-		iface.data.value = data.value;
+		this.iface.data.value = data.value;
 	}
 
-	node.syncIn = function(eventName, value){
+	syncIn(eventName, value){
 		if(eventName === 'value')
-			iface.data.value = value;
+			this.iface.data.value = value;
 	}
 });

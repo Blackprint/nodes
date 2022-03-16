@@ -19,33 +19,38 @@ sf-space[blackprint] bpic-decoration-text-notes .node {
 
 
 ## js-global
-Blackprint.Sketch.registerInterface('BPIC/Decoration/Text/Notes', function(iface){
-	var waitRepaint = false;
-	async function refreshHeight(){
-		waitRepaint = true;
-		await $.afterRepaint();
+Blackprint.Sketch.registerInterface('BPIC/Decoration/Text/Notes',
+class extends Blackprint.Interface{
+	constructor(node){
+		super(node);
+		let iface = this;
+		
+		var waitRepaint = false;
+		async function refreshHeight(){
+			waitRepaint = true;
+			await $.afterRepaint();
 
-		var el = iface.$el('textarea');
-		el.css('height', (el[0].scrollHeight)+"px");
-		waitRepaint = false;
+			var el = iface.$el('textarea');
+			el.css('height', (el[0].scrollHeight)+"px");
+			waitRepaint = false;
+		}
+
+		iface.data = {
+			value:'',
+
+			// Triggered when 'value' was changed from view/model
+			on$value(now){
+				if(waitRepaint) return;
+				iface.$el('textarea').css('height', "5px");
+				refreshHeight();
+
+				node.syncOut('value', now);
+			}
+		};
 	}
 
-	iface.data = {
-		value:'',
-
-		// Triggered when 'value' was changed from view/model
-		on$value(now){
-			if(waitRepaint) return;
-			iface.$el('textarea').css('height', "5px");
-			refreshHeight();
-
-			iface.node.syncOut('value', now);
-		}
-	};
-
-	iface.init = function(){
-		setTimeout(function(){
-			iface.data.on$value(); // Refresh size
-		}, 1000);
+	init(){
+		 // Refresh size
+		setTimeout(()=> this.data.on$value(), 1000);
 	}
 });

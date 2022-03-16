@@ -31,3 +31,5 @@ bpic-data-object-getvalue{
 Blackprint.Sketch.registerInterface('BPIC/Data/Object/GetValue',
 class extends Context.IFace.GetValue {
 });
+
+// ToDo: add field suggestion
