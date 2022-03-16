@@ -137,13 +137,13 @@ class extends Blackprint.Interface{
 	}
 
 	// Disable selection for this node
-	onSelect(){ return false; }
+	// onSelect(){ return false; }
 
 	// Refresh content when pointerup
 	moveNode(ev){
 		super.moveNode(ev);
 		if(ev.ctrlKey) return;
-		
+
 		let { _ifaces, _cables } = this;
 
 		for (var i = 0; i < _cables.length; i++)
@@ -220,10 +220,24 @@ class extends Blackprint.Interface{
 		}
 	}
 
-	// Refresh content and Disable changing index
+	// Refresh content and disable changing index
 	swapZIndex(ev){
 		this.refreshContent(ev);
 		super.swapZIndex(ev, true);
+
+		// Clear any selections
+		let container = this.$space('container');
+		let nodes = container.nodeScope.selected;
+		let cables = container.nodeScope.selected;
+
+		for(let i = 0; i < nodes.length; i++)
+			nodes[i]._nodeSelected = false;
+
+		for(let i = 0; i < cables.length; i++)
+			cables[i]._nodeSelected = false;
+
+		nodes.splice(0);
+		cables.splice(0);
 	}
 
 	destroy(){
