@@ -1,0 +1,232 @@
+## html
+<div class="node" style="
+	transform: translate({{ x }}px, {{ y }}px);
+	height: {{ data.height }}px;
+	width: {{ data.width }}px
+">
+  	<div class="header"
+		@contextmenu.stopAll.prevent="nodeMenu(event)"
+		@dragmove="moveNode(event)"
+		@pointerdown="swapZIndex(event)"
+		@pointerover="nodeHovered(event)"
+	  	@pointerout="nodeUnhovered(event)"
+	>{{ data.title }}</div>
+
+	<div class="sides">
+		<div @pointerdown="resize('n')" class="n"></div>
+		<div @pointerdown="resize('w')" class="w"></div>
+		<div @pointerdown="resize('s')" class="s"></div>
+		<div @pointerdown="resize('e')" class="e"></div>
+		<div @pointerdown="resize('nw')" class="nw"></div>
+		<div @pointerdown="resize('ne')" class="ne"></div>
+		<div @pointerdown="resize('se')" class="se"></div>
+		<div @pointerdown="resize('sw')" class="sw"></div>
+	</div>
+
+  <sf-template path="Blackprint/nodes/template/other.sf"></sf-template>
+</div>
+
+## scss-global
+// Element name based on current path, BPIC/Decoration/Group/Default.sf
+sf-space[blackprint] .nodes bpic-decoration-group-default .node {
+	background: #b8b8ff6e;
+	pointer-events: none;
+	.header{
+		background: #b8b8ff91;
+		color: black;
+		font-weight: bold;
+		font-size: 14px;
+		pointer-events: all;
+	}
+
+	.sides {
+		pointer-events: all;
+		div{ position: absolute; opacity: 0.01;}
+
+		// n= north, s= south, w= west, e= east
+		.nw{cursor: nw-resize; top: 0; left: 0; width: 5px; height: 5px;}
+		.ne{cursor: ne-resize; top: 0; right: 0; width: 5px; height: 5px;}
+		.se{cursor: se-resize; bottom: 0; right: 0; width: 5px; height: 5px;}
+		.sw{cursor: sw-resize; bottom: 0; left: 0; width: 5px; height: 5px;}
+
+		.n{cursor: n-resize; top: 0; left: 0; margin-left: 5px; width: calc(100% - 10px); height: 5px;}
+		.w{cursor: w-resize; top: 0; left: 0; margin-top: 5px; width: 5px; height: calc(100% - 10px);}
+		.s{cursor: s-resize; bottom: 0; left: 0; margin-left: 5px; width: calc(100% - 10px); height: 5px;}
+		.e{cursor: e-resize; top: 0; right: 0; margin-top: 5px; width: 5px; height: calc(100% - 10px);}
+	}
+}
+
+
+## js-global
+Blackprint.Sketch.registerInterface('BPIC/Decoration/Group/Default',
+class extends Blackprint.Interface{
+	constructor(node){
+		super(node);
+
+		this._ifaces = []; // Object references
+		this._cables = []; // Object references
+
+		this.data = {
+			title: 'No title',
+			width: 100,
+			height: 100,
+
+			// Triggered when the value was changed from view (by user interaction on the UI)
+			v2m$width(width){ node.syncOut('width', width) },
+			v2m$height(height){ node.syncOut('height', height) },
+		};
+
+		this._listenSelection = ev => {
+			// ToDo
+		}
+	}
+
+	init(){
+		this.$space.sketch.on('container.selection', this._listenSelection);
+	}
+
+	resize(compass){
+		let containerScale = this.$space('container').scale;
+
+		const onMove = ev => {
+			let mX = ev.movementX / containerScale;
+			let mY = ev.movementY / containerScale;
+
+			if(compass === 'n'){
+				this.y += mY;
+				this.data.height -= mY;
+			}
+			else if(compass === 's') this.data.height += mY;
+			else if(compass === 'w'){
+				this.x += mX;
+				this.data.width -= mX;
+			}
+			else if(compass === 'e') this.data.width += mX;
+
+			if(compass === 'nw'){
+				this.x += mX;
+				this.y += mY;
+				this.data.width -= mX;
+				this.data.height -= mY;
+			}
+			else if(compass === 'ne'){
+				this.y += mY;
+				this.data.width += mX;
+				this.data.height -= mY;
+			}
+			else if(compass === 'sw'){
+				this.x += mX;
+				this.data.width -= mX;
+				this.data.height += mY;
+			}
+			else if(compass === 'se'){
+				this.data.width += mX;
+				this.data.height += mY;
+			}
+
+			if(this.data.width < 100) this.data.width = 100;
+			if(this.data.height < 100) this.data.height = 100;
+		}
+
+		let temp = $(window)
+			.once('pointerup', ev => {
+				temp.off('pointermove', onMove);
+				this.refreshContent(ev);
+			})
+			.on('pointermove', onMove);
+	}
+
+	// Disable selection for this node
+	onSelect(){ return false; }
+
+	// Refresh content when pointerup
+	moveNode(ev){
+		super.moveNode(ev);
+		if(ev.ctrlKey) return;
+		
+		let { _ifaces, _cables } = this;
+
+		for (var i = 0; i < _cables.length; i++)
+			_cables[i].moveCableHead(ev, true);
+
+		for (var i = 0; i < _ifaces.length; i++){
+			let temp = _ifaces[i];
+
+			if(temp.namespace === "Decoration/Group/Default")
+				continue;
+
+			temp.moveNode(ev, true);
+		}
+	}
+
+	refreshContent(ev){
+		let { ifaceList } = this.$space.sketch;
+		let modelIfaceList = this.$space('nodes').list;
+		let cableList = this.$space('cables').list;
+
+		// s = start, e = end; (X, Y position)
+		let sx = this.x;
+		let sy = this.y;
+		let ex = this.x + this.data.width;
+		let ey = this.y + this.data.height;
+
+		let { _ifaces, _cables } = this;
+		_ifaces.length = _cables.length = 0;
+
+		for (var i = 0, n = cableList.length; i < n; i++) {
+			let temp = cableList[i];
+			if(temp.hasBranch === false) continue;
+
+			let [x, y] = temp.head2;
+			if(x >= sx && x <= ex
+			&& y >= sy && y <= ey){
+				_cables.push(temp);
+			}
+		}
+
+		let lowestIndex = -1;
+		for (var i = 0, n = ifaceList.length; i < n; i++) {
+			let temp = ifaceList[i];
+
+			// Skip this node
+			if(temp === this) continue;
+
+			let {x, y} = temp;
+			let {offsetWidth, offsetHeight} = sf.Window.source(temp.$el, ev).firstElementChild;
+
+			let ox = offsetWidth + x;
+			let oy = offsetHeight + y;
+
+			if(ox >= sx && x <= ex
+			&& oy >= sy && y <= ey){
+				let indexInModel = modelIfaceList.indexOf(temp);
+				
+				if(lowestIndex == -1 || lowestIndex > indexInModel){
+					lowestIndex = indexInModel;
+
+					if(temp.namespace === "Decoration/Group/Default")
+						1; // ToDo: fix z-index when it's in front of another group node
+				}
+
+				_ifaces.push(temp);
+			}
+		}
+
+		if(lowestIndex !== -1) {
+			let thisIndex = modelIfaceList.indexOf(this);
+
+			if(lowestIndex < thisIndex)
+				modelIfaceList.move(thisIndex, lowestIndex);
+		}
+	}
+
+	// Refresh content and Disable changing index
+	swapZIndex(ev){
+		this.refreshContent(ev);
+		super.swapZIndex(ev, true);
+	}
+
+	destroy(){
+		this.$space.sketch.off('container.selection', this._listenSelection);
+	}
+});
