@@ -18,6 +18,8 @@ class extends Blackprint.Node {
 		// When this node was successfully imported
 		this.iface.data.width = data.width;
 		this.iface.data.height = data.height;
+		this.iface.data.title = data.title;
+		this.iface.data.color = data.color;
 	}
 
 	syncIn(eventName, value){

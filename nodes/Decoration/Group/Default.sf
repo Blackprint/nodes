@@ -2,9 +2,11 @@
 <div class="node" style="
 	transform: translate({{ x }}px, {{ y }}px);
 	height: {{ data.height }}px;
-	width: {{ data.width }}px
+	width: {{ data.width }}px;
+	{{ data.color ? ('background: ' + data.color + '6e;') : '' }}
 ">
   	<div class="header"
+	  	style="{{ data.color ? ('background: ' + data.color + '6e;') : '' }}"
 		@contextmenu.stopAll.prevent="nodeMenu(event)"
 		@dragmove="moveNode(event)"
 		@pointerdown="swapZIndex(event)"
@@ -37,6 +39,7 @@ sf-space[blackprint] .nodes bpic-decoration-group-default .node {
 		font-weight: bold;
 		font-size: 14px;
 		pointer-events: all;
+		white-space: pre-line;
 	}
 
 	.sides {
@@ -68,6 +71,7 @@ class extends Blackprint.Interface{
 
 		this.data = {
 			title: 'No title',
+			color: '',
 			width: 100,
 			height: 100,
 
@@ -137,7 +141,7 @@ class extends Blackprint.Interface{
 	}
 
 	// Disable selection for this node
-	// onSelect(){ return false; }
+	onSelect(){ return false; }
 
 	// Refresh content when pointerup
 	moveNode(ev){
