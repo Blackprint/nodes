@@ -1,7 +1,7 @@
 {
   "name": "@blackprint/nodes",
   "description": "Blackprint nodes for Browser/Node.js/Deno",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "author": "Blackprint",
   "license": "MIT",
   "repository": {
