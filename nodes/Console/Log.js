@@ -18,16 +18,19 @@ class extends Blackprint.Node {
 		if(!Blackprint.Environment.isBrowser)
 			console.log(val);
 
-		if(val === null)
-			iface.log = 'null';
-		else if(val === undefined)
-			iface.log = 'undefined';
-		else if(val.constructor === Function)
-			iface.log = val.toString();
-		else if(val.constructor === String || val.constructor === Number)
-			iface.log = val;
-		else
+		if(this.ref.IInput.Any.cables.length > 1)
 			iface.log = JSON.stringify(val);
+		else {
+			let val = this.ref.Input.Any[0];
+	
+			if(val === null)
+				iface.log = "null";
+			else if(val === undefined)
+				iface.log = "undefined";
+			else if(typeof val === 'object')
+				iface.log = JSON.stringify(val);
+			else iface.log = val;
+		}
 	}
 
 	init(){
