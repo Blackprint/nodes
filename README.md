@@ -1,3 +1,6 @@
+[![NPM](https://img.shields.io/npm/v/@blackprint/nodes.svg)](https://www.npmjs.com/package/@blackprint/nodes)
+[![Build Status](https://github.com/Blackprint/nodes/actions/workflows/build.yml/badge.svg?branch=main)](https://github.com/Blackprint/nodes/actions/workflows/build.yml)
+
 # Blackprint Nodes
 This repository contains a collection of general Blackprint Nodes.<br>
 General nodes like:<br>
@@ -46,11 +49,11 @@ Please specify the version to avoid breaking changes.
 
 ```js
 Blackprint.loadModuleFromURL([
-	'https://cdn.jsdelivr.net/npm/@blackprint/nodes@0.3/dist/nodes-console.mjs',
-	'https://cdn.jsdelivr.net/npm/@blackprint/nodes@0.3/dist/nodes-data.mjs',
-	'https://cdn.jsdelivr.net/npm/@blackprint/nodes@0.3/dist/nodes-decoration.mjs',
-	'https://cdn.jsdelivr.net/npm/@blackprint/nodes@0.3/dist/nodes-example.mjs',
-	'https://cdn.jsdelivr.net/npm/@blackprint/nodes@0.3/dist/nodes-input.mjs',
+	'https://cdn.jsdelivr.net/npm/@blackprint/nodes@0.4/dist/nodes-console.mjs',
+	'https://cdn.jsdelivr.net/npm/@blackprint/nodes@0.4/dist/nodes-data.mjs',
+	'https://cdn.jsdelivr.net/npm/@blackprint/nodes@0.4/dist/nodes-decoration.mjs',
+	'https://cdn.jsdelivr.net/npm/@blackprint/nodes@0.4/dist/nodes-example.mjs',
+	'https://cdn.jsdelivr.net/npm/@blackprint/nodes@0.4/dist/nodes-input.mjs',
 ], {
 	// Turn this on if you want to load .sf.js, and .sf.css
 	// only with single .mjs
