@@ -1,0 +1,31 @@
+## html
+<bppc-decoration-group-default>
+	<div class="field">
+		<span class="name">Title:</span>
+		<textarea sf-bind="title" placeholder="Add title here..."></textarea>
+	</div>
+	<div class="field">
+		<span class="name">Color:</span>
+		<input sf-bind="color" placeholder="#b8b8ffe1">
+	</div>
+</bppc-decoration-group-default>
+
+## scss-global
+bppc-decoration-group-default { }
+
+## js-global
+Blackprint.space.component('bppc-decoration-group-default', {template: #this.path},
+class extends sf.Model {
+	constructor(scope, iface){
+		super(scope, iface);
+
+		this.iface = iface;
+		this.data = iface.data;
+	}
+
+	get title(){ return this.data.title }
+	set title(val){ this.data.title = val }
+
+	get color(){ return this.data.color }
+	set color(val){ this.data.color = val }
+});
