@@ -16,7 +16,7 @@ class extends Blackprint.Node {
 		if(this.ref.IInput.Any.cables.length > 1)
 			this.iface.log = JSON.stringify(val);
 		else {
-			let val = this.ref.Input.Any[0];
+			let val = this.ref.Input.Any?.[0];
 
 			if(val === null)
 				this.iface.log = "null";
