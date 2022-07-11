@@ -1,6 +1,6 @@
 Blackprint.registerNode('Console/GetReference',
 class GetReferenceNode extends Blackprint.Node {
-	static input = {Any: null};
+	static input = {Any: Blackprint.Types.Any};
 
 	constructor(instance){
 		super(instance);

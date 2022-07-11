@@ -1,7 +1,7 @@
 Blackprint.registerNode('Data/Object/GetValue',
 class extends Blackprint.Node {
 	static input = { Object };
-	static output = { Value: null };
+	static output = { Value: Blackprint.Types.Any };
 
 	constructor(instance){
 		super(instance);
@@ -82,14 +82,30 @@ Context.IFace.GetValue = class extends Blackprint.Interface {
 		super(node);
 		this._toast = new NodeToast(this);
 
-		this.data = {
-			_props: '',
-			get props(){ return this._props },
-			set props(val){
-				this._props = val;
-				node.recreateFunc(val);
-				node.syncOut('props', val);
-			},
-		};
+		this.data = new DataObjectGetValueData(this);
 	}
+});
+
+class DataObjectGetValueData{
+	#iface = null;
+	#props = '';
+
+	constructor(iface){
+		this.#iface = iface;
+		this.#props = '';
+	}
+
+	get props(){ return this.#props }
+	set props(val){
+		this.#props = val;
+		let node = this.#iface.node;
+
+		node.recreateFunc(val);
+		node.syncOut('props', val);
+	}
+}
+
+// Using getter/setter will make the property not enumerable and Blackprint will skip that property when exporting
+Blackprint.utils.setEnumerablePrototype(DataObjectGetValueData, {
+	props: true,
 });

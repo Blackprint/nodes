@@ -19,7 +19,7 @@ Blackprint.registerNode('Example/Math/Multiply', class extends Blackprint.Node {
 			}
 		}),
 		A: Number,
-		B: null, // Any data type
+		B: Blackprint.Types.Any,
 	};
 
 	constructor(instance){
@@ -87,12 +87,12 @@ Blackprint.registerNode('Example/Math/Random', class extends Blackprint.Node {
 	}
 
 	// When the connected node is requesting for the output value
-	request(port, iface2){
+	request(cable){
 		// Only run once this node never been executed
 		// Return false if no value was changed
 		if(this.executed === true) return false;
 
-		Context.log('Example/Math/Random', 'Value request for port:', port.name, "from node:", iface2.title);
+		Context.log('Example/Math/Random', 'Value request for port:', cable.output.name, "from node:", cable.input.iface.title);
 
 		// Let's create the value for him
 		this.input['Re-seed']();

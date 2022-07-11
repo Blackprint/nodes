@@ -1,7 +1,7 @@
 Blackprint.registerNode('Example/Display/Logger',
 class extends Blackprint.Node {
 	static input = {
-		Any: Blackprint.Port.ArrayOf(null) // Any data type, and can be used for many cable
+		Any: Blackprint.Port.ArrayOf(Blackprint.Types.Any) // Any data type, and can be used for many cable
 	};
 
 	constructor(instance){

@@ -1,6 +1,6 @@
 Blackprint.registerNode("Data/Any/To/Trigger",
 class EmptyNode extends Blackprint.Node {
-	static input = { Value: null };
+	static input = { Value: Blackprint.Types.Any };
 	static output = { Call: Function };
 
 	constructor(instance){
