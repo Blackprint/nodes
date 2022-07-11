@@ -13,6 +13,8 @@ class MouseNode extends Blackprint.Node {
 	};
 
 	static output = {
+		Pressed: Blackprint.Port.Union([PointerEvent, TouchEvent, MouseEvent]),
+		Release: Blackprint.Port.Union([PointerEvent, TouchEvent, MouseEvent]),
 		Left: Boolean,
 		Middle: Boolean,
 		Right: Boolean,
@@ -37,6 +39,8 @@ class MouseNode extends Blackprint.Node {
 		let { Output } = this.ref;
 
 		if(ev.type === 'pointerup'){
+			Output.Release = ev;
+
 			if(ev.button === 0)
 				Output.Left = false;
 			else if(ev.button === 1)
@@ -49,6 +53,8 @@ class MouseNode extends Blackprint.Node {
 				Output["5th"] = false;
 		}
 		else if(ev.type === 'pointerdown'){
+			Output.Pressed = ev;
+
 			if(ev.button === 0)
 				Output.Left = true;
 			else if(ev.button === 1)

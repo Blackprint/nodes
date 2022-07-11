@@ -13,7 +13,8 @@ class KeyboardNode extends Blackprint.Node {
 	};
 
 	static output = {
-		Event: KeyboardEvent
+		Pressed: KeyboardEvent,
+		Released: KeyboardEvent,
 	};
 
 	constructor(instance){
@@ -33,14 +34,17 @@ class KeyboardNode extends Blackprint.Node {
 	onKeyboard(ev){
 		let { Output } = this.ref;
 
+		if(ev.type === 'keydown')
+			Output.Pressed = ev;
+		else if(ev.type === 'keyup')
+			Output.Released = ev;
+
 		if(ev.code in Output){
 			if(ev.type === 'keydown')
 				Output[ev.code] = true;
 			else if(ev.type === 'keyup')
 				Output[ev.code] = false;
 		}
-
-		Output.Event = ev;
 	}
 
 	imported(data){
