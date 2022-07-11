@@ -1,0 +1,48 @@
+## html
+<div class="node event" style="transform: translate({{ x }}px, {{ y }}px)">
+  <sf-template path="Blackprint/nodes/template/header.sf"></sf-template>
+
+  <div class="content">
+    <div class="button" @click="clicked(event)">
+      <a>Trigger</a>
+    </div>
+
+    <div class="right-port">
+      <sf-template path="Blackprint/nodes/template/output-port.sf"></sf-template>
+    </div>
+  </div>
+
+  <sf-template path="Blackprint/nodes/template/other.sf"></sf-template>
+</div>
+
+## scss-global
+bpic-input-ui-button{
+  .button {
+    display: inline-flex;
+    background: #ffffff1c;
+    height: 30px;
+    box-shadow: 0 0 8px white;
+    width: 100px;
+    border: 2px solid #BFC0C0;
+    margin: 5px 5px 10px 10px;
+    color: #BFC0C0;
+    text-transform: uppercase;
+    text-decoration: none;
+    font-size: 14px;
+    letter-spacing: 1.5px;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+    a {
+      position: relative;
+    }
+    &:hover {
+      background: #ffffff3c;
+    }
+  }
+}
+
+## js-global
+Blackprint.Sketch.registerInterface('BPIC/Input/UI/Button', Context.IFace.Button);

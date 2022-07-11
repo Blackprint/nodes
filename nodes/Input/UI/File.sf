@@ -1,5 +1,6 @@
 ## html
 <div class="node input" style="transform: translate({{ x }}px, {{ y }}px)">
+  <sf-template path="Blackprint/nodes/template/routes.sf"></sf-template>
   <sf-template path="Blackprint/nodes/template/header.sf"></sf-template>
 
   <div class="content">
@@ -16,7 +17,7 @@
 </div>
 
 ## scss-global
-bpic-input-file {
+bpic-input-ui-file {
   .file-place{
     margin: 5px;
     border: 1px dashed white;
@@ -36,14 +37,20 @@ bpic-input-file {
 }
 
 ## js-global
-Blackprint.Sketch.registerInterface('BPIC/Input/File',
+Blackprint.Sketch.registerInterface('BPIC/Input/UI/File',
 class FileIFace extends Context.IFace.File {
   constructor(node){
     super(node);
 
     let that = this;
     this.dropFile = function(file){
-      that.setFile(file[0]);
+      file = file[0];
+
+      // Fix for multiple window
+      if(file.constructor !== File)
+        Object.setPrototypeOf(file, File.prototype);
+
+      that.setFile(file);
     }
   }
 });

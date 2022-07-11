@@ -1,4 +1,4 @@
-Blackprint.registerNode('Input/File',
+Blackprint.registerNode('Input/UI/File',
 class FileNode extends Blackprint.Node {
 	// Let's declare the Node port's outputs
 	static output = {
@@ -10,12 +10,12 @@ class FileNode extends Blackprint.Node {
 		super(instance);
 
 		// Let's use an Interface
-		let iface = this.setInterface('BPIC/Input/File');
+		let iface = this.setInterface('BPIC/Input/UI/File');
 		iface.title = 'File loader'; // Give it a name
 	}
 });
 
-Blackprint.registerInterface('BPIC/Input/File',
+Blackprint.registerInterface('BPIC/Input/UI/File',
 Context.IFace.File = class FileIFace extends Blackprint.Interface {
 	constructor(node){
 		super(node);

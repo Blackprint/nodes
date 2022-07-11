@@ -2,7 +2,7 @@
 // Blackprint will handle data flow between nodes connection
 // This should be simple and contain structure only
 // Just like creating a template/base and attach an interface for extra control
-Blackprint.registerNode('Input/TextBox',
+Blackprint.registerNode('Input/UI/TextBox',
 class extends Blackprint.Node {
 	// Output Port's Template (This will be transformed to it's type after initialized)
 	static output = {
@@ -13,7 +13,7 @@ class extends Blackprint.Node {
 	constructor(instance){
 		super(instance);
 
-		let iface = this.setInterface('BPIC/Input/TextBox'); // Let's use ./input.js
+		let iface = this.setInterface('BPIC/Input/UI/TextBox'); // Let's use ./input.js
 		iface.title = "Input";
 	}
 
@@ -59,44 +59,33 @@ class extends Blackprint.Node {
 // Interface will be exposed to public and being attached for a node
 // it's just like API or User Interface (on sketch editor)
 // Let's think you're creating a library, these properties can be accessed by other developers
-Blackprint.registerInterface('BPIC/Input/TextBox',
+Blackprint.registerInterface('BPIC/Input/UI/TextBox',
 Context.IFace.Input = class InputIFace extends Blackprint.Interface{
 	constructor(node){
 		super(node);
-		let iface = this;
-		var theValue = '';
-
-		// You can also use
-		// this.data = new ReactiveInputData(this);
-		this.data = {
-			get value(){ return theValue },
-			set value(val){
-				if(theValue === val) return;
-				theValue = val;
-
-				if(iface.node.changed !== void 0)
-					iface.node.changed(val);
-			},
-		};
+		this.data = new InputTextBoxData(this);
 	}
 });
 
-/*
-class ReactiveInputData {
+class InputTextBoxData {
+	#iface = null;
+
 	constructor(iface){
-		this._iface = iface;
+		this.#iface = iface;
 	}
 
 	// Use underscore "_" or "$" to avoid being exported as JSON
-	_value = '';
+	#value = '';
 
-	get value(){ return this._value }
+	get value(){ return this.#value }
 	set value(val){
-		if(this._value === val) return;
-		this._value = val;
-
-		if(this._iface.node.changed !== void 0)
-			this._iface.node.changed(val);
+		if(this.#value === val) return;
+		this.#value = val;
+		this.#iface.node.changed(val);
 	}
 }
-*/
+
+// Using getter/setter will make the property not enumerable and Blackprint will skip that property when exporting
+Blackprint.utils.setEnumerablePrototype(InputTextBoxData, {
+	value: true,
+});

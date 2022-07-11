@@ -1,5 +1,6 @@
 ## html
 <div class="node input" style="transform: translate({{ x }}px, {{ y }}px)">
+  <sf-template path="Blackprint/nodes/template/routes.sf"></sf-template>
   <sf-template path="Blackprint/nodes/template/header.sf"></sf-template>
 
   <div class="content">
@@ -14,14 +15,14 @@
 </div>
 
 ## scss-global
-bpic-input-textbox{
+bpic-input-ui-textbox{
 	textarea{
 		width: 100px;
 	}
 }
 
 ## js-global
-Blackprint.Sketch.registerInterface('BPIC/Input/TextBox',
+Blackprint.Sketch.registerInterface('BPIC/Input/UI/TextBox',
 class InputIFace extends Context.IFace.Input {
 	constructor(node){
 		super(node);

@@ -1,4 +1,4 @@
-Blackprint.registerNode('Input/SliderBox',
+Blackprint.registerNode('Input/UI/SliderBox',
 class SliderBoxNode extends Blackprint.Node {
 	static output = {
 		"0": Blackprint.Port.Default(Number, 0)
@@ -7,7 +7,7 @@ class SliderBoxNode extends Blackprint.Node {
 	constructor(instance){
 		super(instance);
 
-		let iface = this.setInterface('BPIC/Input/SliderBox');
+		let iface = this.setInterface('BPIC/Input/UI/SliderBox');
 		iface.title = 'Slider Box';
 	}
 
@@ -96,7 +96,7 @@ class SliderBoxNode extends Blackprint.Node {
 });
 
 // Save it on Context, so we can also access it from .sf files
-Blackprint.registerInterface('BPIC/Input/SliderBox',
+Blackprint.registerInterface('BPIC/Input/UI/SliderBox',
 Context.IFace.SliderBoxIFace = class SliderBoxIFace extends Blackprint.Interface {
 	constructor(node){
 		super(node);
