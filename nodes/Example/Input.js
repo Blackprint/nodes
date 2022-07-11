@@ -31,25 +31,6 @@ class extends Blackprint.Node {
 		this.output.Value = data.value;
 	}
 
-	// Proxy string value from: node.changed -> node.changed -> output.Value
-	// And also call output.Changed() if connected to other node
-	changed(text, ev){
-		let iface = this.iface;
-
-		// This node still being imported
-		if(iface.importing !== false)
-			return;
-
-		Context.log('Example/Input/Simple', 'The input box have new value:', text);
-
-		// iface.data.value === text;
-		this.output.Value = iface.data.value;
-		this.syncOut('data', {value: iface.data.value});
-
-		// This will call every connected node
-		this.output.Changed();
-	}
-
 	// Remote sync in
 	syncIn(id, data){
 		if(id === 'data'){
@@ -68,40 +49,50 @@ Blackprint.registerInterface('BPIC/Example/Input',
 Context.IFace.Input = class InputIFace extends Blackprint.Interface{
 	constructor(node){
 		super(node);
-		let iface = this;
-		var theValue = '';
 
 		// You can also use
-		// this.data = new ReactiveInputData(this);
-		this.data = {
-			get value(){ return theValue },
-			set value(val){
-				if(theValue === val) return;
-				theValue = val;
+		this.data = new ExampleInputData(this);
+	}
 
-				if(iface.node.changed !== void 0)
-					iface.node.changed(val);
-			},
-		};
+	// Proxy string value from: data.value(setter) -> iface.changed -> output.Value
+	// And also call output.Changed() if connected to other node
+	changed(text, ev){
+		let node = this.node;
+
+		// This node still being imported
+		if(this.importing !== false)
+			return;
+
+		Context.log('Example/Input/Simple', 'The input box have new value:', text);
+
+		// iface.data.value === text;
+		node.output.Value = this.data.value;
+		node.syncOut('data', {value: this.data.value});
+
+		// This will call every connected node
+		node.output.Changed();
 	}
 });
 
-/*
-class ReactiveInputData {
+class ExampleInputData {
+	#iface = null;
+
 	constructor(iface){
-		this._iface = iface;
+		this.#iface = iface;
 	}
 
 	// Use underscore "_" or "$" to avoid being exported as JSON
-	_value = '';
+	#value = '';
 
-	get value(){ return this._value }
+	get value(){ return this.#value }
 	set value(val){
-		if(this._value === val) return;
-		this._value = val;
-
-		if(this._iface.node.changed !== void 0)
-			this._iface.node.changed(val);
+		if(this.#value === val) return;
+		this.#value = val;
+		this.#iface.changed(val);
 	}
 }
-*/
+
+// Using getter/setter will make the property not enumerable and Blackprint will skip that property when exporting
+Blackprint.utils.setEnumerablePrototype(ExampleInputData, {
+	value: true,
+});

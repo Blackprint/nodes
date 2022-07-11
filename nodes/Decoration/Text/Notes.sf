@@ -23,30 +23,7 @@ Blackprint.Sketch.registerInterface('BPIC/Decoration/Text/Notes',
 class extends Blackprint.Interface{
 	constructor(node){
 		super(node);
-		let iface = this;
-		
-		var waitRepaint = false;
-		async function refreshHeight(){
-			waitRepaint = true;
-			await $.afterRepaint();
-
-			var el = iface.$el('textarea');
-			el.css('height', (el[0].scrollHeight)+"px");
-			waitRepaint = false;
-		}
-
-		iface.data = {
-			value:'',
-
-			// Triggered when 'value' was changed from view/model
-			on$value(now){
-				if(waitRepaint) return;
-				iface.$el('textarea').css('height', "5px");
-				refreshHeight();
-
-				node.syncOut('value', now);
-			}
-		};
+		this.data = new DecorationTextNotesData(this);
 	}
 
 	init(){
@@ -54,3 +31,32 @@ class extends Blackprint.Interface{
 		setTimeout(()=> this.data.on$value(), 1000);
 	}
 });
+
+class DecorationTextNotesData {
+	#iface = null;
+	#waitRepaint = false;
+
+	constructor(iface){
+		this.#iface = iface;
+		this.value = '';
+	}
+
+	// Triggered when 'value' was changed from view/model
+	// For refreshing texbox's height when user typing
+	on$value(now){
+		if(this.#waitRepaint) return;
+		let iface = this.#iface;
+		let node = iface.node;
+
+		iface.$el('textarea').css('height', "5px");
+
+		this.#waitRepaint = true;
+		$.afterRepaint().then(()=>{
+			var el = iface.$el('textarea');
+			el.css('height', (el[0].scrollHeight)+"px");
+			this.#waitRepaint = false;
+
+			node.syncOut('value', now);
+		});
+	}
+}

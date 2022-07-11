@@ -30,3 +30,11 @@ class extends Blackprint.Node {
 			this.iface.data.height = value;
 	}
 });
+
+Blackprint.registerInterface('BPIC/Decoration/Group/Default',
+class extends Blackprint.Interface{
+	constructor(node){
+		super(node);
+		this.data ??= {}; // Dummy object store for non-sketch interface
+	}
+});

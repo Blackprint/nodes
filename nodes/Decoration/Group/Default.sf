@@ -68,17 +68,7 @@ class extends Blackprint.Interface{
 
 		this._ifaces = []; // Object references
 		this._cables = []; // Object references
-
-		this.data = {
-			title: 'No title',
-			color: '',
-			width: 100,
-			height: 100,
-
-			// Triggered when the value was changed from view (by user interaction on the UI)
-			v2m$width(width){ node.syncOut('width', width) },
-			v2m$height(height){ node.syncOut('height', height) },
-		};
+		this.data = new DecorationGroupDefaultData(this);
 
 		this._listenSelection = ev => {
 			// ToDo
@@ -86,7 +76,7 @@ class extends Blackprint.Interface{
 	}
 
 	init(){
-		this.$space.sketch.on('container.selection', this._listenSelection);
+		this.node.instance.on('container.selection', this._listenSelection);
 	}
 
 	resize(compass){
@@ -164,7 +154,7 @@ class extends Blackprint.Interface{
 	}
 
 	refreshContent(ev){
-		let { ifaceList } = this.$space.sketch;
+		let { ifaceList } = this.node.instance;
 		let modelIfaceList = this.$space('nodes').list;
 		let cableList = this.$space('cables').list;
 
@@ -245,6 +235,32 @@ class extends Blackprint.Interface{
 	}
 
 	destroy(){
-		this.$space.sketch.off('container.selection', this._listenSelection);
+		this.node.instance.off('container.selection', this._listenSelection);
 	}
 });
+
+class DecorationGroupDefaultData {
+	#iface = null;
+
+	constructor(iface){
+		this.#iface = iface;
+	
+		this.title = 'No title';
+		this.color = '';
+		this.width = 100;
+		this.height = 100;
+	}
+
+	// Triggered when the value was changed from view (by user interaction on the UI)
+	v2m$width(val){ this.#iface.node.syncOut('width', val) }
+	v2m$height(val){ this.#iface.node.syncOut('height', val) }
+
+	exportData(){
+		return {
+			width: Math.round(this.width),
+			height: Math.round(this.height),
+			title: this.title,
+			color: this.color,
+		};
+	}
+}
