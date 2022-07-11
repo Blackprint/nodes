@@ -14,6 +14,7 @@ jobs:
   build:
     name: Build Blackprint Modules
     runs-on: ubuntu-latest
+    timeout-minutes: 5 # Usually this will be finish under 5 minutes
 
     steps:
       - uses: actions/checkout@v2
@@ -25,14 +26,14 @@ jobs:
           registry-url: https://registry.npmjs.org/
 
       - name: 🔃 Setup PNPM modules
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: ~/.pnpm-store
           key: ${{ runner.os }}-${{ hashFiles('**/pnpm-lock.yaml') }}
           restore-keys: |
             ${{ runner.os }}-
 
-      - uses: pnpm/action-setup@v2.0.1
+      - uses: pnpm/action-setup@v2
         with:
           version: 6.0.2
           run_install: true
@@ -41,10 +42,13 @@ jobs:
         run: npx blackprint build production
 
       - name: 🔥 Run Tests
+        # env:
+        #   YOUR_ENV_A: ${{ secrets.YOUR_ENV_A }}
+        #   YOUR_ENV_B: ${{ secrets.YOUR_ENV_B }}
         run: npm test
 
       - name: 🚀 Deploy
-        uses: JamesIves/github-pages-deploy-action@4.2.0
+        uses: JamesIves/github-pages-deploy-action@4
         if: github.event_name != 'pull_request' # Don't deploy, it will be dangerous if someone submit dangerous pull request
         with:
           branch: dist # The branch the action should deploy to.
