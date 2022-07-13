@@ -12,7 +12,6 @@
 		@pointerdown="swapZIndex(event)"
 		@pointerover="nodeHovered(event)"
 	  	@pointerout="nodeUnhovered(event)"
-	  	title="{{ title }}"
 	></div>
 
     <div class="right-port">
