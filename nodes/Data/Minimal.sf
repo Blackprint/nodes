@@ -1,5 +1,6 @@
 ## html
 <div class="node {{ showPortName ? 'show-port-name' : ''}}" style="transform:translate({{ x }}px,{{ y }}px)">
+  <sf-template path="Blackprint/nodes/template/routes.sf"></sf-template>
   <div class="content">
     <div class="left-port">
       <sf-template path="Blackprint/nodes/template/input-port.sf"></sf-template>
