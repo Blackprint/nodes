@@ -1,4 +1,4 @@
-Blackprint.registerNode("Data/Boolean/Or",
+Blackprint.registerNode("Data/Boolean/Compare/Or",
 class EmptyNode extends Blackprint.Node {
 	static input = { "0": Boolean, "1": Boolean };
 	static output = { Value: Boolean };
