@@ -10,6 +10,10 @@ class EmptyNode extends Blackprint.Node {
 		iface.title = "Trigger on any data changes";
 	}
 
+	createIcon(){
+		return document.createTextNode('Fx()');
+	}
+
 	update(){
 		this.ref.Output.Call();
 	}
