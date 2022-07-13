@@ -8,7 +8,10 @@ class EmptyNode extends Blackprint.Node {
 
 		let iface = this.setInterface('BPIC/Data/Minimal');
 		iface.title = "Boolean: Or";
-		iface.element = document.createTextNode('Or');
+	}
+
+	createIcon(){
+		return document.createTextNode('Or');
 	}
 
 	update(){

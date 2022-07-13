@@ -8,7 +8,10 @@ class EmptyNode extends Blackprint.Node {
 
 		let iface = this.setInterface('BPIC/Data/Minimal');
 		iface.title = "Number: Not Equal";
-		iface.element = $('<i class="fa fa-not-equal"></i>')[0];
+	}
+
+	createIcon(){
+		return $('<i class="fa fa-not-equal"></i>')[0];
 	}
 
 	update(){

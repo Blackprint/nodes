@@ -24,6 +24,9 @@ if(!Blackprint.Environment.isBrowser)
 	$ = ()=> [];
 
 
+// Register with default interface
+Blackprint.registerInterface("BPIC/Data/Minimal", class extends Blackprint.Interface {});
+
 // Bootstrap for add toast on node decoration
 let NodeToast = Context.NodeToast = class NodeToast {
 	constructor(iface){

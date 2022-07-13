@@ -8,7 +8,10 @@ class EmptyNode extends Blackprint.Node {
 
 		let iface = this.setInterface('BPIC/Data/Minimal');
 		iface.title = "Binary: ShiftRight";
-		iface.element = $('<i class="fa fa-angle-double-right"></i>')[0];
+	}
+
+	createIcon(){
+		return $('<i class="fa fa-angle-double-right"></i>')[0];
 	}
 
 	update(){

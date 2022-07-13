@@ -8,9 +8,11 @@ class EmptyNode extends Blackprint.Node {
 
 		let iface = this.setInterface('BPIC/Data/Minimal');
 		iface.title = "Trigger on true";
-		iface.element = document.createTextNode('Fx()');
-
 		iface.data = {signal: true};
+	}
+
+	createIcon(){
+		return document.createTextNode('Fx()');
 	}
 
 	update(){
@@ -18,6 +20,3 @@ class EmptyNode extends Blackprint.Node {
 			this.ref.Output.Call();
 	}
 });
-
-// Register with default interface
-Blackprint.registerInterface("BPIC/Data/Minimal", class extends Blackprint.Interface {});

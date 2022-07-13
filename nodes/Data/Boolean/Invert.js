@@ -8,7 +8,10 @@ class EmptyNode extends Blackprint.Node {
 
 		let iface = this.setInterface('BPIC/Data/Minimal');
 		iface.title = "Invert Boolean";
-		iface.element = document.createTextNode('!');
+	}
+
+	createIcon(){
+		return document.createTextNode('!');
 	}
 
 	update(){

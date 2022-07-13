@@ -8,8 +8,11 @@ class EmptyNode extends Blackprint.Node {
 
 		let iface = this.setInterface('BPIC/Data/Minimal');
 		iface.title = "Binary: And";
-		iface.element = document.createTextNode('Bin And');
 		iface.w = 95;
+	}
+
+	createIcon(){
+		return document.createTextNode('Bin And');
 	}
 
 	update(){

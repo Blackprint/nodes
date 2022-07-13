@@ -8,8 +8,11 @@ class NumString extends Blackprint.Node {
 
 		let iface = this.setInterface('BPIC/Data/Minimal');
 		iface.title = "Number to String";
-		iface.element = $('<i class="fa fa-magic"></i>')[0];
 		iface.showPortName = true;
+	}
+
+	createIcon(){
+		return $('<i class="fa fa-magic"></i>')[0];
 	}
 
 	update(){

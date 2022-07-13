@@ -12,7 +12,7 @@
 		@pointerover="nodeHovered(event)"
 	  	@pointerout="nodeUnhovered(event)"
 	  	title="{{ title }}"
-	><sf-slot for="element"></div>
+	></div>
 
     <div class="right-port">
       <sf-template path="Blackprint/nodes/template/output-port.sf"></sf-template>
@@ -85,7 +85,11 @@ bpic-data-minimal {
 Blackprint.Sketch.registerInterface("BPIC/Data/Minimal", class extends Blackprint.Interface {
 	constructor(node){
 		super(node);
-		this.element = null;
 		this.showPortName = false;
+	}
+
+	initClone(el){ this.init(el) }
+	init(el){
+		$('.center', el).append(this.node.createIcon());
 	}
 });
