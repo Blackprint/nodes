@@ -79,6 +79,15 @@ class extends Blackprint.Interface{
 		this.node.instance.on('container.selection', this._listenSelection);
 	}
 
+	exportData(){
+		return {
+			width: Math.round(this.data.width),
+			height: Math.round(this.data.height),
+			title: this.data.title,
+			color: this.data.color,
+		};
+	}
+
 	resize(compass){
 		let containerScale = this.$space('container').scale;
 
@@ -254,13 +263,4 @@ class DecorationGroupDefaultData {
 	// Triggered when the value was changed from view (by user interaction on the UI)
 	v2m$width(val){ this.#iface.node.syncOut('width', val) }
 	v2m$height(val){ this.#iface.node.syncOut('height', val) }
-
-	exportData(){
-		return {
-			width: Math.round(this.width),
-			height: Math.round(this.height),
-			title: this.title,
-			color: this.color,
-		};
-	}
 }
