@@ -1,13 +1,12 @@
-Blackprint.registerNode("Data/Any/To/Trigger",
-class EmptyNode extends Blackprint.Node {
-	static input = { Value: Blackprint.Types.Any };
+Blackprint.registerNode("Data/Route/To/Trigger",
+class extends Blackprint.Node {
 	static output = { Call: Function };
 
 	constructor(instance){
 		super(instance);
 
 		let iface = this.setInterface('BPIC/Data/Minimal');
-		iface.title = "Trigger on any data changes";
+		iface.title = "Route to trigger";
 	}
 
 	createIcon(){

@@ -1,12 +1,12 @@
 ## html
-<div class="node {{ showPortName ? 'show-port-name' : ''}}" style="transform:translate({{ x }}px,{{ y }}px)">
+<div :class="node {{ showPortName ? 'show-port-name' : '' }}" style="transform:translate({{ x }}px,{{ y }}px)">
   <sf-template path="Blackprint/nodes/template/routes.sf"></sf-template>
   <div class="content">
-    <div class="left-port">
-      <sf-template path="Blackprint/nodes/template/input-port.sf"></sf-template>
-    </div>
+	<div class="left-port">
+	  <sf-template path="Blackprint/nodes/template/input-port.sf"></sf-template>
+	</div>
 
-  	<div class="center"
+  	<div class="center port-{{ _portLen }}"
 		@contextmenu.stopAll.prevent="nodeMenu(event)"
 		@dragmove="moveNode(event)"
 		@pointerdown="swapZIndex(event)"
@@ -14,9 +14,9 @@
 	  	@pointerout="nodeUnhovered(event)"
 	></div>
 
-    <div class="right-port">
-      <sf-template path="Blackprint/nodes/template/output-port.sf"></sf-template>
-    </div>
+	<div class="right-port">
+	  <sf-template path="Blackprint/nodes/template/output-port.sf"></sf-template>
+	</div>
   </div>
   
   <sf-template path="Blackprint/nodes/template/other.sf"></sf-template>
@@ -60,8 +60,10 @@ bpic-data-minimal {
 	}
 
 	.left-port {
-		width: 20px;
 		margin-right: 17px;
+		input {
+			display: inline-block;
+		}
 	}
 
 	& > .node {
@@ -70,26 +72,35 @@ bpic-data-minimal {
 	}
 
 	.center {
-		position: absolute;
-	    width: 100%;
-	    height: 100%;
-	    text-align: center;
-	    display: grid;
-	    align-items: center;
-	    z-index: -1;
+		height: 100%;
+		position: relative;
+		text-align: center;
+		vertical-align: middle;
+		margin-left: -15px;
+		display: inline-flex;
+		&.port-2 {
+			margin-top: 11px;
+		}
 	}
 }
 
 ## js-global
 // Register with default interface
-Blackprint.Sketch.registerInterface("BPIC/Data/Minimal", class extends Blackprint.Interface {
+Blackprint.Sketch.registerInterface("BPIC/Data/Minimal",
+class extends Context.IFace.DataMinimal {
 	constructor(node){
 		super(node);
 		this.showPortName = false;
+		this._portLen = 0;
 	}
 
-	initClone(el){ this.init(el) }
-	init(el){
+	init(el){ // Run once
+		this.initClone(el);
+
+		let inputs = this.input;
+		for(let key in inputs) this._portLen++;
+	}
+	initClone(el){ // Run multiple times if the nodes element is cloned to different container
 		$('.center', el).append(this.node.createIcon());
 	}
 });
