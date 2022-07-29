@@ -1,11 +1,19 @@
+/** 
+ * Listen to mouse, pointer, or touch click event
+ * Make sure to turn on AllowResync if you need to reupdate other node
+ * @blackprint node
+ */
 Blackprint.registerNode('Input/Pointer/MouseClick',
 class MouseNode extends Blackprint.Node {
 	static input = {
+		/** If this not connected to anything, this node will listen to window */
 		Element: HTMLElement,
+		/** Start listening to mouse click event */
 		Listen: Blackprint.Port.Trigger(function(){
 			this.enabled = true;
 			this.update();
 		}),
+		/** Stop listener */
 		Unlisten: Blackprint.Port.Trigger(function(){
 			this.enabled = false;
 			this.update();
@@ -13,12 +21,19 @@ class MouseNode extends Blackprint.Node {
 	};
 
 	static output = {
+		/** Raw event on button pressed */
 		Pressed: Blackprint.Port.Union([PointerEvent, TouchEvent, MouseEvent]),
+		/** Raw event on button released */
 		Release: Blackprint.Port.Union([PointerEvent, TouchEvent, MouseEvent]),
+		/** Mouse's left click, pointer/touch tap */
 		Left: Boolean,
+		/** Mouse's middle click */
 		Middle: Boolean,
+		/** Mouse's right click */
 		Right: Boolean,
+		/** Gaming mouse's 4th button */
 		"4th": Boolean,
+		/** Gaming mouse's 5th button */
 		"5th": Boolean,
 	};
 

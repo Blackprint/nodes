@@ -1,7 +1,12 @@
+/**
+ * User Interface for handling number input with a horizontal slider
+ * @blackprint node
+ */
 Blackprint.registerNode('Input/UI/SliderBox',
 class SliderBoxNode extends Blackprint.Node {
 	static output = {
-		"0": Blackprint.Port.Default(Number, 0)
+		/** You can also right click to create a new port */
+		"0": Blackprint.Port.Default(Number, 0),
 	};
 
 	constructor(instance){

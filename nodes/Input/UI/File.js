@@ -1,8 +1,14 @@
+/**
+ * User Interface for handling file input
+ * @blackprint node
+ */
 Blackprint.registerNode('Input/UI/File',
 class FileNode extends Blackprint.Node {
 	// Let's declare the Node port's outputs
 	static output = {
+		/** Blob URL that can only be used locally in this browser */
 		URL: String,
+		/** Blob Object */
 		Blob: Blob,
 	}
 

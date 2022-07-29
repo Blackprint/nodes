@@ -1,4 +1,7 @@
-// These registration is using function for constructing nodes
+/**
+ * A decoration that can be used to give additional details on something
+ * @blackprint node
+ */
 Blackprint.registerNode('Decoration/Text/Notes',
 class extends Blackprint.Node {
 	constructor(instance){

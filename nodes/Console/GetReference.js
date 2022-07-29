@@ -1,3 +1,10 @@
+/**
+ * Any data that being passed to this node
+ * will be sent to Console on your DevTools
+ * To open the DevTools you can use CTRL + Shift + I, then go to Console
+ * @blackprint node
+ * @summary Send reference to browser console
+ */
 Blackprint.registerNode('Console/GetReference',
 class GetReferenceNode extends Blackprint.Node {
 	static input = {Any: Blackprint.Types.Any};
@@ -7,7 +14,6 @@ class GetReferenceNode extends Blackprint.Node {
 
 		let iface = this.setInterface();
 		iface.title = "Get Reference";
-		iface.description = "Send reference to browser console";
 	}
 
 	init(){

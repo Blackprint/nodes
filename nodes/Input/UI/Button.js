@@ -1,6 +1,11 @@
+/**
+ * User Interface (UI) for calling a function port
+ * @blackprint node
+ */
 Blackprint.registerNode('Input/UI/Button',
 class extends Blackprint.Node {
   static output = {
+    /** Call every function port */
     Clicked: Function
   };
 

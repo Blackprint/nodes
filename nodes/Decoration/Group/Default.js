@@ -1,4 +1,8 @@
-// These registration is using function for constructing nodes
+/**
+ * Decoration node that can be used to group nodes and move it together
+ * To change this node's settings, you can find it on editor's right-side panel
+ * @blackprint node
+ */
 Blackprint.registerNode('Decoration/Group/Default',
 class extends Blackprint.Node {
 	constructor(instance){

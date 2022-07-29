@@ -1,13 +1,15 @@
-// Register Node
-// Blackprint will handle data flow between nodes connection
-// This should be simple and contain structure only
-// Just like creating a template/base and attach an interface for extra control
+/**
+ * User Interface for handling text input
+ * @blackprint node
+ */
 Blackprint.registerNode('Input/UI/TextBox',
 class extends Blackprint.Node {
 	// Output Port's Template (This will be transformed to it's type after initialized)
 	static output = {
+		/** This can be used to call a function every time the value was changed */
 		Changed: Function,
-		Value: String, // Default to empty string
+		/** Input box's text value */
+		Value: String,
 	};
 
 	constructor(instance){

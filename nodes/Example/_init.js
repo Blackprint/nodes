@@ -8,6 +8,9 @@ let Blackprint = window.Blackprint.loadScope({
 
 	// This will autoload (*.sf.mjs) and (*.sf.css) file for Browser
 	hasInterface: true,
+
+	// This will autoload (*.docs.json) for Browser
+	// hasDocs: true,
 });
 
 // Global shared context

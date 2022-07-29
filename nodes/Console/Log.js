@@ -1,7 +1,15 @@
+/**
+ * Display value from a port
+ * Primitive type will be converted into a string
+ * Object will be converted with JSON.stringify
+ * @blackprint node
+ * @summary Print anything into text
+ */
 Blackprint.registerNode('Console/Log',
 class extends Blackprint.Node {
 	static input = {
-		Any: Blackprint.Port.ArrayOf(Blackprint.Types.Any) // Any data type, and can be used for many cable
+		/** Any data type, and can be used for many cable */
+		Any: Blackprint.Port.ArrayOf(Blackprint.Types.Any),
 	};
 
 	constructor(instance){
@@ -9,7 +17,6 @@ class extends Blackprint.Node {
 
 		let iface = this.setInterface('BPIC/Console/Log');
 		iface.title = "Log";
-		iface.description = 'Print anything into text';
 	}
 
 	_refreshLogger(val){

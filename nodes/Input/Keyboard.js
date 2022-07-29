@@ -1,11 +1,20 @@
+/** 
+ * Listen to keyboard event
+ * You can also listen to specific keyboard key by right clicking the output port
+ * Make sure to turn on AllowResync if you need to reupdate other node
+ * @blackprint node
+ */
 Blackprint.registerNode('Input/Keyboard',
 class KeyboardNode extends Blackprint.Node {
 	static input = {
+		/** If this not connected to anything, this node will listen to window */
 		Element: HTMLElement,
+		/** Start listening to mouse click event */
 		Listen: Blackprint.Port.Trigger(function(){
 			this.enabled = true;
 			this.update();
 		}),
+		/** Stop listener */
 		Unlisten: Blackprint.Port.Trigger(function(){
 			this.enabled = false;
 			this.update();
@@ -13,7 +22,9 @@ class KeyboardNode extends Blackprint.Node {
 	};
 
 	static output = {
+		/** Raw event on button pressed */
 		Pressed: KeyboardEvent,
+		/** Raw event on button released */
 		Released: KeyboardEvent,
 	};
 
@@ -92,14 +103,14 @@ class KeyboardNode extends Blackprint.Node {
 
 		// Put this array here, and reuse when port menu event
 		var portMenu = [{
-			title:"Create new port", context:null, callback(){
+			title:"Create new port", callback(){
 				if(node._waiting != null) return;
 
 				let iPort = node.createPort('output', '[?]', Boolean);
 				node.waitKeyToBeListened(iPort);
 			}
 		}, {
-			title:"Change this port", context:null, callback(){
+			title:"Change this port", callback(){
 				let i = keys.indexOf(this.name);
 				if(i !== -1) keys.splice(i, 1);
 
@@ -107,7 +118,7 @@ class KeyboardNode extends Blackprint.Node {
 				node.waitKeyToBeListened(this);
 			}
 		}, {
-			title:"Delete this port", context:null, callback(){
+			title:"Delete this port", callback(){
 				if(node._waiting != null){
 					$(sf.Window).off('keydown', node._waiting);
 
@@ -129,16 +140,17 @@ class KeyboardNode extends Blackprint.Node {
 			if(port.source !== 'output')
 				return;
 
-			if(port.name === 'Event')
-				portMenu.pop();
+			let addMenu;
+			if(port.name === 'Pressed' || port.name === 'Released')
+				addMenu = [portMenu[0]];
+			else addMenu = portMenu.slice(0);
 
-			for (var i = 0; i < portMenu.length; i++) {
+			for (var i = 0; i < addMenu.length; i++) {
 				// Change every callback context to refer current port
-				let temp = portMenu[i];
-
-				temp.context = port;
-				menu.push(temp);
+				addMenu[i].context = port;
 			}
+
+			menu.push(...addMenu);
 		});
 
 		iface.on('cable.disconnect', ({port}) => port.name === 'Element' && this.update());

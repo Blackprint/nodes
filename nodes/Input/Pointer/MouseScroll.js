@@ -1,11 +1,19 @@
+/** 
+ * Listen to mouse scroll event
+ * Make sure to turn on AllowResync if you need to reupdate other node
+ * @blackprint node
+ */
 Blackprint.registerNode('Input/Pointer/MouseScroll',
 class MouseScrollNode extends Blackprint.Node {
 	static input = {
+		/** If this not connected to anything, this node will listen to window */
 		Element: HTMLElement,
+		/** Start listening to mouse click event */
 		Listen: Blackprint.Port.Trigger(function(){
 			this.enabled = true;
 			this.update();
 		}),
+		/** Stop listener */
 		Unlisten: Blackprint.Port.Trigger(function(){
 			this.enabled = false;
 			this.update();
@@ -13,10 +21,15 @@ class MouseScrollNode extends Blackprint.Node {
 	};
 
 	static output = {
-		Event: Event,
-		X: Number,
-		Y: Number,
-		Z: Number,
+		/** Raw event on pressed */
+		Event: Blackprint.Port.StructOf(Event, {
+			/** Horizontal scroll */
+			X: {type: Number, field: 'deltaX'},
+			/** Vertical scroll (middle mouse scroll) */
+			Y: {type: Number, field: 'deltaY'},
+			/** Z-axis scroll */
+			Z: {type: Number, field: 'deltaZ'},
+		}),
 	};
 
 	constructor(instance){
@@ -33,18 +46,7 @@ class MouseScrollNode extends Blackprint.Node {
 	_onScroll = null;
 	_onScrollEl = null;
 	onScroll(ev){
-		let { Output, IOutput } = this.ref;
-
-		Output.X = ev.deltaX;
-		Output.Y = ev.deltaY;
-		Output.Z = ev.deltaZ;
-
-		Output.Event = ev;
-
-		// Reset value but don't trigger any event
-		IOutput.X.value = 0;
-		IOutput.Y.value = 0;
-		IOutput.Z.value = 0;
+		this.ref.Output.Event = ev;
 	}
 
 	init(){
