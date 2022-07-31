@@ -1,3 +1,8 @@
+/**
+ * Trigger function call if data flow's route
+ * was reaching to this node
+ * @blackprint node
+ */
 Blackprint.registerNode("Data/Route/To/Trigger",
 class extends Blackprint.Node {
 	static output = { Call: Function };

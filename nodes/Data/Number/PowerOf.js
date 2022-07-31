@@ -1,5 +1,9 @@
+/**
+ * Returns the value of A to the power of B.
+ * @blackprint node
+ */
 Blackprint.registerNode("Data/Number/PowerOf",
-class EmptyNode extends Blackprint.Node {
+class extends Blackprint.Node {
 	static input = { A: Number, B: Number };
 	static output = { Value: Number };
 

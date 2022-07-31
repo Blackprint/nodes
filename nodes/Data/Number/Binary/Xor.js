@@ -1,8 +1,8 @@
 /**
- * Apply bitwise AND operator on number (A & B)
+ * Apply bitwise XOR operator on number (A ^ B)
  * @blackprint node
  */
-Blackprint.registerNode("Data/Number/Binary/And",
+Blackprint.registerNode("Data/Number/Binary/Xor",
 class extends Blackprint.Node {
 	static input = { A: Number, B: Number };
 	static output = { Value: Number };
@@ -11,12 +11,12 @@ class extends Blackprint.Node {
 		super(instance);
 
 		let iface = this.setInterface('BPIC/Data/Minimal');
-		iface.title = "Binary: And";
+		iface.title = "Binary: Xor";
 		iface.w = 95;
 	}
 
 	createIcon(){
-		return document.createTextNode('Bin And');
+		return document.createTextNode('Bin Xor');
 	}
 
 	update(){
@@ -24,6 +24,6 @@ class extends Blackprint.Node {
 		let {A, B} = ref.Input;
 
 		if(A == null || B == null) return;
-		ref.Output.Value = A & B;
+		ref.Output.Value = A ^ B;
 	}
 });

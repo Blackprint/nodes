@@ -1,6 +1,11 @@
+/**
+ * Fill string with string (padding) on right (end)
+ * if the text is less than specified length
+ * @blackprint node
+ */
 Blackprint.registerNode("Data/String/Padding/End",
-class EmptyNode extends Blackprint.Node {
-	static input = { A: String, B: Number };
+class extends Blackprint.Node {
+	static input = { A: String, Length: Number, Filler: String };
 	static output = { Result: String };
 
 	constructor(instance){
@@ -13,9 +18,9 @@ class EmptyNode extends Blackprint.Node {
 
 	update(){
 		let ref = this.ref;
-		let {A, B} = ref.Input;
+		let {A, Length, Filler} = ref.Input;
 
-		if(A == null || B == null) return;
-		ref.Output.Result = A.padEnd(B);
+		if(A == null || Length == null) return;
+		ref.Output.Result = A.padEnd(Length, Filler);
 	}
 });

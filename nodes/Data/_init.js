@@ -10,6 +10,9 @@ let Blackprint = window.Blackprint.loadScope({
 
 	// This will autoload (*.sf.mjs) and (*.sf.css) file for Browser
 	hasInterface: true,
+
+	// This will autoload (*.docs.json) for Browser
+	hasDocs: true,
 });
 
 // Global shared context
@@ -25,7 +28,8 @@ if(!Blackprint.Environment.isBrowser)
 
 
 // Register with default interface
-Blackprint.registerInterface("BPIC/Data/Minimal", class extends Blackprint.Interface {});
+Blackprint.registerInterface("BPIC/Data/Minimal",
+Context.IFace.DataMinimal = class extends Blackprint.Interface { });
 
 // Bootstrap for add toast on node decoration
 let NodeToast = Context.NodeToast = class NodeToast {

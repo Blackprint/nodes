@@ -1,5 +1,10 @@
+/**
+ * Return true if the string have a specified
+ * string at the beginning of the string
+ * @blackprint node
+ */
 Blackprint.registerNode("Data/String/Starts With",
-class EmptyNode extends Blackprint.Node {
+class extends Blackprint.Node {
 	static input = { Haystack: String, Needle: String };
 	static output = { Result: Boolean };
 

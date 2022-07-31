@@ -1,5 +1,10 @@
+/**
+ * Invert `true` to `false` and vice-versa
+ * This just like `let NewValue = !Value;`
+ * @blackprint node
+ */
 Blackprint.registerNode("Data/Boolean/Invert",
-class EmptyNode extends Blackprint.Node {
+class extends Blackprint.Node {
 	static input = { Value: Boolean };
 	static output = { Value: Boolean };
 

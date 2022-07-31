@@ -1,5 +1,9 @@
+/**
+ * Trigger a function call if input receive `true` value
+ * @blackprint node
+ */
 Blackprint.registerNode("Data/Boolean/To/Trigger",
-class EmptyNode extends Blackprint.Node {
+class extends Blackprint.Node {
 	static input = { Value: Boolean };
 	static output = { Call: Function };
 
@@ -12,7 +16,7 @@ class EmptyNode extends Blackprint.Node {
 	}
 
 	createIcon(){
-		return document.createTextNode('Fx()');
+		return document.createTextNode('Call()');
 	}
 
 	update(){

@@ -1,5 +1,9 @@
+/**
+ * Apply bitwise OR operator on number (A | B)
+ * @blackprint node
+ */
 Blackprint.registerNode("Data/Number/Binary/Or",
-class EmptyNode extends Blackprint.Node {
+class extends Blackprint.Node {
 	static input = { A: Number, B: Number };
 	static output = { Value: Number };
 

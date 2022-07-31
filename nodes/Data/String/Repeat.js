@@ -1,5 +1,9 @@
+/**
+ * Repeat the string few times
+ * @blackprint node
+ */
 Blackprint.registerNode("Data/String/Repeat",
-class EmptyNode extends Blackprint.Node {
+class extends Blackprint.Node {
 	static input = { String: String, Count: Number };
 	static output = { Result: String };
 

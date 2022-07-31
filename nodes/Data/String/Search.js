@@ -1,5 +1,9 @@
+/**
+ * Find index from a string with RegExp
+ * @blackprint node
+ */
 Blackprint.registerNode("Data/String/Search",
-class EmptyNode extends Blackprint.Node {
+class extends Blackprint.Node {
 	static input = {
 		Haystack: String,
 		Needle: Blackprint.Port.Union([String, RegExp])

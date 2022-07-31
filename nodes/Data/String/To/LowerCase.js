@@ -1,3 +1,7 @@
+/**
+ * Return lowercased letters
+ * @blackprint node
+ */
 Blackprint.registerNode("Data/String/To/LowerCase",
 class LowerCase extends Blackprint.Node {
 	static input = { In: String };

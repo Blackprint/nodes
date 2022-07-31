@@ -1,5 +1,10 @@
+/**
+ * The left shift operator (<<) shifts the first operand the specified number of bits, modulo 32, to the left.
+ * Excess bits shifted off to the left are discarded. Zero bits are shifted in from the right.
+ * @blackprint node
+ */
 Blackprint.registerNode("Data/Number/Binary/ShiftLeft",
-class EmptyNode extends Blackprint.Node {
+class extends Blackprint.Node {
 	static input = { A: Number, B: Number };
 	static output = { Value: Number };
 

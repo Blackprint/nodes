@@ -1,5 +1,9 @@
+/**
+ * Add string to string
+ * @blackprint node
+ */
 Blackprint.registerNode("Data/String/Add",
-class EmptyNode extends Blackprint.Node {
+class extends Blackprint.Node {
 	static input = { A: String, B: String };
 	static output = { Result: String };
 

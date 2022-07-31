@@ -1,5 +1,9 @@
+/**
+ * Compare and return true if both value is similar
+ * @blackprint node
+ */
 Blackprint.registerNode("Data/Number/Compare/Equal",
-class EmptyNode extends Blackprint.Node {
+class extends Blackprint.Node {
 	static input = { A: Number, B: Number };
 	static output = { Value: Boolean };
 

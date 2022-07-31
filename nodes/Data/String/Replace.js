@@ -1,5 +1,10 @@
+/**
+ * Find a string (needle) from a string (haystack)
+ * with a string (replacement)
+ * @blackprint node
+ */
 Blackprint.registerNode("Data/String/Replace",
-class EmptyNode extends Blackprint.Node {
+class extends Blackprint.Node {
 	static input = {
 		Haystack: String,
 		Needle: Blackprint.Port.Union([RegExp, String]),

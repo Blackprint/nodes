@@ -1,5 +1,9 @@
+/**
+ * Trim white space from a string at the start and end of string
+ * @blackprint node
+ */
 Blackprint.registerNode("Data/String/Trim",
-class EmptyNode extends Blackprint.Node {
+class extends Blackprint.Node {
 	static input = { String: String };
 	static output = { Result: String };
 

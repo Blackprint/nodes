@@ -1,3 +1,7 @@
+/**
+ * Convert string into RegExp
+ * @blackprint node
+ */
 Blackprint.registerNode("Data/String/To/RegExp",
 class Str2RegExp extends Blackprint.Node {
 	static input = { In: String, Options: String };

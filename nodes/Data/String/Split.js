@@ -1,6 +1,13 @@
+/**
+ * Split a string and return an array
+ * @blackprint node
+ */
 Blackprint.registerNode("Data/String/Split",
-class EmptyNode extends Blackprint.Node {
-	static input = { String: String, Splitter: String };
+class extends Blackprint.Node {
+	static input = {
+		String: String,
+		Splitter: Blackprint.Port.Union([RegExp, String]),
+	};
 	static output = { Result: String };
 
 	constructor(instance){

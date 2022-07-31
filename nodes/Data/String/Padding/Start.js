@@ -1,5 +1,10 @@
+/**
+ * Fill string with string (padding) on left (starts)
+ * if the text is less than specified length
+ * @blackprint node
+ */
 Blackprint.registerNode("Data/String/Padding/Start",
-class EmptyNode extends Blackprint.Node {
+class extends Blackprint.Node {
 	static input = { A: String, B: Number };
 	static output = { Result: String };
 

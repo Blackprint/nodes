@@ -1,3 +1,7 @@
+/**
+ * Transverse a object with specified property to get its value inside
+ * @blackprint node
+ */
 Blackprint.registerNode('Data/Object/GetValue',
 class extends Blackprint.Node {
 	static input = { Object };

@@ -1,3 +1,7 @@
+/**
+ * Return uppercased letters
+ * @blackprint node
+ */
 Blackprint.registerNode("Data/String/To/UpperCase",
 class UpperCase extends Blackprint.Node {
 	static input = { In: String };

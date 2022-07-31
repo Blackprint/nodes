@@ -1,3 +1,9 @@
+/**
+ * Convert string to number
+ * This may error if the string couldn't be converted to number
+ * For example if it's get NaN
+ * @blackprint node
+ */
 Blackprint.registerNode("Data/String/To/Number",
 class Str2Number extends Blackprint.Node {
 	static input = { In: String };

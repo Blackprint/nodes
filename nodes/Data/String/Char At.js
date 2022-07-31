@@ -1,5 +1,9 @@
+/**
+ * Get char from a string at index
+ * @blackprint node
+ */
 Blackprint.registerNode("Data/String/Char At",
-class EmptyNode extends Blackprint.Node {
+class extends Blackprint.Node {
 	static input = { String: String, Index: Number };
 	static output = { Result: String };
 

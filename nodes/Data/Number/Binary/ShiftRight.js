@@ -1,5 +1,10 @@
+/**
+ * Shift bits of a number from left to the right, modulo 32.
+ * Excess bits shifted off to the right are discarded.
+ * @blackprint node
+ */
 Blackprint.registerNode("Data/Number/Binary/ShiftRight",
-class EmptyNode extends Blackprint.Node {
+class extends Blackprint.Node {
 	static input = { A: Number, B: Number };
 	static output = { Value: Number };
 

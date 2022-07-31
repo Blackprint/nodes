@@ -1,5 +1,9 @@
+/**
+ * Slice a string
+ * @blackprint node
+ */
 Blackprint.registerNode("Data/String/Slice",
-class EmptyNode extends Blackprint.Node {
+class extends Blackprint.Node {
 	static input = { String: String, Begin: Number, End: Number };
 	static output = { Result: String };
 

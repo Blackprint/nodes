@@ -1,5 +1,9 @@
+/**
+ * Return true if A is more than or equal with B (A >= B)
+ * @blackprint node
+ */
 Blackprint.registerNode("Data/Number/Compare/More Than or Equal",
-class EmptyNode extends Blackprint.Node {
+class extends Blackprint.Node {
 	static input = { A: Number, B: Number };
 	static output = { Value: Boolean };
 

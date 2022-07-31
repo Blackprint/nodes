@@ -1,5 +1,9 @@
+/**
+ * Return length of a string
+ * @blackprint node
+ */
 Blackprint.registerNode("Data/String/Length",
-class EmptyNode extends Blackprint.Node {
+class extends Blackprint.Node {
 	static input = { String: String };
 	static output = { Length: Number };
 

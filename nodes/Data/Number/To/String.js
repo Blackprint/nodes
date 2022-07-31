@@ -1,3 +1,10 @@
+/**
+ * Convert number into string type
+ * Radix (Optional):
+ * 2: Binary string
+ * 16: Hex string
+ * @blackprint node
+ */
 Blackprint.registerNode("Data/Number/To/String",
 class NumString extends Blackprint.Node {
 	static input = { In: Number, Radix: Number };

@@ -1,5 +1,10 @@
+/**
+ * Compare boolean with AND
+ * This will only return `true` if both input is `true`
+ * @blackprint node
+ */
 Blackprint.registerNode("Data/Boolean/Compare/And",
-class EmptyNode extends Blackprint.Node {
+class extends Blackprint.Node {
 	static input = { "0": Boolean, "1": Boolean };
 	static output = { Value: Boolean };
 

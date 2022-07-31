@@ -1,5 +1,9 @@
+/**
+ * Return the remaining of divided number with modulo (A % B)
+ * @blackprint node
+ */
 Blackprint.registerNode("Data/Number/Modulo",
-class EmptyNode extends Blackprint.Node {
+class extends Blackprint.Node {
 	static input = { A: Number, B: Number };
 	static output = { Value: Number };
 

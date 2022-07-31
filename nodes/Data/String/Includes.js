@@ -1,5 +1,9 @@
+/**
+ * Return true if a string contains the specified string
+ * @blackprint node
+ */
 Blackprint.registerNode("Data/String/Includes",
-class EmptyNode extends Blackprint.Node {
+class extends Blackprint.Node {
 	static input = { Haystack: String, Needle: String };
 	static output = { IsExist: Boolean };
 

@@ -1,5 +1,10 @@
+/**
+ * Return the last index of specified string on a string
+ * This will return -1 if not exist
+ * @blackprint node
+ */
 Blackprint.registerNode("Data/String/Last Index Of",
-class EmptyNode extends Blackprint.Node {
+class extends Blackprint.Node {
 	static input = { Haystack: String, Needle: String };
 	static output = { Index: Number };
 
