@@ -1,5 +1,5 @@
 [![NPM](https://img.shields.io/npm/v/@blackprint/nodes.svg)](https://www.npmjs.com/package/@blackprint/nodes)
-[![Build Status](https://github.com/Blackprint/nodes/actions/workflows/build.yml/badge.svg?branch=main)](https://github.com/Blackprint/nodes/actions/workflows/build.yml)
+[![Build Status](https://github.com/Blackprint/nodes/actions/workflows/build.yml/badge.svg?branch=master)](https://github.com/Blackprint/nodes/actions/workflows/build.yml)
 
 # Blackprint Nodes
 This repository contains a collection of general Blackprint Nodes.<br>
