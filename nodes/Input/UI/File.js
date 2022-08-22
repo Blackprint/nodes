@@ -42,10 +42,13 @@ Context.IFace.File = class FileIFace extends Blackprint.Interface {
 
 	setFile(file){
 		this.name = file.name;
-		this.node.output.Blob = file;
 
-		URL.revokeObjectURL(this.node.output.URL);
-		this.node.output.URL = URL.createObjectURL(file);
+		let node = this.node;
+		node.output.Blob = file;
+
+		URL.revokeObjectURL(node.output.URL);
+		node.output.URL = URL.createObjectURL(file);
+		node.routes.routeOut();
 	}
 
 	browseFile(ev){

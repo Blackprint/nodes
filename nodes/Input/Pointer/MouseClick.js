@@ -9,14 +9,16 @@ class MouseNode extends Blackprint.Node {
 		/** If this not connected to anything, this node will listen to window */
 		Element: HTMLElement,
 		/** Start listening to mouse click event */
-		Listen: Blackprint.Port.Trigger(function(){
-			this.enabled = true;
-			this.update();
+		Listen: Blackprint.Port.Trigger(function({ iface }){
+			let node = iface.node;
+			node.enabled = true;
+			node.update();
 		}),
 		/** Stop listener */
-		Unlisten: Blackprint.Port.Trigger(function(){
-			this.enabled = false;
-			this.update();
+		Unlisten: Blackprint.Port.Trigger(function({ iface }){
+			let node = iface.node;
+			node.enabled = false;
+			node.update();
 		}),
 	};
 
@@ -81,11 +83,18 @@ class MouseNode extends Blackprint.Node {
 			else if(ev.button === 4)
 				Output["5th"] = true;
 		}
+
+		this.routes.routeOut();
 	}
 
 	init(){
 		this.update();
-		this.iface.on('cable.disconnect', ({port}) => port.name === 'Element' && this.update());
+		this.iface.on('cable.disconnect', ({port}) => {
+			if(port.name === 'Element'){
+				this.update();
+				this.routes.routeOut();
+			}
+		});
 	}
 
 	update(){

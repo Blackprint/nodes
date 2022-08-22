@@ -83,7 +83,10 @@ class InputTextBoxData {
 	set value(val){
 		if(this.#value === val) return;
 		this.#value = val;
-		this.#iface.node.changed(val);
+
+		let node = this.#iface.node;
+		node.changed(val);
+		node.routes.routeOut();
 	}
 }
 

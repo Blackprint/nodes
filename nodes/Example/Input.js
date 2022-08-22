@@ -89,6 +89,7 @@ class ExampleInputData {
 		if(this.#value === val) return;
 		this.#value = val;
 		this.#iface.changed(val);
+		this.#iface.node.routes.routeOut();
 	}
 }
 

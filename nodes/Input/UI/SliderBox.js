@@ -112,10 +112,12 @@ Context.IFace.SliderBoxIFace = class SliderBoxIFace extends Blackprint.Interface
 	}
 
 	changed(index, val){
-		this.node.output[index] = val;
+		let node = this.node;
+		node.output[index] = val;
+		node.routes.routeOut();
 
 		// Already throttled before being send to remote
-		this.node.syncOut('data', this.data);
+		node.syncOut('data', this.data);
 	}
 
 	// Put this here to reduce memory usage because of function creation

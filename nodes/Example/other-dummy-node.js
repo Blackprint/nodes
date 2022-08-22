@@ -8,14 +8,14 @@ Blackprint.registerNode('Example/Math/Multiply', class extends Blackprint.Node {
 
 	// Handle all input port here
 	static input = {
-		Exec: Blackprint.Port.Trigger(function(){
-			this.output.Result = this.multiply();
-			Context.log('Example/Math/Multiply', "Result has been set:", this.output.Result);
+		Exec: Blackprint.Port.Trigger(function({ iface }){
+			let node = iface.node;
+			node.output.Result = node.multiply();
+			Context.log('Example/Math/Multiply', "Result has been set:", node.output.Result);
 
-			let iface = this.iface;
-			if(iface._inactive !== false){
-				iface._inactive.destroy();
-				iface._inactive = false;
+			if(iface._inactive_ !== false){
+				iface._inactive_.destroy();
+				iface._inactive_ = false;
 			}
 		}),
 		A: Number,
@@ -50,7 +50,7 @@ Blackprint.registerNode('Example/Math/Multiply', class extends Blackprint.Node {
 	// When any output value from other node are updated
 	// Let's immediately change current node result
 	update(cable){
-		if(this.iface._inactive) return;
+		if(this.iface._inactive_) return;
 		this.output.Result = this.multiply();
 	}
 
@@ -63,7 +63,7 @@ Blackprint.registerNode('Example/Math/Multiply', class extends Blackprint.Node {
 		});
 
 		// $decoration only available for Sketch (Browser)
-		iface._inactive = iface.$decoration?.warn("Need activation") || false;
+		iface._inactive_ = iface.$decoration?.warn("Need activation") || false;
 	}
 });
 
@@ -72,9 +72,10 @@ Blackprint.registerNode('Example/Math/Random', class extends Blackprint.Node {
 
 	static output = { Out: Number };
 	static input = {
-		'Re-seed': Blackprint.Port.Trigger(function(){
-			this.executed = true;
-			this.output.Out = Math.round(Math.random()*100);
+		'Re-seed': Blackprint.Port.Trigger(function({ iface }){
+			let node = iface.node;
+			node.executed = true;
+			node.output.Out = Math.round(Math.random()*100);
 		})
 	};
 
