@@ -50,43 +50,6 @@ class MouseNode extends Blackprint.Node {
 		this.enabled = true;
 	}
 
-	_onClick = null;
-	_onClickEl = null;
-	onClick(ev){
-		let { Output } = this.ref;
-
-		if(ev.type === 'pointerup'){
-			Output.Release = ev;
-
-			if(ev.button === 0)
-				Output.Left = false;
-			else if(ev.button === 1)
-				Output.Middle = false;
-			else if(ev.button === 2)
-				Output.Right = false;
-			else if(ev.button === 3)
-				Output["4th"] = false;
-			else if(ev.button === 4)
-				Output["5th"] = false;
-		}
-		else if(ev.type === 'pointerdown'){
-			Output.Pressed = ev;
-
-			if(ev.button === 0)
-				Output.Left = true;
-			else if(ev.button === 1)
-				Output.Middle = true;
-			else if(ev.button === 2)
-				Output.Right = true;
-			else if(ev.button === 3)
-				Output["4th"] = true;
-			else if(ev.button === 4)
-				Output["5th"] = true;
-		}
-
-		this.routes.routeOut();
-	}
-
 	init(){
 		this.update();
 		this.iface.on('cable.disconnect', ({port}) => {
@@ -125,6 +88,48 @@ class MouseNode extends Blackprint.Node {
 			.on('pointerup', this._onClick);
 
 		this._onClickEl = el;
+	}
+
+	_onClick = null;
+	_onClickEl = null;
+	onClick(ev, _isSync){
+		let { Output } = this.ref;
+
+		if(ev.type === 'pointerup'){
+			Output.Release = ev;
+
+			if(ev.button === 0)
+				Output.Left = false;
+			else if(ev.button === 1)
+				Output.Middle = false;
+			else if(ev.button === 2)
+				Output.Right = false;
+			else if(ev.button === 3)
+				Output["4th"] = false;
+			else if(ev.button === 4)
+				Output["5th"] = false;
+		}
+		else if(ev.type === 'pointerdown'){
+			Output.Pressed = ev;
+
+			if(ev.button === 0)
+				Output.Left = true;
+			else if(ev.button === 1)
+				Output.Middle = true;
+			else if(ev.button === 2)
+				Output.Right = true;
+			else if(ev.button === 3)
+				Output["4th"] = true;
+			else if(ev.button === 4)
+				Output["5th"] = true;
+		}
+
+		this.routes.routeOut();
+		if(!_isSync) this.syncOut(ev.type, ev.button);
+	}
+
+	syncIn(type, button){
+		this.onClick({type, button}, true);
 	}
 
 	destroy(){

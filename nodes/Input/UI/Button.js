@@ -15,11 +15,16 @@ class extends Blackprint.Node {
     let iface = this.setInterface('BPIC/Input/UI/Button');
     iface.title = "Button";
   }
+
+  syncIn(key, val){
+    if(key === 'clicked') this.output.Clicked();
+  }
 });
 
 Blackprint.registerInterface('BPIC/Input/UI/Button',
 Context.IFace.Button = class ButtonIFace extends Blackprint.Interface {
   clicked(ev){
     this.node.output.Clicked();
+    this.node.syncOut('clicked');
   }
 });

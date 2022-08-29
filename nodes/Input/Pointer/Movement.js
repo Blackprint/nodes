@@ -51,13 +51,6 @@ class PointerMovementNode extends Blackprint.Node {
 		this.enabled = true;
 	}
 
-	_onMove = null;
-	_onMoveEl = null;
-	onMove(ev){
-		this.ref.Output.Event = ev;
-		this.routes.routeOut();
-	}
-
 	init(){
 		this.update();
 		this.iface.on('cable.disconnect', ({port}) => {
@@ -90,6 +83,15 @@ class PointerMovementNode extends Blackprint.Node {
 
 		$(el).on('pointermove', this._onMove);
 		this._onMoveEl = el;
+	}
+
+	_onMove = null;
+	_onMoveEl = null;
+	onMove(ev){
+		this.ref.Output.Event = ev;
+		this.routes.routeOut();
+
+		// no sync because there will too many event need to be synced
 	}
 
 	destroy(){

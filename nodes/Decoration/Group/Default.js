@@ -27,11 +27,13 @@ class extends Blackprint.Node {
 	}
 
 	syncIn(eventName, value){
-		if(eventName === 'width')
-			this.iface.data.width = value;
+		if(eventName === 'trigger'){
+			if(value === 'refreshContent') this.iface.refreshContent({}, true);
+			return;
+		}
 
-		if(eventName === 'height')
-			this.iface.data.height = value;
+		if(this.iface.data[eventName] != null)
+			this.iface.data[eventName] = value;
 	}
 });
 

@@ -24,8 +24,14 @@ class extends sf.Model {
 	}
 
 	get title(){ return this.data.title }
-	set title(val){ this.data.title = val }
+	set title(val){
+		this.data.title = val;
+		this.iface.node.syncOut('title', val);
+	}
 
 	get color(){ return this.data.color }
-	set color(val){ this.data.color = val }
+	set color(val){
+		this.data.color = val;
+		this.iface.node.syncOut('color', val);
+	}
 });

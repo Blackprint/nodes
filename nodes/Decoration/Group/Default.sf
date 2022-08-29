@@ -162,7 +162,7 @@ class extends Blackprint.Interface{
 		}
 	}
 
-	refreshContent(ev){
+	refreshContent(ev, _isSync){
 		let { ifaceList } = this.node.instance;
 		let modelIfaceList = this.$space('nodes').list;
 		let cableList = this.$space('cables').list;
@@ -195,7 +195,8 @@ class extends Blackprint.Interface{
 			if(temp === this) continue;
 
 			let {x, y} = temp;
-			let {offsetWidth, offsetHeight} = sf.Window.source(temp.$el, ev).firstElementChild;
+			let elChild = (_isSync ? temp.$el[0] : sf.Window.source(temp.$el, ev)).firstElementChild;
+			let {offsetWidth, offsetHeight} = elChild;
 
 			let ox = offsetWidth + x;
 			let oy = offsetHeight + y;
@@ -221,6 +222,9 @@ class extends Blackprint.Interface{
 			if(lowestIndex < thisIndex)
 				modelIfaceList.move(thisIndex, lowestIndex);
 		}
+
+		if(!_isSync)
+			this.node.syncOut('trigger', 'refreshContent');
 	}
 
 	// Refresh content and disable changing index
@@ -261,6 +265,6 @@ class DecorationGroupDefaultData {
 	}
 
 	// Triggered when the value was changed from view (by user interaction on the UI)
-	v2m$width(val){ this.#iface.node.syncOut('width', val) }
-	v2m$height(val){ this.#iface.node.syncOut('height', val) }
+	on$width(val){ if(window.event?.isTrusted) this.#iface.node.syncOut('width', val) }
+	on$height(val){ if(window.event?.isTrusted) this.#iface.node.syncOut('height', val) }
 }

@@ -45,13 +45,6 @@ class MouseScrollNode extends Blackprint.Node {
 		this.enabled = true;
 	}
 
-	_onScroll = null;
-	_onScrollEl = null;
-	onScroll(ev){
-		this.ref.Output.Event = ev;
-		this.routes.routeOut();
-	}
-
 	init(){
 		this.update();
 		this.iface.on('cable.disconnect', ({port}) => {
@@ -84,6 +77,29 @@ class MouseScrollNode extends Blackprint.Node {
 
 		$(el).on('wheel', this._onScroll);
 		this._onScrollEl = el;
+	}
+
+	_onScroll = null;
+	_onScrollEl = null;
+	onScroll(ev, _isSync){
+		this.ref.Output.Event = ev;
+		this.routes.routeOut();
+
+		if(!_isSync) this.syncOut('wheel', {
+			dx: ev.deltaX,
+			dy: ev.deltaY,
+			dz: ev.deltaZ,
+			dm: ev.deltaMode,
+		});
+	}
+
+	syncIn(which, data){
+		this.onScroll(new WheelEvent('wheel', {
+			deltaX: data.dx,
+			deltaY: data.dy,
+			deltaZ: data.dz,
+			deltaMode: data.dm,
+		}), true);
 	}
 
 	destroy(){
