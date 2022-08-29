@@ -100,7 +100,11 @@ class extends Context.IFace.DataMinimal {
 		let inputs = this.input;
 		for(let key in inputs) this._portLen++;
 	}
+
 	initClone(el){ // Run multiple times if the nodes element is cloned to different container
-		$('.center', el).append(this.node.createIcon());
+		let $el = $('.center', el);
+		if($el[0] == null) return;
+
+		$el.append(this.node.createIcon());
 	}
 });

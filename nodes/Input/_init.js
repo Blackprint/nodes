@@ -31,11 +31,27 @@ let objLength = Context.objLength = function(obj){
 	return i;
 }
 
+// Fake Type, for Node.js/Deno
+let _fType = {};
+let fType = function(name){
+	if(_fType[name] == null){
+		let temp = _fType[name] = class{};
+		Object.defineProperty(temp, 'name', {value: name});
+	}
+
+	return _fType[name];
+}
+
+// Fix for Node.js/Deno
+var {
+	HTMLElement = fType('HTMLElement'),
+	Event = fType('Event'),
+	KeyboardEvent = fType('KeyboardEvent'),
+	PointerEvent = fType('PointerEvent'),
+	TouchEvent = fType('TouchEvent'),
+	MouseEvent = fType('MouseEvent'),
+} = window;
+
 let Blob = window.Blob; // Browser/Deno
 if(Blob === void 0) // Node.js
 	Blob = (await import('node:buffer')).Blob;
-
-// Fix for Node.js
-let HTMLElement = window.HTMLElement || null;
-let Event = window.Event || null;
-let KeyboardEvent = window.KeyboardEvent || null;
