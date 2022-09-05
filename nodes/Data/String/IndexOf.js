@@ -3,7 +3,7 @@
  * This will return -1 if not exist
  * @blackprint node
  */
-Blackprint.registerNode("Data/String/Index Of",
+Blackprint.registerNode("Data/String/IndexOf",
 class extends Blackprint.Node {
 	static input = { Haystack: String, Needle: String };
 	static output = { Index: Number };

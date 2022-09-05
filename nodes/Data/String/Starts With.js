@@ -3,7 +3,7 @@
  * string at the beginning of the string
  * @blackprint node
  */
-Blackprint.registerNode("Data/String/Starts With",
+Blackprint.registerNode("Data/String/StartsWith",
 class extends Blackprint.Node {
 	static input = { Haystack: String, Needle: String };
 	static output = { Result: Boolean };

@@ -2,7 +2,7 @@
  * Return true if A is less than or equal with B (A <= B)
  * @blackprint node
  */
-Blackprint.registerNode("Data/Number/Compare/Less Than or Equal",
+Blackprint.registerNode("Data/Number/Compare/LessThanOrEqual",
 class extends Blackprint.Node {
 	static input = { A: Number, B: Number };
 	static output = { Value: Boolean };

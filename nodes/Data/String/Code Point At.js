@@ -2,7 +2,7 @@
  * Get char point from a string at index
  * @blackprint node
  */
-Blackprint.registerNode("Data/String/Code Point At",
+Blackprint.registerNode("Data/String/CodePointAt",
 class extends Blackprint.Node {
 	static input = { String: String, Index: Number };
 	static output = { Result: Number };

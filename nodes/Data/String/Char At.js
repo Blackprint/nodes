@@ -2,7 +2,7 @@
  * Get char from a string at index
  * @blackprint node
  */
-Blackprint.registerNode("Data/String/Char At",
+Blackprint.registerNode("Data/String/CharAt",
 class extends Blackprint.Node {
 	static input = { String: String, Index: Number };
 	static output = { Result: String };

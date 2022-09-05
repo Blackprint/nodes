@@ -2,7 +2,7 @@
  * Compare and return true if both value is not similar
  * @blackprint node
  */
-Blackprint.registerNode("Data/Number/Compare/Not Equal",
+Blackprint.registerNode("Data/Number/Compare/NotEqual",
 class extends Blackprint.Node {
 	static input = { A: Number, B: Number };
 	static output = { Value: Boolean };

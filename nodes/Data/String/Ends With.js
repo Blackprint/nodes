@@ -3,7 +3,7 @@
  * string at the ends of the string
  * @blackprint node
  */
-Blackprint.registerNode("Data/String/Ends With",
+Blackprint.registerNode("Data/String/EndsWith",
 class extends Blackprint.Node {
 	static input = { Haystack: String, Needle: String };
 	static output = { Result: Boolean };
