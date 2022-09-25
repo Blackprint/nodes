@@ -7,8 +7,10 @@ class extends Blackprint.Node {
 	constructor(instance){
 		super(instance);
 
-		if(!Blackprint.Environment.isBrowser)
-			return this.setInterface(); // use default interface for Node.js/Deno
+		if(!Blackprint.Environment.isBrowser){
+			this.setInterface(); // use default interface for Node.js/Deno
+			return;
+		}
 
 		let iface = this.setInterface('BPIC/Decoration/Text/Notes'); // Interface path
 		iface.title = 'Notes';
