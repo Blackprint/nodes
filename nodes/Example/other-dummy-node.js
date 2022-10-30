@@ -49,7 +49,7 @@ Blackprint.registerNode('Example/Math/Multiply', class extends Blackprint.Node {
 
 	// When any output value from other node are updated
 	// Let's immediately change current node result
-	update(cable){
+	update(){
 		if(this.iface._inactive_) return;
 		this.output.Result = this.multiply();
 	}
@@ -63,7 +63,7 @@ Blackprint.registerNode('Example/Math/Multiply', class extends Blackprint.Node {
 		});
 
 		// $decoration only available for Sketch (Browser)
-		iface._inactive_ = iface.$decoration?.warn("Need activation") || false;
+		iface._inactive_ = iface.$decoration?.warn("Need activation") || true;
 	}
 });
 
@@ -72,8 +72,7 @@ Blackprint.registerNode('Example/Math/Random', class extends Blackprint.Node {
 
 	static output = { Out: Number };
 	static input = {
-		'Re-seed': Blackprint.Port.Trigger(function({ iface }){
-			let node = iface.node;
+		'Re-seed': Blackprint.Port.Trigger(function({ iface: { node } }){
 			node.executed = true;
 			node.output.Out = Math.round(Math.random()*100);
 		})
@@ -123,5 +122,42 @@ Blackprint.registerNode('Example/Dummy/Test', class extends Blackprint.Node {
 
 		let iface = this.setInterface(); // Let's use default node interface
 		iface.title = "Do nothing";
+	}
+});
+
+Blackprint.registerNode('Example/Dummy/UpdateTest', class extends Blackprint.Node {
+	static input = {
+		A1: String,
+		A2: String,
+	};
+
+	static output = {
+		B1: String,
+		B2: String,
+	};
+
+	constructor(instance){
+		super(instance);
+
+		let iface = this.setInterface(); // Let's use default node interface
+		iface.title = "Pass data only";
+
+		// iface.on('port.value', ({ port, target }) => {
+		// 	console.log(port, target);
+		// 	if(port.source !== 'input') return;
+		// 	this[port.name] = target.value;
+		// });
+	}
+
+	update(){
+		let index = this.iface.id || this.instance.ifaceList.indexOf(this.iface);
+		// console.error("UpdateTest "+index+"> Updating ports");
+
+		// if(this.input.A1 !== this.A1) console.error("A1 from event listener value was mismatched");
+		// if(this.input.A2 !== this.A2) console.error("A2 from event listener value was mismatched");
+
+		this.output.B1 = this.input.A1;
+		this.output.B2 = this.input.A2;
+		// console.log("UpdateTest "+index+"> Updated");
 	}
 });

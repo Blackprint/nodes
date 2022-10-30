@@ -25,11 +25,6 @@ bpic-console-log{
 ## js-global
 Blackprint.Sketch.registerInterface('BPIC/Console/Log',
 class extends Context.IFace.Logger {
-	constructor(scope){
-		super(scope);
-		this.log = '...';
-	}
-
 	m2v$log(now){
 		// Scale the input box depend on character length
 		var el = this.$el('textarea');

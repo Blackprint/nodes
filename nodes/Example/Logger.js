@@ -31,13 +31,13 @@ class extends Blackprint.Node {
 	init(){
 		// Let's show data after new cable was connected or disconnected
 		this.iface.on('cable.disconnect', Context.EventSlot, () => {
-			Context.log('Example/Display/Logger', "A cable was changed on Logger, manual update will be triggered");
+			Context.log('Logger ('+(this.iface.id || '')+')', "A cable was changed on Logger, manual update will be triggered");
 
 			this.update();
 		});
 
 		this.iface.input.Any.on('value', Context.EventSlot, ({ target }) => {
-			Context.log('Example/Display/Logger', `I connected to Result port from "${target.name}" that have value: ${target.value}`);
+			Context.log('Logger ('+(this.iface.id || '')+')', `I connected to Result port from "${target.name}" that have value: ${target.value}`);
 		});
 	}
 
@@ -51,8 +51,7 @@ class extends Blackprint.Node {
 
 	// Remote sync in
 	syncIn(id, data){
-		if(id === 'log')
-			this.iface.log = data;
+		if(id === 'log') this.iface.log = data;
 	}
 });
 
@@ -64,7 +63,7 @@ Context.IFace.Logger = class extends Blackprint.Interface {
 	get log(){ return this._log }
 	set log(val){
 		this._log = val;
-		Context.log("Logger Data", val);
+		Context.log("Logger ("+(this.id || '')+") Data", val);
 		this.node.syncOut('log', val);
 	}
 });
