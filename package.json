@@ -1,7 +1,7 @@
 {
   "name": "@blackprint/nodes",
   "description": "Blackprint nodes for Browser/Node.js/Deno",
-  "version": "0.6.1",
+  "version": "0.6.2",
   "author": "Blackprint",
   "license": "MIT",
   "repository": {
@@ -19,8 +19,8 @@
   "homepage": "http://stefansarya.gitbook.io/blackprint",
   "devDependencies": {
     "scarletsframe": "0.35.x",
-    "@blackprint/engine": "0.7.x",
-    "@blackprint/sketch": "0.7.x",
+    "@blackprint/engine": "0.8.x",
+    "@blackprint/sketch": "0.8.x",
     "@blackprint/cli-tools": "0.3.x"
   },
   "blackprint": {
