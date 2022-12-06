@@ -37,7 +37,7 @@ class extends Blackprint.Node {
 		});
 
 		this.iface.input.Any.on('value', Context.EventSlot, ({ target }) => {
-			Context.log('Logger ('+(this.iface.id || '')+')', `I connected to Result port from "${target.name}" that have value: ${target.value}`);
+			Context.log('Logger ('+(this.iface.id || '')+')', `I connected to port ${target.name} (${target.iface.namespace}), that have value: ${target.value}`);
 		});
 	}
 
