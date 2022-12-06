@@ -5,7 +5,7 @@
 Blackprint.registerNode("Data/Boolean/To/Route",
 class extends Blackprint.Node {
 	static input = { Value: Boolean };
-	static output = { Route: Blackprint.Port.Route };
+	static output = { Route: Blackprint.Types.Route };
 
 	constructor(instance){
 		super(instance);

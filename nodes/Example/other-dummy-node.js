@@ -13,8 +13,8 @@ Blackprint.registerNode('Example/Math/Multiply', class extends Blackprint.Node {
 			node.output.Result = node.multiply();
 			Context.log('Example/Math/Multiply', "Result has been set:", node.output.Result);
 
-			if(iface._inactive_ !== false){
-				iface._inactive_.destroy();
+			if(iface._inactive_){
+				iface._inactive_.destroy?.();
 				iface._inactive_ = false;
 			}
 		}),
