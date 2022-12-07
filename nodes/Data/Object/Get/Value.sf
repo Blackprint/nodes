@@ -4,7 +4,7 @@
   <sf-template path="Blackprint/nodes/template/header.sf"></sf-template>
 
   <div class="content">
-    <input sf-bind="data.props">
+    <input style="display: {{ node.hasFieldData || node.hasFieldCable ? 'none' : '' }}" sf-bind="data.props" placeholder="Type the properties here...">
 
     <div class="left-port">
       <sf-template path="Blackprint/nodes/template/input-port.sf"></sf-template>
@@ -19,7 +19,7 @@
 </div>
 
 ## scss-global
-bpic-data-object-getvalue{
+bpic-data-object-get-value{
 	input{
 		display: block;
 		width: calc(100% - 10px);
@@ -29,8 +29,7 @@ bpic-data-object-getvalue{
 }
 
 ## js-global
-Blackprint.Sketch.registerInterface('BPIC/Data/Object/GetValue',
-class extends Context.IFace.GetValue {
-});
+Blackprint.Sketch.registerInterface('BPIC/Data/Object/Get/Value',
+class extends Context.IFace.GetValue { });
 
 // ToDo: add field suggestion

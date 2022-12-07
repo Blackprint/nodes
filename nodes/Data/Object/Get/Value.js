@@ -2,35 +2,71 @@
  * Transverse a object with specified property to get its value inside
  * @blackprint node
  */
-Blackprint.registerNode('Data/Object/GetValue',
+Blackprint.registerNode('Data/Object/Get/Value',
 class extends Blackprint.Node {
-	static input = { Object };
-	static output = { Value: Blackprint.Types.Any };
+	static input = {
+		/** Object to be transversed */
+		Object: Object,
+		/** Single narrow field to extract */
+		Field: String,
+	};
+	static output = {
+		/** Extracted value */
+		Value: Blackprint.Types.Any
+	};
 
 	constructor(instance){
 		super(instance);
 
-		let iface = this.setInterface('BPIC/Data/Object/GetValue');
+		let iface = this.setInterface('BPIC/Data/Object/Get/Value');
 		iface.title = "Get Object Value";
 		iface.description = 'Dive through object properties';
+
+		this.hasFieldData = false;
+		this.hasFieldCable = false;
 	}
 
 	init(){
-		let { Output } = this.ref;
+		let { IInput, Output } = this.ref;
 
 		// Let's remove data after the cable was disconnected
-		this.iface.on('cable.disconnect', Context.EventSlot, () => {
-			Output.Value = null;
-		});
+		IInput.Object.on('disconnect', Context.EventSlot, () => Output.Value = null);
+
+		// Hide or unhide input box
+		IInput.Field.on('disconnect', Context.EventSlot, () => this.hasFieldCable = false);
+		IInput.Field.on('connect', Context.EventSlot, () => this.hasFieldCable = true);
 	}
 
 	update(){
 		let { Input, Output } = this.ref;
-		let val = null;
+		let { Object: Object_, Field } = Input;
 
+		if(Object_ == null){
+			if(!!Field) // not null or empty
+				this.hasFieldData = true;
+
+			return this.iface._toast.warn("Object can't be null or undefined");
+		}
+
+		if(!!Field){ // not null or empty
+			this.iface._toast.clear();
+			this.hasFieldData = true;
+			Output.Value = Object_[Field];
+			return;
+		}
+		else if(this.hasFieldCable){
+			this.iface._toast.error("Field can't be empty string");
+			this.hasFieldData = false;
+			return;
+		}
+		// else use input box
+
+		this.hasFieldData = false;
+
+		let val = null;
 		try{
 			if(this._getter == null) return;
-			val = this._getter(Input.Object);
+			val = this._getter(Object_);
 		} catch(e) {
 			if(e.message.includes === "Cannot read properties of"){
 				Output.Value = null;
@@ -80,7 +116,7 @@ class extends Blackprint.Node {
 	}
 });
 
-Blackprint.registerInterface('BPIC/Data/Object/GetValue',
+Blackprint.registerInterface('BPIC/Data/Object/Get/Value',
 Context.IFace.GetValue = class extends Blackprint.Interface {
 	constructor(node){
 		super(node);
