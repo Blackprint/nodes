@@ -61,13 +61,13 @@ class SliderBoxNode extends Blackprint.Node {
 
 		// Put this array here, and reuse when port menu event
 		var portMenu = [{
-			title:"Create port", context:null, callback(){
+			title:"Create port", callback(){
 				// Always create on last position -> (key, default value)
 				node.createPort('output', iface.data.length, Number);
 				iface.createPort();
 			}
 		}, {
-			title:"Delete last port", context:null, callback(){
+			title:"Delete last port", callback(){
 				var length = iface.data.length;
 				if(length === 1)
 					return;
