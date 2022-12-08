@@ -1,5 +1,6 @@
 /**
  * Return lowercased letters
+ * @summary String
  * @blackprint node
  */
 Blackprint.registerNode("Data/String/To/LowerCase",
@@ -12,7 +13,6 @@ class LowerCase extends Blackprint.Node {
 
 		let iface = this.setInterface();
 		iface.title = "To LowerCase";
-		iface.description = "String";
 	}
 
 	update(){

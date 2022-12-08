@@ -1,6 +1,7 @@
 /**
  * Return true if the string have a specified
  * string at the beginning of the string
+ * @summary String
  * @blackprint node
  */
 Blackprint.registerNode("Data/String/StartsWith",
@@ -13,7 +14,6 @@ class extends Blackprint.Node {
 
 		let iface = this.setInterface();
 		iface.title = "Starts With";
-		iface.description = "String";
 	}
 
 	update(){

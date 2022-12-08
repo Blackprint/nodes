@@ -1,5 +1,6 @@
 /**
  * Return true if a string contains the specified string
+ * @summary String
  * @blackprint node
  */
 Blackprint.registerNode("Data/String/Includes",
@@ -12,7 +13,6 @@ class extends Blackprint.Node {
 
 		let iface = this.setInterface();
 		iface.title = "Includes";
-		iface.description = "String";
 	}
 
 	update(){

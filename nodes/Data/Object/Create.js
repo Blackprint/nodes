@@ -1,5 +1,6 @@
 /**
  * Create a new object
+ * @summary Create a new object
  * @blackprint node
  */
 Blackprint.registerNode('Data/Object/Create',
@@ -21,7 +22,6 @@ class extends Blackprint.Node {
 
 		let iface = this.setInterface();
 		iface.title = "Create Object";
-		iface.description = 'Create a new object';
 	}
 
 	init(){

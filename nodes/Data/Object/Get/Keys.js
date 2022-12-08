@@ -1,5 +1,6 @@
 /**
  * Extract object keys or property name as an array
+ * @summary Object keys as array
  * @blackprint node
  */
 Blackprint.registerNode('Data/Object/Get/Keys',
@@ -12,7 +13,6 @@ class extends Blackprint.Node {
 
 		let iface = this.setInterface();
 		iface.title = "Get Object Keys";
-		iface.description = 'Object keys as array';
 	}
 
 	update(){

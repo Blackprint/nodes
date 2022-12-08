@@ -1,6 +1,7 @@
 /**
  * Fill string with string (padding) on right (end)
  * if the text is less than specified length
+ * @summary String
  * @blackprint node
  */
 Blackprint.registerNode("Data/String/Padding/End",
@@ -13,7 +14,6 @@ class extends Blackprint.Node {
 
 		let iface = this.setInterface();
 		iface.title = "Padding End";
-		iface.description = "String";
 	}
 
 	update(){

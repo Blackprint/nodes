@@ -1,5 +1,6 @@
 /**
  * Return uppercased letters
+ * @summary String
  * @blackprint node
  */
 Blackprint.registerNode("Data/String/To/UpperCase",
@@ -12,7 +13,6 @@ class UpperCase extends Blackprint.Node {
 
 		let iface = this.setInterface();
 		iface.title = "To UpperCase";
-		iface.description = "String";
 	}
 
 	update(){

@@ -1,6 +1,7 @@
 /**
  * Return fixed number of a number with specified precision
  * Example: 0.123456 => 0.12 (Precision: 2)
+ * @summary Number
  * @blackprint node
  */
 Blackprint.registerNode("Data/Number/To/Fixed",
@@ -13,7 +14,6 @@ class NumFixed extends Blackprint.Node {
 
 		let iface = this.setInterface();
 		iface.title = "To Fixed";
-		iface.description = "Number";
 	}
 
 	update(){

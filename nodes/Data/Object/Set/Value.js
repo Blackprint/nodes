@@ -1,5 +1,6 @@
 /**
  * Set value in an object
+ * @summary Set value in an object
  * @blackprint node
  */
 Blackprint.registerNode('Data/Object/Set/Value',
@@ -16,7 +17,6 @@ class extends Blackprint.Node {
 
 		let iface = this.setInterface();
 		iface.title = "Set Object Value";
-		iface.description = 'Set value in an object';
 
 		this._toast = new NodeToast(this);
 	}

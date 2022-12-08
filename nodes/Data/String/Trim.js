@@ -1,5 +1,6 @@
 /**
  * Trim white space from a string at the start and end of string
+ * @summary String
  * @blackprint node
  */
 Blackprint.registerNode("Data/String/Trim",
@@ -12,7 +13,6 @@ class extends Blackprint.Node {
 
 		let iface = this.setInterface();
 		iface.title = "Trim";
-		iface.description = "String";
 	}
 
 	update(){

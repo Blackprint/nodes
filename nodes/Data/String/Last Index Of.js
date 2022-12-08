@@ -1,6 +1,7 @@
 /**
  * Return the last index of specified string on a string
  * This will return -1 if not exist
+ * @summary String
  * @blackprint node
  */
 Blackprint.registerNode("Data/String/LastIndexOf",
@@ -13,7 +14,6 @@ class extends Blackprint.Node {
 
 		let iface = this.setInterface();
 		iface.title = "Last Index Of";
-		iface.description = "String";
 	}
 
 	update(){

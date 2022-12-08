@@ -2,6 +2,7 @@
  * Deconstruct an output port's structure
  * This also known as object destructuring in JavaScript
  * Or extract property for an object that have structured
+ * @summary Deconstruct a port structure
  * @blackprint node
  */
 Blackprint.registerNode('Data/Object/Deconstructor',
@@ -14,7 +15,6 @@ class extends Blackprint.Node {
 
 		let iface = this.setInterface();
 		iface.title = "Decontructor";
-		iface.description = 'Deconstruct a port structure';
 		this._toast = new NodeToast(iface);
 
 		// iface._dynamicPort = true; // Flag this node for having dynamic port

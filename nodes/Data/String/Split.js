@@ -1,5 +1,6 @@
 /**
  * Split a string and return an array
+ * @summary String
  * @blackprint node
  */
 Blackprint.registerNode("Data/String/Split",
@@ -15,7 +16,6 @@ class extends Blackprint.Node {
 
 		let iface = this.setInterface();
 		iface.title = "Split";
-		iface.description = "String";
 	}
 
 	update(){

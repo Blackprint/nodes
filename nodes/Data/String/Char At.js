@@ -1,5 +1,6 @@
 /**
  * Get char from a string at index
+ * @summary String
  * @blackprint node
  */
 Blackprint.registerNode("Data/String/CharAt",
@@ -12,7 +13,6 @@ class extends Blackprint.Node {
 
 		let iface = this.setInterface();
 		iface.title = "Char At";
-		iface.description = "String";
 	}
 
 	update(){

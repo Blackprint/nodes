@@ -1,5 +1,6 @@
 /**
  * Transverse a object with specified property to get its value inside
+ * @summary Dive through object properties
  * @blackprint node
  */
 Blackprint.registerNode('Data/Object/Get/Value',
@@ -20,7 +21,6 @@ class extends Blackprint.Node {
 
 		let iface = this.setInterface('BPIC/Data/Object/Get/Value');
 		iface.title = "Get Object Value";
-		iface.description = 'Dive through object properties';
 
 		this.hasFieldData = false;
 		this.hasFieldCable = false;

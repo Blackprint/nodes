@@ -1,5 +1,6 @@
 /**
  * Slice a string
+ * @summary String
  * @blackprint node
  */
 Blackprint.registerNode("Data/String/Slice",
@@ -12,7 +13,6 @@ class extends Blackprint.Node {
 
 		let iface = this.setInterface();
 		iface.title = "Slice";
-		iface.description = "String";
 	}
 
 	update(){

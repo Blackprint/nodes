@@ -1,5 +1,6 @@
 /**
  * Convert string into RegExp
+ * @summary String
  * @blackprint node
  */
 Blackprint.registerNode("Data/String/To/RegExp",
@@ -12,7 +13,6 @@ class Str2RegExp extends Blackprint.Node {
 
 		let iface = this.setInterface();
 		iface.title = "To RegExp";
-		iface.description = "String";
 	}
 
 	update(){

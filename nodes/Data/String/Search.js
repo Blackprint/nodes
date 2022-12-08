@@ -1,5 +1,6 @@
 /**
  * Find index from a string with RegExp
+ * @summary String
  * @blackprint node
  */
 Blackprint.registerNode("Data/String/Search",
@@ -16,7 +17,6 @@ class extends Blackprint.Node {
 
 		let iface = this.setInterface();
 		iface.title = "Search";
-		iface.description = "String";
 	}
 
 	update(){

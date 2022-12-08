@@ -1,6 +1,7 @@
 /**
  * Return true if the string have a specified
  * string at the ends of the string
+ * @summary String
  * @blackprint node
  */
 Blackprint.registerNode("Data/String/EndsWith",
@@ -13,7 +14,6 @@ class extends Blackprint.Node {
 
 		let iface = this.setInterface();
 		iface.title = "Ends With";
-		iface.description = "String";
 	}
 
 	update(){

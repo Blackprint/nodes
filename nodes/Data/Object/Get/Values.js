@@ -1,5 +1,6 @@
 /**
  * Extract object values as an array
+ * @summary Object values as array
  * @blackprint node
  */
 Blackprint.registerNode('Data/Object/Get/Values',
@@ -12,7 +13,6 @@ class extends Blackprint.Node {
 
 		let iface = this.setInterface();
 		iface.title = "Get Object Values";
-		iface.description = 'Object values as array';
 	}
 
 	update(){

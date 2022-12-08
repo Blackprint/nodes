@@ -1,6 +1,7 @@
 /**
  * Return index of specified string on a string
  * This will return -1 if not exist
+ * @summary String
  * @blackprint node
  */
 Blackprint.registerNode("Data/String/IndexOf",
@@ -13,7 +14,6 @@ class extends Blackprint.Node {
 
 		let iface = this.setInterface();
 		iface.title = "Index Of";
-		iface.description = "String";
 	}
 
 	update(){

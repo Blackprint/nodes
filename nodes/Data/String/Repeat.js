@@ -1,5 +1,6 @@
 /**
  * Repeat the string few times
+ * @summary String
  * @blackprint node
  */
 Blackprint.registerNode("Data/String/Repeat",
@@ -12,7 +13,6 @@ class extends Blackprint.Node {
 
 		let iface = this.setInterface();
 		iface.title = "Repeat";
-		iface.description = "String";
 	}
 
 	update(){

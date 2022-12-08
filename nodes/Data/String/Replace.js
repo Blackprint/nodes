@@ -1,6 +1,7 @@
 /**
  * Find a string (needle) from a string (haystack)
  * with a string (replacement)
+ * @summary String
  * @blackprint node
  */
 Blackprint.registerNode("Data/String/Replace",
@@ -18,7 +19,6 @@ class extends Blackprint.Node {
 
 		let iface = this.setInterface();
 		iface.title = "Replace";
-		iface.description = "String";
 	}
 
 	update(){
