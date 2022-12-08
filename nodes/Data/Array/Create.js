@@ -1,5 +1,6 @@
 /**
  * Create a new array
+ * @summary Create a new Array
  * @blackprint node
  */
 Blackprint.registerNode('Data/Array/Create',
@@ -21,7 +22,6 @@ class extends Blackprint.Node {
 
 		let iface = this.setInterface();
 		iface.title = "Create Array";
-		iface.description = 'Create a new Array';
 	}
 
 	init(){
