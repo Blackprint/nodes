@@ -16,9 +16,11 @@ class extends Blackprint.Node {
 
 		let iface = this.setInterface();
 		iface.title = "Set Data";
+
+		this._toast = new NodeToast(this);
 	}
 
-	init(){
+	update(){
 		let { Input } = this.ref;
 
 		if(Input.Map == null || Input.Key == null || Input.Value == null)

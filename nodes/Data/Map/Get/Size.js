@@ -17,9 +17,11 @@ class extends Blackprint.Node {
 
 		let iface = this.setInterface();
 		iface.title = "Get Size";
+
+		this._toast = new NodeToast(this);
 	}
 
-	init(){
+	update(){
 		let { Input, Output } = this.ref;
 
 		if(Input.Map == null)
