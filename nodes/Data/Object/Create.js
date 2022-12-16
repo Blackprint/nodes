@@ -1,5 +1,7 @@
 /**
  * Create a new object
+ * Any input update will recreate the object
+ * Reusing the outputted object is more recommended than recreate the object
  * @summary Create a new object
  * @blackprint node
  */

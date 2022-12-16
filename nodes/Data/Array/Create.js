@@ -1,5 +1,7 @@
 /**
  * Create a new array
+ * Any input update will recreate the array
+ * Reusing the outputted array is more recommended than recreate the array
  * @summary Create a new Array
  * @blackprint node
  */
