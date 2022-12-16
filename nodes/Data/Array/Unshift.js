@@ -4,7 +4,7 @@
  * @summary Insert data from first index
  * @blackprint node
  */
-Blackprint.registerNode('Data/Array/Push',
+Blackprint.registerNode('Data/Array/Unshift',
 class extends Blackprint.Node {
 	static input = {
 		Array: Array,

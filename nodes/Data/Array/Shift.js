@@ -4,7 +4,7 @@
  * @summary Get first value and remove it
  * @blackprint node
  */
-Blackprint.registerNode('Data/Array/Pop',
+Blackprint.registerNode('Data/Array/Shift',
 class extends Blackprint.Node {
 	static input = {
 		Array: Array,

@@ -3,7 +3,7 @@
  * @summary Find item index from an array
  * @blackprint node
  */
-Blackprint.registerNode('Data/Array/Push',
+Blackprint.registerNode('Data/Array/IndexOf',
 class extends Blackprint.Node {
 	static input = {
 		Array: Array,
