@@ -49,11 +49,11 @@ Please specify the version to avoid breaking changes.
 
 ```js
 Blackprint.loadModuleFromURL([
-	'https://cdn.jsdelivr.net/npm/@blackprint/nodes@0.5/dist/nodes-console.mjs',
-	'https://cdn.jsdelivr.net/npm/@blackprint/nodes@0.5/dist/nodes-data.mjs',
-	'https://cdn.jsdelivr.net/npm/@blackprint/nodes@0.5/dist/nodes-decoration.mjs',
-	'https://cdn.jsdelivr.net/npm/@blackprint/nodes@0.5/dist/nodes-example.mjs',
-	'https://cdn.jsdelivr.net/npm/@blackprint/nodes@0.5/dist/nodes-input.mjs',
+	'https://cdn.jsdelivr.net/npm/@blackprint/nodes@0.7/dist/nodes-console.mjs',
+	'https://cdn.jsdelivr.net/npm/@blackprint/nodes@0.7/dist/nodes-data.mjs',
+	'https://cdn.jsdelivr.net/npm/@blackprint/nodes@0.7/dist/nodes-decoration.mjs',
+	'https://cdn.jsdelivr.net/npm/@blackprint/nodes@0.7/dist/nodes-example.mjs',
+	'https://cdn.jsdelivr.net/npm/@blackprint/nodes@0.7/dist/nodes-input.mjs',
 ], {
 	// Turn this on if you want to load .sf.js, and .sf.css
 	// only with single .mjs
@@ -63,10 +63,10 @@ Blackprint.loadModuleFromURL([
 
 ## Development URL
 You can use this link to load unpublished nodes and still under development on GitHub.
-> `https://cdn.jsdelivr.net/gh/Blackprint/nodes@dist/nodes-console.mjs?1`
-> `https://cdn.jsdelivr.net/gh/Blackprint/nodes@dist/nodes-data.mjs?1`
-> `https://cdn.jsdelivr.net/gh/Blackprint/nodes@dist/nodes-decoration.mjs?1`
-> `https://cdn.jsdelivr.net/gh/Blackprint/nodes@dist/nodes-example.mjs?1`
-> `https://cdn.jsdelivr.net/gh/Blackprint/nodes@dist/nodes-input.mjs?1`
+https://cdn.jsdelivr.net/gh/Blackprint/nodes@dist/nodes-console.mjs
+https://cdn.jsdelivr.net/gh/Blackprint/nodes@dist/nodes-data.mjs
+https://cdn.jsdelivr.net/gh/Blackprint/nodes@dist/nodes-decoration.mjs
+https://cdn.jsdelivr.net/gh/Blackprint/nodes@dist/nodes-example.mjs
+https://cdn.jsdelivr.net/gh/Blackprint/nodes@dist/nodes-input.mjs
 
-Please append `/url-here?random-number` if your browser still using the cached files after the repository was updated.
+Replace `dist` with your latest commit hash (from `dist` branch) to avoid cache from CDN.
