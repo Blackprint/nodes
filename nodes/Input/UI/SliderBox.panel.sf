@@ -1,0 +1,55 @@
+## html
+<bppc-input-ui-sliderbox>
+	<div sf-each="i, val in data">
+		<div class="field">
+			<span class="name">Step ({{ i }}):</span>
+			<input @change="step(event, i)" value="{{ val.step }}" placeholder="Step value" type="number">
+		</div>
+		<div class="field">
+			<span class="name">Min ({{ i }}):</span>
+			<input @change="min(event, i)" value="{{ val.min }}" placeholder="Minimum value" type="number">
+		</div>
+		<div class="field">
+			<span class="name">Max ({{ i }}):</span>
+			<input @change="max(event, i)" value="{{ val.max }}" placeholder="Maximum value" type="number">
+		</div>
+	</div>
+</bppc-input-ui-sliderbox>
+
+## scss-global
+bppc-input-ui-sliderbox { }
+
+## js-global
+Blackprint.space.component('bppc-input-ui-sliderbox', {template: #this.path},
+class extends sf.Model {
+	constructor(scope, iface){
+		super(scope, iface);
+
+		this.iface = iface;
+		this.data = iface.data;
+	}
+
+	step(event, i){
+		let val = +event.target.value;
+		if(Number.isNaN(val)) return;
+
+		this.data[i].step = val;
+		this.iface.node.syncOut('step', {i, value: val});
+	}
+
+	min(event, i){
+		let val = +event.target.value;
+		if(Number.isNaN(val)) return;
+
+		this.data[i].min = val;
+		this.iface.node.syncOut('min', {i, value: val});
+	}
+
+	max(event, i){
+		let val = +event.target.value;
+		if(Number.isNaN(val)) return;
+
+		this.data[i].max = val;
+		this.iface.node.syncOut('max', {i, value: val});
+	}
+});
