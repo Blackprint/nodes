@@ -1,0 +1,26 @@
+## js-global
+// Because .js and .sf is separated
+// we also need to call loadScope just like _init.js
+let Blackprint = window.Blackprint.loadScope({
+	// You can find the URL on Blackprint menu -> Modules
+	// This will also be exported to JSON if this module's nodes is being used
+	url: import.meta.url,
+});
+
+// Use sQuery
+let $ = sf.$;
+
+// Global shared context (wait it to avoid race condition)
+let Context = await Blackprint.getContext('FlowControl');
+
+## scss-global
+sf-space[blackprint] .nodes .node.flow-control {
+	.header{
+		box-shadow: inset 0 0 3px #4e4e4e;
+    	background: linear-gradient(120deg, rgba(175, 175, 175, 0.7) 0%, rgba(0, 0, 0, 0.2) 80%, rgba(0, 0, 0, 0.1) 100%);
+	}
+
+	.icon {
+		margin-right: 5px;
+	}
+}
