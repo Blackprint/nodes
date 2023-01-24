@@ -3,7 +3,7 @@
  * firing off an execution pulse for each index between a start and end.
  * @blackprint node
  */
-Blackprint.registerNode("FlowControl/For Loop",
+Blackprint.registerNode("FlowControl/ForLoop",
 class extends Blackprint.Node {
 	static type = "flow-control";
 	static input = {
