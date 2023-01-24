@@ -35,6 +35,8 @@ class extends Blackprint.Node {
 		// Hide or unhide input box
 		IInput.Field.on('disconnect', Context.EventSlot, () => this.hasFieldCable = false);
 		IInput.Field.on('connect', Context.EventSlot, () => this.hasFieldCable = true);
+
+		if(IInput.Field.default) this.hasFieldData = true;
 	}
 
 	update(){
@@ -42,9 +44,7 @@ class extends Blackprint.Node {
 		let { Object: Object_, Field } = Input;
 
 		if(Object_ == null){
-			if(!!Field) // not null or empty
-				this.hasFieldData = true;
-
+			this.hasFieldData = !!Field;
 			return this.iface._toast.warn("Object can't be null or undefined");
 		}
 
