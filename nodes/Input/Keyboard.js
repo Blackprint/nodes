@@ -60,7 +60,7 @@ class KeyboardNode extends Blackprint.Node {
 		}
 	}
 
-	imported(data){
+	initPorts(data){
 		let iface = this.iface;
 		Object.assign(iface.data, data);
 
