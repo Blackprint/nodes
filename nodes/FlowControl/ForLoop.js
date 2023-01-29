@@ -40,7 +40,7 @@ class extends Blackprint.Node {
 		this._toast = new NodeToast(iface);
 	}
 
-	trigger(){
+	async trigger(){
 		let { FirstIndex, LastIndex, Increment } = this.input;
 		let output = this.output;
 
@@ -52,7 +52,7 @@ class extends Blackprint.Node {
 				if(this._break) break;
 
 				output.Index = i;
-				output.Do();
+				await output.Do();
 			}
 		}
 		else if(FirstIndex > LastIndex){
@@ -63,11 +63,12 @@ class extends Blackprint.Node {
 				if(this._break) break;
 
 				output.Index = i;
-				output.Do();
+				await output.Do();
 			}
 		}
 
 		this._toast.clear();
+		this._break = false;
 		output.End();
 	}
 });
