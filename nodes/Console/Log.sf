@@ -28,6 +28,7 @@ class extends Context.IFace.Logger {
 	m2v$log(now){
 		// Scale the input box depend on character length
 		var el = this.$el('textarea');
+		if(el[0] == null) return;
 
 		// Skip if textarea was larger than our auto control
 		// I mean, if user have change the size manually
