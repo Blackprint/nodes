@@ -1,7 +1,7 @@
 var { Port } = Blackprint;
 
 if(Blackprint.Environment.isBrowser)
-	sf.loader.js(["https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"]);
+	imports(["https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"]);
 
 /**
  * Create a confetti that can be triggered by other nodes

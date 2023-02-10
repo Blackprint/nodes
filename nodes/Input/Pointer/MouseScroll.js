@@ -59,14 +59,14 @@ class MouseScrollNode extends Blackprint.Node {
 		let { Input } = this.ref;
 
 		if(this._onScroll != null){
-			$(this._onScrollEl ?? sf.Window).off('wheel', this._onScroll);
+			$(this._onScrollEl ?? allWindow).off('wheel', this._onScroll);
 			this._onScrollEl = null;
 		}
 
 		this._onScroll = ev => this.onScroll(ev);
-		let el = Input.Element ?? sf.Window;
+		let el = Input.Element ?? allWindow;
 
-		if(el === sf.Window)
+		if(el === allWindow)
 			this.iface.description = 'Listening to window';
 		else this.iface.description = 'Listening to element';
 
@@ -82,6 +82,9 @@ class MouseScrollNode extends Blackprint.Node {
 	_onScroll = null;
 	_onScrollEl = null;
 	onScroll(ev, _isSync){
+		// Avoid receiving event from other window
+		if(ev.view !== window) return;
+
 		this.ref.Output.Event = ev;
 		this.routes.routeOut();
 
@@ -104,7 +107,7 @@ class MouseScrollNode extends Blackprint.Node {
 
 	destroy(){
 		if(this._onScroll != null){
-			$(this._onScrollEl ?? sf.Window).off('wheel', this._onScroll);
+			$(this._onScrollEl ?? allWindow).off('wheel', this._onScroll);
 			this._onScrollEl = null;
 		}
 	}

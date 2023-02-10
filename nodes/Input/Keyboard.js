@@ -47,6 +47,9 @@ class KeyboardNode extends Blackprint.Node {
 	onKeyboard(ev){
 		let { Output } = this.ref;
 
+		// Avoid receiving event from other window
+		if(ev.view !== window) return;
+
 		if(ev.type === 'keydown')
 			Output.Pressed = ev;
 		else if(ev.type === 'keyup')
@@ -89,12 +92,12 @@ class KeyboardNode extends Blackprint.Node {
 			node.renamePort('output', port.name, ev.code);
 			toast.destroy();
 
-			$(sf.Window).off('keydown', node._waiting);
+			$(allWindow).off('keydown', node._waiting);
 			node._waiting = null;
 		}
 
 		this._waiting.toast = toast;
-		$(sf.Window).on('keydown', this._waiting);
+		$(allWindow).on('keydown', this._waiting);
 	}
 
 	init(){
@@ -122,7 +125,7 @@ class KeyboardNode extends Blackprint.Node {
 		}, {
 			title:"Delete this port", callback(){
 				if(node._waiting != null){
-					$(sf.Window).off('keydown', node._waiting);
+					$(allWindow).off('keydown', node._waiting);
 
 					node._waiting.toast.destroy();
 					node._waiting = null;
@@ -162,7 +165,7 @@ class KeyboardNode extends Blackprint.Node {
 		let { Input } = this.ref;
 
 		if(this._onKeyboard != null){
-			$(this._onKeyboardEl ?? sf.Window)
+			$(this._onKeyboardEl ?? allWindow)
 				.off('keydown', this._onKeyboard)
 				.off('keyup', this._onKeyboard);
 
@@ -170,9 +173,9 @@ class KeyboardNode extends Blackprint.Node {
 		}
 
 		this._onKeyboard = ev => this.onKeyboard(ev);
-		let el = Input.Element ?? sf.Window;
+		let el = Input.Element ?? allWindow;
 
-		if(el === sf.Window)
+		if(el === allWindow)
 			this.iface.description = 'Listening to window';
 		else this.iface.description = 'Listening to element';
 
@@ -189,7 +192,7 @@ class KeyboardNode extends Blackprint.Node {
 
 	destroy(){
 		if(this._onKeyboard != null){
-			$(this._onKeyboardEl ?? sf.Window)
+			$(this._onKeyboardEl ?? allWindow)
 				.off('keydown', this._onKeyboard)
 				.off('keyup', this._onKeyboard);
 

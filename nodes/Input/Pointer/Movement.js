@@ -65,14 +65,14 @@ class PointerMovementNode extends Blackprint.Node {
 		let { Input } = this.ref;
 
 		if(this._onMove != null){
-			$(this._onMoveEl ?? sf.Window).off('pointermove', this._onMove);
+			$(this._onMoveEl ?? allWindow).off('pointermove', this._onMove);
 			this._onMoveEl = null;
 		}
 
 		this._onMove = ev => this.onMove(ev);
-		let el = Input.Element ?? sf.Window;
+		let el = Input.Element ?? allWindow;
 
-		if(el === sf.Window)
+		if(el === allWindow)
 			this.iface.description = 'Listening to window';
 		else this.iface.description = 'Listening to element';
 
@@ -88,6 +88,9 @@ class PointerMovementNode extends Blackprint.Node {
 	_onMove = null;
 	_onMoveEl = null;
 	onMove(ev){
+		// Avoid receiving event from other window
+		if(ev.view !== window) return;
+
 		this.ref.Output.Event = ev;
 		this.routes.routeOut();
 
@@ -96,7 +99,7 @@ class PointerMovementNode extends Blackprint.Node {
 
 	destroy(){
 		if(this._onMove != null){
-			$(this._onMoveEl ?? sf.Window).off('pointermove', this._onMove);
+			$(this._onMoveEl ?? allWindow).off('pointermove', this._onMove);
 			this._onMoveEl = null;
 		}
 	}

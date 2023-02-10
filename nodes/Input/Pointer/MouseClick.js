@@ -64,7 +64,7 @@ class MouseNode extends Blackprint.Node {
 		let { Input } = this.ref;
 
 		if(this._onClick != null){
-			let el = $(this._onClickEl ?? sf.Window);
+			let el = $(this._onClickEl ?? allWindow);
 
 			el.off('pointerdown', this._onClick)
 				.off('pointerup', this._onClick);
@@ -73,9 +73,9 @@ class MouseNode extends Blackprint.Node {
 		}
 
 		this._onClick = ev => this.onClick(ev);
-		let el = Input.Element ?? sf.Window;
+		let el = Input.Element ?? allWindow;
 
-		if(el === sf.Window)
+		if(el === allWindow)
 			this.iface.description = 'Listening to window';
 		else this.iface.description = 'Listening to element';
 
@@ -94,6 +94,9 @@ class MouseNode extends Blackprint.Node {
 	_onClickEl = null;
 	onClick(ev, _isSync){
 		let { Output } = this.ref;
+
+		// Avoid receiving event from other window
+		if(ev.view !== window) return;
 
 		if(ev.type === 'pointerup'){
 			Output.Release = ev;
@@ -134,7 +137,7 @@ class MouseNode extends Blackprint.Node {
 
 	destroy(){
 		if(this._onClick != null){
-			let el = $(this._onClickEl ?? sf.Window);
+			let el = $(this._onClickEl ?? allWindow);
 
 			el.off('pointerdown', this._onClick)
 				.off('pointerup', this._onClick);
