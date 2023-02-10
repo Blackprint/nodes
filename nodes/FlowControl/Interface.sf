@@ -1,0 +1,38 @@
+## html
+<div class="node {{ type }}" style="transform: translate({{ x }}px, {{ y }}px)">
+  <sf-template path="Blackprint/nodes/template/routes.sf"></sf-template>
+  <sf-template path="Blackprint/nodes/template/header.sf"></sf-template>
+
+  <div class="content">
+	<div class="left-port" style="margin: {{ leftPortMargin }}px">
+	  <sf-template path="Blackprint/nodes/template/input-port.sf"></sf-template>
+	</div>
+
+	<div class="right-port" style="margin: {{ rightPortMargin }}px">
+	  <sf-template path="Blackprint/nodes/template/output-port.sf"></sf-template>
+	</div>
+  </div>
+
+  <sf-template path="Blackprint/nodes/template/other.sf"></sf-template>
+</div>
+
+## scss-global
+bpic-flowcontrol-interface {
+	.right-port {
+		// margin-top: 36px;
+	}
+}
+
+## js-global
+Blackprint.Sketch.registerInterface('BPIC/FlowControl/Interface',
+class extends Context.IFace['Interface'] {
+	constructor(node){
+		super(node);
+
+		this.leftPortMargin = '';
+		this.rightPortMargin = '';
+	}
+	init(el){
+		$('.title .icon', el).prepend('<i class="fa fa-sign-in-alt"></i>');
+	}
+});

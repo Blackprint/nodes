@@ -17,9 +17,10 @@ class extends Blackprint.Node {
 	constructor(instance){
 		super(instance);
 
-		let iface = this.setInterface();
+		let iface = this.setInterface('BPIC/FlowControl/Interface');
 		iface.title = "Valve";
 		iface.data = {total: 1};
+		iface.rightPortMargin = '38px 0 0 0';
 	}
 
 	init(){
@@ -86,11 +87,6 @@ class extends Blackprint.Node {
 
 			menu.push(...addMenu);
 		});
-
-		if(iface.$el){
-			iface.$el('.title .icon').prepend('<i class="fa fa-sign-in-alt"></i>');
-			iface.$el('.right-port').css('margin-top', '36px');
-		}
 	}
 
 	initPorts(data){
