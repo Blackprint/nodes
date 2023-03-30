@@ -61,6 +61,8 @@ class KeyboardNode extends Blackprint.Node {
 			else if(ev.type === 'keyup')
 				Output[ev.code] = false;
 		}
+
+		if(this.routes.out != null) this.routes.routeOut();
 	}
 
 	initPorts(data){
