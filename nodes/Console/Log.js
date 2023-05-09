@@ -12,6 +12,9 @@ class extends Blackprint.Node {
 		Any: Blackprint.Port.ArrayOf(Blackprint.Types.Any),
 	};
 
+	// Create interface for puppet node
+	// static interfaceSync = [];
+
 	constructor(instance){
 		super(instance);
 
@@ -29,7 +32,7 @@ class extends Blackprint.Node {
 			iface.log = JSON.stringify(val);
 		else {
 			let val = this.ref.Input.Any?.[0];
-	
+
 			if(val === null)
 				iface.log = "null";
 			else if(val === undefined)
@@ -59,8 +62,7 @@ class extends Blackprint.Node {
 
 	// Remote sync in
 	syncIn(id, data){
-		if(id === 'log')
-			this.iface.log = data;
+		if(id === 'log') this.iface.log = data;
 	}
 });
 
