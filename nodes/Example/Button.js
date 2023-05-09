@@ -23,7 +23,13 @@ class extends Blackprint.Node {
   clicked(ev){
     Context.log('Example/Button/Simple', 'I got ', ev, "time to trigger to the other node");
     this.output.Clicked(ev);
+    this.syncOut('click', true);
   }
+
+	// Remote sync in
+	syncIn(id, data){
+		if(id === 'click') this.clicked();
+	}
 });
 
 
