@@ -5,7 +5,7 @@
 Blackprint.registerNode("Data/Any/To/Trigger",
 class extends Blackprint.Node {
 	static input = { Value: Blackprint.Types.Any };
-	static output = { Call: Function };
+	static output = { Call: Blackprint.Types.Trigger };
 
 	constructor(instance){
 		super(instance);

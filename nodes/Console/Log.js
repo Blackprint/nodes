@@ -13,7 +13,9 @@ class extends Blackprint.Node {
 	};
 
 	// Create interface for puppet node
-	// static interfaceSync = [];
+	static interfaceSync = [
+		{type: "text_out", id: "log", placeholder: "...", tooltip: "Output will written here"},
+	];
 
 	constructor(instance){
 		super(instance);

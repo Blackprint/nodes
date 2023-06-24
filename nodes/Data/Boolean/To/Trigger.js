@@ -5,7 +5,7 @@
 Blackprint.registerNode("Data/Boolean/To/Trigger",
 class extends Blackprint.Node {
 	static input = { Value: Boolean };
-	static output = { Call: Function };
+	static output = { Call: Blackprint.Types.Trigger };
 
 	constructor(instance){
 		super(instance);

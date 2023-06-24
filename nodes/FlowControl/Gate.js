@@ -22,7 +22,7 @@ class extends Blackprint.Node {
 	};
 	static output = {
 		/** You can use "Route Out" port in case you need to route node */
-		Exit: Function,
+		Exit: Blackprint.Types.Trigger,
 	};
 
 	constructor(instance){

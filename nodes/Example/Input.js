@@ -6,7 +6,7 @@ Blackprint.registerNode('Example/Input/Simple',
 class extends Blackprint.Node {
 	// Output Port's Template (This will be transformed to it's type after initialized)
 	static output = {
-		Changed: Function,
+		Changed: Blackprint.Types.Trigger,
 		Value: String, // Default to empty string
 	};
 

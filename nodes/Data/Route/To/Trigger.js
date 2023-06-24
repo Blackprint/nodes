@@ -5,7 +5,7 @@
  */
 Blackprint.registerNode("Data/Route/To/Trigger",
 class extends Blackprint.Node {
-	static output = { Call: Function };
+	static output = { Call: Blackprint.Types.Trigger };
 
 	constructor(instance){
 		super(instance);

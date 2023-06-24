@@ -7,7 +7,7 @@ class extends Blackprint.Node {
 	// Output Port's Template (This will be transformed to it's type after initialized)
 	static output = {
 		/** This can be used to call a function every time the value was changed */
-		Changed: Function,
+		Changed: Blackprint.Types.Trigger,
 		/** Input box's text value */
 		Value: String,
 	};

@@ -6,7 +6,7 @@ Blackprint.registerNode('Input/UI/Button',
 class extends Blackprint.Node {
   static output = {
     /** Call every function port */
-    Clicked: Function
+    Clicked: Blackprint.Types.Trigger
   };
 
   constructor(instance){

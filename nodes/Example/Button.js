@@ -5,7 +5,7 @@
 Blackprint.registerNode('Example/Button/Simple',
 class extends Blackprint.Node {
   static output = {
-    Clicked: Function
+    Clicked: Blackprint.Types.Trigger
   };
 
   constructor(instance){
