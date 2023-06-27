@@ -54,6 +54,7 @@ Blackprint.loadModuleFromURL([
 	'https://cdn.jsdelivr.net/npm/@blackprint/nodes@0.8/dist/nodes-decoration.mjs',
 	'https://cdn.jsdelivr.net/npm/@blackprint/nodes@0.8/dist/nodes-example.mjs',
 	'https://cdn.jsdelivr.net/npm/@blackprint/nodes@0.8/dist/nodes-input.mjs',
+	'https://cdn.jsdelivr.net/npm/@blackprint/nodes@0.8/dist/nodes-flowcontrol.mjs',
 ], {
 	// Turn this on if you want to load .sf.js, and .sf.css
 	// only with single .mjs
@@ -68,5 +69,6 @@ https://cdn.jsdelivr.net/gh/Blackprint/nodes@dist/nodes-data.mjs
 https://cdn.jsdelivr.net/gh/Blackprint/nodes@dist/nodes-decoration.mjs
 https://cdn.jsdelivr.net/gh/Blackprint/nodes@dist/nodes-example.mjs
 https://cdn.jsdelivr.net/gh/Blackprint/nodes@dist/nodes-input.mjs
+https://cdn.jsdelivr.net/gh/Blackprint/nodes@dist/nodes-flowcontrol.mjs
 
 Replace `dist` with your latest commit hash (from `dist` branch) to avoid cache from CDN.
