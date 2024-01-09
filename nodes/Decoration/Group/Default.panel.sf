@@ -4,9 +4,17 @@
 		<span class="name">Title:</span>
 		<textarea sf-bind="title" placeholder="Add title here..."></textarea>
 	</div>
-	<div class="field color-pick">
-		<span class="name">Color:</span>
-		<input sf-bind="color" placeholder="#b8b8ffe1">
+	<div class="field textContent">
+		<span class="name">Text Content:</span>
+		<textarea sf-bind="textContent" placeholder="Add text content here..."></textarea>
+	</div>
+	<div class="field color-pick color-1">
+		<span class="name">Background Color:</span>
+		<input sf-bind="color" placeholder="#b8b8ff">
+	</div>
+	<div class="field color-pick color-2">
+		<span class="name">Font Color:</span>
+		<input sf-bind="fontColor" placeholder="#b8b8ff">
 	</div>
 </bppc-decoration-group-default>
 
@@ -18,6 +26,10 @@ bppc-decoration-group-default {
 			height: 22px;
 			width: 22px;
 		}
+	}
+
+	.clr-field{
+		width: 98%;
 	}
 
 	.title textarea:focus {
@@ -36,8 +48,7 @@ class extends sf.Model {
 	}
 
 	init(){
-		Coloris({
-			el: 'bppc-decoration-group-default .color-pick input',
+		let opt = {
 			themeMode: 'dark',
 			format: 'hex',
       		clearButton: true,
@@ -54,10 +65,10 @@ class extends sf.Model {
 				'#ffffff',
 				'#969696',
 			],
-			onChange: (color) => {
-				this.color = color;
-			}
-		});
+		};
+
+		Coloris(Object.assign({ el: 'bppc-decoration-group-default .color-1 input' }, opt));
+		Coloris(Object.assign({ el: 'bppc-decoration-group-default .color-2 input' }, opt));
 	}
 
 	get title(){ return this.data.title }
@@ -66,9 +77,21 @@ class extends sf.Model {
 		this.iface.node.syncOut('title', val);
 	}
 
+	get textContent(){ return this.data.textContent }
+	set textContent(val){
+		this.data.textContent = val;
+		this.iface.node.syncOut('textContent', val);
+	}
+
 	get color(){ return this.data.color }
 	set color(val){
 		this.data.color = val;
 		this.iface.node.syncOut('color', val);
+	}
+
+	get fontColor(){ return this.data.fontColor }
+	set fontColor(val){
+		this.data.fontColor = val;
+		this.iface.node.syncOut('fontColor', val);
 	}
 });

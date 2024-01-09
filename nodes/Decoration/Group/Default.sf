@@ -4,6 +4,7 @@
 	height: {{ data.height }}px;
 	width: {{ data.width }}px;
 	{{ data.color ? ('background: ' + data.color + '6e;') : '' }}
+	{{ data.fontColor ? ('color: ' + data.fontColor + ';') : '' }}
 ">
   	<div class="header"
 	  	style="{{ data.color ? ('background: ' + data.color + '6e;') : '' }}"
@@ -26,6 +27,8 @@
 		<div @pointerdown="resize('sw')" class="sw"></div>
 	</div>
 
+	<div class="text-content">{{ data.textContent }}</div>
+
   <sf-template path="Blackprint/nodes/template/other.sf"></sf-template>
 </div>
 
@@ -34,9 +37,15 @@
 sf-space[blackprint] .nodes bpic-decoration-group-default .node {
 	background: #b8b8ff6e;
 	pointer-events: none;
+	overflow: hidden;
+	color: black;
+	.text-content{
+		padding: 5px;
+		font-size: 12px;
+		white-space: pre-wrap;
+	}
 	.header{
 		background: #b8b8ff91;
-		color: black;
 		font-weight: bold;
 		font-size: 14px;
 		pointer-events: all;
@@ -85,7 +94,9 @@ class extends Blackprint.Interface{
 			width: Math.round(this.data.width),
 			height: Math.round(this.data.height),
 			title: this.data.title,
+			textContent: this.data.textContent,
 			color: this.data.color,
+			fontColor: this.data.fontColor,
 		};
 	}
 
@@ -164,8 +175,8 @@ class extends Blackprint.Interface{
 		for (var i = 0; i < _ifaces.length; i++){
 			let temp = _ifaces[i];
 
-			if(temp.namespace === "Decoration/Group/Default")
-				continue;
+			// Avoid maximum call stack
+			if(temp.namespace === "Decoration/Group/Default") continue;
 
 			temp.moveNode(ev, true);
 		}
@@ -240,6 +251,7 @@ class extends Blackprint.Interface{
 	swapZIndex(ev){
 		this.refreshContent(ev);
 		super.swapZIndex(ev, true);
+		Coloris.close(); // Close color picker if exist
 
 		// Clear any selections
 		let container = this.$space('container');
@@ -268,7 +280,9 @@ class DecorationGroupDefaultData {
 		this.#iface = iface;
 	
 		this.title = 'No title';
+		this.textContent = '';
 		this.color = '';
+		this.fontColor = '';
 		this.width = 100;
 		this.height = 100;
 	}

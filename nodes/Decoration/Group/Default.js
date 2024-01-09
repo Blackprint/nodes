@@ -22,10 +22,12 @@ class extends Blackprint.Node {
 		if(data === void 0) return;
 
 		// When this node was successfully imported
-		this.iface.data.width = data.width;
-		this.iface.data.height = data.height;
-		this.iface.data.title = data.title;
-		this.iface.data.color = data.color;
+		this.iface.data.width = data.width || 100;
+		this.iface.data.height = data.height || 100;
+		this.iface.data.title = data.title || '';
+		this.iface.data.textContent = data.textContent || '';
+		this.iface.data.color = data.color || '';
+		this.iface.data.fontColor = data.fontColor || '';
 	}
 
 	syncIn(eventName, value){
