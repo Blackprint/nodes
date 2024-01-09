@@ -14,7 +14,7 @@
 	</div>
 	<div class="field color-pick color-2">
 		<span class="name">Font Color:</span>
-		<input sf-bind="fontColor" placeholder="#b8b8ff">
+		<input sf-bind="fontColor" placeholder="black">
 	</div>
 </bppc-decoration-group-default>
 
@@ -25,7 +25,18 @@ bppc-decoration-group-default {
 			border-radius: 100%;
 			height: 22px;
 			width: 22px;
+			box-shadow: 0 0 7px 0px white;
+    		outline: 1px solid #ffffff61;
+			background-image: unset;
 		}
+	}
+	
+	.color-1 button {
+		background: #b8b8ff;
+	}
+	
+	.color-2 button {
+		background: black;
 	}
 
 	.clr-field{
@@ -52,7 +63,7 @@ class extends sf.Model {
 			themeMode: 'dark',
 			format: 'hex',
       		clearButton: true,
-			defaultColor: '#b8b8ffe1',
+			defaultColor: '#b8b8ff',
 			alpha: false,
 			swatches: [
 				'#abffb0',

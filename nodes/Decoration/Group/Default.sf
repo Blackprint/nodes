@@ -76,6 +76,7 @@ class extends Blackprint.Interface{
 	constructor(node){
 		super(node);
 
+		this._groups = []; // Other decoration group references
 		this._ifaces = []; // Object references
 		this._cables = []; // Object references
 		this.data = new DecorationGroupDefaultData(this);
@@ -176,7 +177,7 @@ class extends Blackprint.Interface{
 			let temp = _ifaces[i];
 
 			// Avoid maximum call stack
-			if(temp.namespace === "Decoration/Group/Default") continue;
+			// if(temp.namespace === "Decoration/Group/Default") continue;
 
 			temp.moveNode(ev, true);
 		}
@@ -193,8 +194,8 @@ class extends Blackprint.Interface{
 		let ex = this.x + this.data.width;
 		let ey = this.y + this.data.height;
 
-		let { _ifaces, _cables } = this;
-		_ifaces.length = _cables.length = 0;
+		let { _groups, _ifaces, _cables } = this;
+		_groups.length = _ifaces.length = _cables.length = 0;
 
 		for (var i = 0, n = cableList.length; i < n; i++) {
 			let temp = cableList[i];
@@ -232,6 +233,13 @@ class extends Blackprint.Interface{
 						1; // ToDo: fix z-index when it's in front of another group node
 				}
 
+				if(temp.namespace === "Decoration/Group/Default") {
+					// Skip outer group
+					let isInnerGroup = (temp.x > this.x && temp.w < this.w) || (temp.y > this.y && temp.h < this.h);
+					if(!isInnerGroup) continue;
+
+					_groups.push(temp);
+				}
 				_ifaces.push(temp);
 			}
 		}
@@ -245,6 +253,19 @@ class extends Blackprint.Interface{
 
 		if(!_isSync)
 			this.node.syncOut('trigger', 'refreshContent');
+
+		// Remove any node/cable that contained on inner group
+		for (let i=0; i < _groups.length; i++) {
+			let temp = _groups[i];
+
+			let { _ifaces: A, _cables: B } = temp;
+			for (let i=_cables.length-1; i >= 0; i--) {
+				if(B.includes(_cables[i])) _cables.splice(i, 1);
+			}
+			for (let i=_ifaces.length-1; i >= 0; i--) {
+				if(A.includes(_ifaces[i])) _ifaces.splice(i, 1);
+			}
+		}
 	}
 
 	// Refresh content and disable changing index
