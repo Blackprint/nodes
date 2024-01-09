@@ -1,17 +1,29 @@
 ## html
 <bppc-decoration-group-default>
-	<div class="field">
+	<div class="field title">
 		<span class="name">Title:</span>
 		<textarea sf-bind="title" placeholder="Add title here..."></textarea>
 	</div>
-	<div class="field">
+	<div class="field color-pick">
 		<span class="name">Color:</span>
 		<input sf-bind="color" placeholder="#b8b8ffe1">
 	</div>
 </bppc-decoration-group-default>
 
 ## scss-global
-bppc-decoration-group-default { }
+bppc-decoration-group-default {
+	.color-pick{
+		.clr-field button{
+			border-radius: 100%;
+			height: 22px;
+			width: 22px;
+		}
+	}
+
+	.title textarea:focus {
+		box-shadow: 0 0 8px 1px white;
+	}
+}
 
 ## js-global
 Blackprint.space.component('bppc-decoration-group-default', {template: #this.path},
@@ -21,6 +33,31 @@ class extends sf.Model {
 
 		this.iface = iface;
 		this.data = iface.data;
+	}
+
+	init(){
+		Coloris({
+			el: 'bppc-decoration-group-default .color-pick input',
+			themeMode: 'dark',
+			format: 'hex',
+      		clearButton: true,
+			defaultColor: '#b8b8ffe1',
+			alpha: false,
+			swatches: [
+				'#abffb0',
+				'#ffee82',
+				'#ff8282',
+				'#82f9ff',
+				'#8293ff',
+				'#cb82ff',
+				'#ff82f7',
+				'#ffffff',
+				'#969696',
+			],
+			onChange: (color) => {
+				this.color = color;
+			}
+		});
 	}
 
 	get title(){ return this.data.title }

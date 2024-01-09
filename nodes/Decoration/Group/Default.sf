@@ -7,6 +7,7 @@
 ">
   	<div class="header"
 	  	style="{{ data.color ? ('background: ' + data.color + '6e;') : '' }}"
+		@dblclick="doubleClick()"
 		@contextmenu.stopAll.prevent="nodeMenu(event)"
 		@dragmove="moveNode(event)"
 		@pointerdown="swapZIndex(event)"
@@ -137,6 +138,14 @@ class extends Blackprint.Interface{
 				this.refreshContent(ev);
 			})
 			.on('pointermove', onMove);
+	}
+
+	doubleClick(){
+		// Force open properties panel and focus to edit panel's title
+		this.$space.sketch.emit('editor.properties.open');
+		setTimeout(() => {
+			$('bppc-decoration-group-default .title textarea').focus();
+		}, 50);
 	}
 
 	// Disable selection for this node

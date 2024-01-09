@@ -27,3 +27,7 @@ let $ = sf.$;
 
 // Global shared context (wait it to avoid race condition)
 let Context = await Blackprint.getContext('Decoration');
+
+// Load colorpicker
+sf.loader.css(['https://cdn.jsdelivr.net/gh/mdbassit/Coloris@latest/dist/coloris.min.css']);
+sf.loader.js(['https://cdn.jsdelivr.net/gh/mdbassit/Coloris@latest/dist/coloris.min.js']);
