@@ -227,10 +227,11 @@ class extends Blackprint.Interface{
 				let indexInModel = modelIfaceList.indexOf(temp);
 				
 				if(lowestIndex == -1 || lowestIndex > indexInModel){
-					lowestIndex = indexInModel;
-
-					if(temp.namespace === "Decoration/Group/Default")
-						1; // ToDo: fix z-index when it's in front of another group node
+					if(temp.namespace === "Decoration/Group/Default"){
+						let isInnerGroup = (temp.x > this.x && temp.w < this.w) || (temp.y > this.y && temp.h < this.h);
+						if(isInnerGroup) lowestIndex = indexInModel;
+					}
+					else lowestIndex = indexInModel;
 				}
 
 				if(temp.namespace === "Decoration/Group/Default") {
