@@ -4,7 +4,7 @@
 	height: {{ data.height }}px;
 	width: {{ data.width }}px;
 	{{ data.color ? ('background: ' + data.color + '6e;') : '' }}
-	{{ data.fontColor ? ('color: ' + data.fontColor + ';') : '' }}
+	color: {{ data.fontColor ? data.fontColor : 'black' }};
 ">
   	<div class="header"
 	  	style="{{ data.color ? ('background: ' + data.color + '6e;') : '' }}"
@@ -47,7 +47,6 @@ sf-space[blackprint] .nodes bpic-decoration-group-default .node {
 		overflow: hidden;
 		max-width: 100%;
 		max-height: 100%;
-		color: black;
 	}
 	.header{
 		background: #b8b8ff91;
@@ -55,7 +54,9 @@ sf-space[blackprint] .nodes bpic-decoration-group-default .node {
 		font-size: 14px;
 		pointer-events: all;
 		white-space: pre-line;
-		color: black;
+	}
+	.other{
+		color: white;
 	}
 
 	.sides {
@@ -205,7 +206,7 @@ class extends Blackprint.Interface{
 
 		for (var i = 0, n = cableList.length; i < n; i++) {
 			let temp = cableList[i];
-			if(temp.hasBranch === false) continue;
+			if(!(temp.hasBranch !== false || !temp.connected)) continue;
 
 			let [x, y] = temp.head2;
 			if(x >= sx && x <= ex
@@ -283,17 +284,8 @@ class extends Blackprint.Interface{
 
 		// Clear any selections
 		let container = this.$space('container');
-		let nodes = container.nodeScope.selected;
-		let cables = container.nodeScope.selected;
-
-		for(let i = 0; i < nodes.length; i++)
-			nodes[i]._nodeSelected = false;
-
-		for(let i = 0; i < cables.length; i++)
-			cables[i]._nodeSelected = false;
-
-		nodes.splice(0);
-		cables.splice(0);
+		container.nodeScope.deselectAll();
+		container.cableScope.deselectAll();
 	}
 
 	destroy(){

@@ -2,6 +2,7 @@
 <bppc-decoration-group-default>
 	<div class="field title">
 		<span class="name">Title:</span>
+		<span class="help" title="Panel below is derived from Decoration/Group/Default.panel.sf"><i class="fas fa-question-circle"></i></span>
 		<textarea sf-bind="title" placeholder="Add title here..."></textarea>
 	</div>
 	<div class="field textContent">
@@ -41,6 +42,11 @@ bppc-decoration-group-default {
 
 	.clr-field{
 		width: 98%;
+	}
+
+	.help{
+		float: right;
+		margin-right: 2px;
 	}
 
 	.title textarea:focus {
