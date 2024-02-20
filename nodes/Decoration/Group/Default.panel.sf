@@ -3,19 +3,19 @@
 	<div class="field title">
 		<span class="name">Title:</span>
 		<span class="help" title="Panel below is derived from Decoration/Group/Default.panel.sf"><i class="fas fa-question-circle"></i></span>
-		<textarea sf-bind="title" placeholder="Add title here..."></textarea>
+		<textarea sf-bind="data.title" placeholder="Add title here..."></textarea>
 	</div>
 	<div class="field textContent">
 		<span class="name">Text Content:</span>
-		<textarea sf-bind="textContent" placeholder="Add text content here..."></textarea>
+		<textarea sf-bind="data.textContent" placeholder="Add text content here..."></textarea>
 	</div>
 	<div class="field color-pick color-1">
 		<span class="name">Background Color:</span>
-		<input sf-bind="color" placeholder="#b8b8ff">
+		<input sf-bind="data.color" placeholder="#b8b8ff">
 	</div>
 	<div class="field color-pick color-2">
 		<span class="name">Font Color:</span>
-		<input sf-bind="fontColor" placeholder="black">
+		<input sf-bind="data.fontColor" placeholder="black">
 	</div>
 </bppc-decoration-group-default>
 
@@ -86,29 +86,5 @@ class extends sf.Model {
 
 		Coloris(Object.assign({ el: 'bppc-decoration-group-default .color-1 input' }, opt));
 		Coloris(Object.assign({ el: 'bppc-decoration-group-default .color-2 input' }, opt));
-	}
-
-	get title(){ return this.data.title }
-	set title(val){
-		this.data.title = val;
-		this.iface.node.syncOut('title', val);
-	}
-
-	get textContent(){ return this.data.textContent }
-	set textContent(val){
-		this.data.textContent = val;
-		this.iface.node.syncOut('textContent', val);
-	}
-
-	get color(){ return this.data.color }
-	set color(val){
-		this.data.color = val;
-		this.iface.node.syncOut('color', val);
-	}
-
-	get fontColor(){ return this.data.fontColor }
-	set fontColor(val){
-		this.data.fontColor = val;
-		this.iface.node.syncOut('fontColor', val);
 	}
 });

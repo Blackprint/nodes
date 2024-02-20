@@ -47,4 +47,6 @@ class extends Blackprint.Interface{
 		super(node);
 		this.data ??= {}; // Dummy object store for non-sketch interface
 	}
+
+	refreshContent(){} // Do nothing for Engine only
 });

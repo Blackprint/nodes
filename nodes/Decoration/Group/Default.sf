@@ -308,6 +308,10 @@ class DecorationGroupDefaultData {
 	}
 
 	// Triggered when the value was changed from view (by user interaction on the UI)
+	on$title(val){ if(window.event?.isTrusted) this.#iface.node.syncOut('title', val) }
+	on$textContent(val){ if(window.event?.isTrusted) this.#iface.node.syncOut('textContent', val) }
+	v2m$color(val){ this.#iface.node.syncOut('color', val) }
+	v2m$fontColor(val){ this.#iface.node.syncOut('fontColor', val) }
 	on$width(val){ if(window.event?.isTrusted) this.#iface.node.syncOut('width', val) }
 	on$height(val){ if(window.event?.isTrusted) this.#iface.node.syncOut('height', val) }
 }
