@@ -19,6 +19,10 @@ class extends Blackprint.Node {
 		return document.createTextNode('Or');
 	}
 
+	// Call update on init, but avoid call if it has route in or input
+	static initUpdate = 0
+		| Blackprint.InitUpdate.NoRouteIn
+		| Blackprint.InitUpdate.NoInputCable;
 	update(){
 		let ref = this.ref;
 		ref.Output.Value = ref.Input["0"] || ref.Input["1"];

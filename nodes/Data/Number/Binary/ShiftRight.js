@@ -19,6 +19,10 @@ class extends Blackprint.Node {
 		return $('<i class="fa fa-angle-double-right"></i>')[0];
 	}
 
+	// Call update on init, but avoid call if it has route in or input
+	static initUpdate = 0
+		| Blackprint.InitUpdate.NoRouteIn
+		| Blackprint.InitUpdate.NoInputCable;
 	update(){
 		let ref = this.ref;
 		let {A, B} = ref.Input;

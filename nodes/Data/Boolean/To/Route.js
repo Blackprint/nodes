@@ -19,6 +19,10 @@ class extends Blackprint.Node {
 		return document.createTextNode('Route ➤');
 	}
 
+	// Call update on init, but avoid call if it has route in or input
+	static initUpdate = 0
+		| Blackprint.InitUpdate.NoRouteIn
+		| Blackprint.InitUpdate.NoInputCable;
 	update(){
 		if(this.ref.Input.Value === this.iface.data.signal)
 			this.ref.Output.Route();

@@ -15,6 +15,10 @@ class Str2RegExp extends Blackprint.Node {
 		iface.title = "To RegExp";
 	}
 
+	// Call update on init, but avoid call if it has route in or input
+	static initUpdate = 0
+		| Blackprint.InitUpdate.NoRouteIn
+		| Blackprint.InitUpdate.NoInputCable;
 	update(){
 		let ref = this.ref;
 		let { In, Options } = ref.Input;
