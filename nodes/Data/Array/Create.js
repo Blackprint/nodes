@@ -37,6 +37,9 @@ class extends Blackprint.Node {
 				node.createPort('input', String(iface.data.length), Blackprint.Types.Any);
 				iface.data.length++;
 				node.update();
+
+				// Let editor know if this iface changed and unsaved
+				node.notifyEditorDataChanged();
 			}
 		}, {
 			title:"Delete port", callback(){
@@ -52,6 +55,9 @@ class extends Blackprint.Node {
 				}
 
 				node.update();
+
+				// Let editor know if this iface changed and unsaved
+				node.notifyEditorDataChanged();
 			}
 		}];
 

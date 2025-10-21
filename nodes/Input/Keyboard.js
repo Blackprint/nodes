@@ -1,4 +1,4 @@
-/** 
+/**
  * Listen to keyboard event
  * You can also listen to specific keyboard key by right clicking the output port
  * Make sure to turn on AllowResync if you need to reupdate other node
@@ -115,6 +115,9 @@ class KeyboardNode extends Blackprint.Node {
 
 				let iPort = node.createPort('output', '[?]', Boolean);
 				node.waitKeyToBeListened(iPort);
+
+				// Let editor know if this iface changed and unsaved
+				node.notifyEditorDataChanged();
 			}
 		}, {
 			title:"Change this port", callback(){
@@ -123,6 +126,9 @@ class KeyboardNode extends Blackprint.Node {
 
 				node.renamePort('output', this.name, '[?]');
 				node.waitKeyToBeListened(this);
+
+				// Let editor know if this iface changed and unsaved
+				node.notifyEditorDataChanged();
 			}
 		}, {
 			title:"Delete this port", callback(){
@@ -140,6 +146,9 @@ class KeyboardNode extends Blackprint.Node {
 
 				let i = keys.indexOf(this.name);
 				if(i !== -1) keys.splice(i, 1);
+
+				// Let editor know if this iface changed and unsaved
+				node.notifyEditorDataChanged();
 			}
 		}];
 

@@ -41,6 +41,9 @@ class extends Blackprint.Node {
 					out.value = active ? input.Value : input.Default;
 					out.sync();
 				});
+
+				// Let editor know if this iface changed and unsaved
+				node.notifyEditorDataChanged();
 			}
 		}, {
 			title: "Delete this port", callback(){
@@ -71,6 +74,9 @@ class extends Blackprint.Node {
 
 					i++;
 				}
+
+				// Let editor know if this iface changed and unsaved
+				node.notifyEditorDataChanged();
 			}
 		}];
 

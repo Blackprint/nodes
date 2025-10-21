@@ -45,6 +45,9 @@ class extends Blackprint.Node {
 				iface.data.list.push(value);
 
 				node.update();
+
+				// Let editor know if this iface changed and unsaved
+				node.notifyEditorDataChanged();
 			}
 		}, {
 			title: "Delete port", callback(){
@@ -57,6 +60,9 @@ class extends Blackprint.Node {
 					list.splice(i, 1);
 					node.update();
 				}
+
+				// Let editor know if this iface changed and unsaved
+				node.notifyEditorDataChanged();
 			}
 		}];
 

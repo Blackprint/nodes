@@ -137,6 +137,10 @@ Context.IFace.SliderBoxIFace = class SliderBoxIFace extends Blackprint.Interface
 		// Wait until the data has been changed
 		clearTimeout(this._wait);
 		this._wait = setTimeout(()=> iface.changed(iface.focusIndex, now), 1);
+
+		// Let editor know if this iface changed and unsaved
+		this.node.notifyEditorDataChanged();
+
 		return now;
 	}
 
@@ -151,5 +155,8 @@ Context.IFace.SliderBoxIFace = class SliderBoxIFace extends Blackprint.Interface
 			// Listener if value changed
 			on$value: this.valueListener,
 		});
+
+		// Let editor know if this iface changed and unsaved
+		this.node.notifyEditorDataChanged();
 	}
 });

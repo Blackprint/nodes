@@ -52,6 +52,9 @@ class InputIFace extends Context.IFace.Input {
 					el.attr('style', 'width:'+(10*now.length)+'px');
 				else if(now.length >= 14)
 					el.attr('style', 'width:140px;height:50px');
+
+				// Let editor know if this iface changed and unsaved
+				node.notifyEditorDataChanged();
 			});
 		}
 	}

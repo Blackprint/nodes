@@ -57,6 +57,9 @@ class DecorationTextNotesData {
 			this.#waitRepaint = false;
 
 			node.syncOut('value', now);
+
+			// Let editor know if this iface changed and unsaved
+			node.notifyEditorDataChanged();
 		});
 	}
 }

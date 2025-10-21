@@ -40,6 +40,9 @@ class extends Blackprint.Node {
 			title: "Create new port", callback(){
 				let index = iface.data.total++;
 				node.createPort('output', index, Blackprint.Types.Route);
+
+				// Let editor know if this iface changed and unsaved
+				node.notifyEditorDataChanged();
 			}
 		}, {
 			title: "Delete this port", callback(){
@@ -56,6 +59,9 @@ class extends Blackprint.Node {
 
 					i++;
 				}
+
+				// Let editor know if this iface changed and unsaved
+				node.notifyEditorDataChanged();
 			}
 		}];
 

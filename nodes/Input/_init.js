@@ -57,9 +57,11 @@ if(Blob === void 0) // Node.js
 	Blob = (await import('node:buffer')).Blob;
 
 let allWindow = window.sf?.Window ?? window.document;
-var $ = window.sf?.$;
 
-if(Blackprint.Environment.isBrowser && $ == null){
-	await import("https://cdn.jsdelivr.net/npm/scarletsframe@0.35.25/dist/squery.min.js");
-	$ = window.sf.$;
-}
+// ToDo: add import for Node.js
+var [ $ ] = await Blackprint.DepsLoader.js({
+	window: ['sf.$'],
+
+	// for browser, Deno, or supported environment that have internet access
+	cdn: ["https://cdn.jsdelivr.net/npm/scarletsframe@0.35.x/dist/squery.min.js"]
+});

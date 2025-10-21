@@ -87,6 +87,9 @@ class InputTextBoxData {
 		let node = this.#iface.node;
 		node.changed(val);
 		node.routes.routeOut();
+
+		// Let editor know if this iface changed and unsaved
+		node.notifyEditorDataChanged();
 	}
 }
 

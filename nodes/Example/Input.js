@@ -35,7 +35,9 @@ class extends Blackprint.Node {
 	syncIn(id, data){
 		if(id === 'data'){
 			Object.assign(this.iface.data, data);
-			this.iface.changed();
+		}
+		else if(id === 'value'){
+			this.iface.data.value = data;
 		}
 	}
 });

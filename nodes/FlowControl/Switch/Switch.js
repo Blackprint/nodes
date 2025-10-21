@@ -40,6 +40,9 @@ class extends Blackprint.Node {
 
 				node.createPort('output', name, Blackprint.Types.Route);
 				iface.data.outputs.push(name);
+
+				// Let editor know if this iface changed and unsaved
+				node.notifyEditorDataChanged();
 			}
 		}, {
 			title: "Delete this port", callback(){
@@ -49,6 +52,9 @@ class extends Blackprint.Node {
 				if(i === -1) return;
 				outputs.splice(i, 1);
 				node.deletePort('output', this.name);
+
+				// Let editor know if this iface changed and unsaved
+				node.notifyEditorDataChanged();
 			}
 		}];
 

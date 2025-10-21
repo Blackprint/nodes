@@ -5,14 +5,6 @@
 // Prepare stuff when the page is loading
 // maybe like loading our dependencies for the nodes
 
-// Load dependencies
-// await imports([
-// 	"https://cdn.jsdelivr.net/gh/liyasthomas/marcdown/marcdown.min.js",
-// ]);
-
-// Prepare stuff after all dependencies was loaded
-// https://guides.github.com/features/mastering-markdown/
-
 
 // Because .js and .sf is separated
 // we also need to call loadScope just like _init.js
@@ -28,6 +20,18 @@ let $ = sf.$;
 // Global shared context (wait it to avoid race condition)
 let Context = await Blackprint.getContext('Decoration');
 
-// Load colorpicker
-sf.loader.css(['https://cdn.jsdelivr.net/gh/mdbassit/Coloris@latest/dist/coloris.min.css']);
-sf.loader.js(['https://cdn.jsdelivr.net/gh/mdbassit/Coloris@latest/dist/coloris.min.js']);
+// Load colorpicker deps
+var [ Coloris ] = await Blackprint.DepsLoader.js({
+	window: ['Coloris'],
+
+	// need to use 'npm install' first or must exist on node_modules, will dynamically imported
+	local: ['@melloware/coloris'],
+
+	// for browser, Deno, or supported environment that have internet access
+	cdn: ["https://cdn.jsdelivr.net/npm/@melloware/coloris@0.25.0/dist/umd/coloris.min.js"]
+});
+
+await Blackprint.DepsLoader.css({
+	local: ['@melloware/coloris/dist/coloris.css'],
+	cdn: ["https://cdn.jsdelivr.net/npm/@melloware/coloris@0.25.0/dist/coloris.min.css"]
+});

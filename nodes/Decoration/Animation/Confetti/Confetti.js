@@ -1,7 +1,17 @@
 var { Port } = Blackprint;
 
-if(Blackprint.Environment.isBrowser)
-	imports(["https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"]);
+// Load confetti deps
+await Blackprint.DepsLoader.js({
+	optional: true, // suppress error message if not resolved
+
+	window: ['confetti'],
+
+	// need to use 'npm install' first or must exist on node_modules, will dynamically imported
+	local: ['canvas-confetti'],
+
+	// for browser, Deno, or supported environment that have internet access
+	cdn: ["https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"]
+});
 
 /**
  * Create a confetti that can be triggered by other nodes

@@ -232,7 +232,7 @@ class extends Blackprint.Interface{
 			if(ox >= sx && x <= ex
 			&& oy >= sy && y <= ey){
 				let indexInModel = modelIfaceList.indexOf(temp);
-				
+
 				if(lowestIndex == -1 || lowestIndex > indexInModel){
 					if(temp.namespace === "Decoration/Group/Default"){
 						let isInnerGroup = (temp.x > this.x && temp.w < this.w) || (temp.y > this.y && temp.h < this.h);
@@ -298,7 +298,7 @@ class DecorationGroupDefaultData {
 
 	constructor(iface){
 		this.#iface = iface;
-	
+
 		this.title = 'No title';
 		this.textContent = '';
 		this.color = '';
@@ -307,11 +307,19 @@ class DecorationGroupDefaultData {
 		this.height = 100;
 	}
 
+	dataChanged(name, val){
+		let node = this.#iface.node;
+		if(window.event?.isTrusted) node.syncOut(name, val);
+
+		// Let editor know if this iface changed and unsaved
+		node.notifyEditorDataChanged();
+	}
+
 	// Triggered when the value was changed from view (by user interaction on the UI)
-	on$title(val){ if(window.event?.isTrusted) this.#iface.node.syncOut('title', val) }
-	on$textContent(val){ if(window.event?.isTrusted) this.#iface.node.syncOut('textContent', val) }
-	v2m$color(val){ this.#iface.node.syncOut('color', val) }
-	v2m$fontColor(val){ this.#iface.node.syncOut('fontColor', val) }
-	on$width(val){ if(window.event?.isTrusted) this.#iface.node.syncOut('width', val) }
-	on$height(val){ if(window.event?.isTrusted) this.#iface.node.syncOut('height', val) }
+	on$title(val){ this.dataChanged('title', val) }
+	on$textContent(val){ this.dataChanged('textContent', val) }
+	v2m$color(val){ this.dataChanged('color', val) }
+	v2m$fontColor(val){ this.dataChanged('fontColor', val) }
+	on$width(val){ this.dataChanged('width', val) }
+	on$height(val){ this.dataChanged('height', val) }
 }

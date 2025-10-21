@@ -26,22 +26,20 @@ class extends Blackprint.Node {
 			title: "Create new port", callback(){
 				let index = iface.data.total++;
 				node.createPort('output', index, Blackprint.Types.Route);
+				node.syncOut('addPort', ''+iface.data.total);
+
+				// Let editor know if this iface changed and unsaved
+				node.notifyEditorDataChanged();
 			}
 		}, {
 			title: "Delete this port", callback(){
 				node.deletePort('output', this.name);
 				iface.data.total--;
+				node.normalizePortIndex();
+				node.syncOut('deletePort', this.name);
 
-				// Normalize ports index
-				let i = 0;
-				let input = iface.input;
-				for (let key in input) {
-					let port = input[key];
-					if(port.name !== String(i))
-						node.renamePort('input', port.name, String(i));
-
-					i++;
-				}
+				// Let editor know if this iface changed and unsaved
+				node.notifyEditorDataChanged();
 			}
 		}];
 
@@ -81,5 +79,36 @@ class extends Blackprint.Node {
 			await output[key]();
 
 		this._begin = false;
+	}
+
+	normalizePortIndex(){
+		// Normalize ports index
+		let i = 0;
+		let output = this.iface.output;
+		for (let key in output) {
+			let port = output[key];
+			if(port.name !== String(i))
+				this.renamePort('output', port.name, String(i));
+
+			i++;
+		}
+	}
+
+	async syncIn(name, value){
+		let iface = this.iface;
+		if(name === 'deletePort') {
+			this.deletePort('output', String(value));
+			this.normalizePortIndex();
+			iface.data.total--;
+		}
+		else if(name === 'addPort') {
+			let total = iface.data.total;
+			if(total < value) {
+				for (let i = total; i < value; i++) {
+					this.createPort('output', String(i), Blackprint.Types.Route);
+					iface.data.total++;
+				}
+			}
+		}
 	}
 });

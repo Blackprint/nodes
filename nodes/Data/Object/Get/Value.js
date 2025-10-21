@@ -142,6 +142,9 @@ class DataObjectGetValueData{
 
 		node.recreateFunc(val);
 		node.syncOut('props', val);
+
+		// Let editor know if this iface changed and unsaved
+		node.notifyEditorDataChanged();
 	}
 }
 
