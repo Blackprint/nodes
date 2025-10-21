@@ -49,12 +49,12 @@ Please specify the version to avoid breaking changes.
 
 ```js
 Blackprint.loadModuleFromURL([
-	'https://cdn.jsdelivr.net/npm/@blackprint/nodes@0.8/dist/nodes-console.mjs',
-	'https://cdn.jsdelivr.net/npm/@blackprint/nodes@0.8/dist/nodes-data.mjs',
-	'https://cdn.jsdelivr.net/npm/@blackprint/nodes@0.8/dist/nodes-decoration.mjs',
-	'https://cdn.jsdelivr.net/npm/@blackprint/nodes@0.8/dist/nodes-example.mjs',
-	'https://cdn.jsdelivr.net/npm/@blackprint/nodes@0.8/dist/nodes-input.mjs',
-	'https://cdn.jsdelivr.net/npm/@blackprint/nodes@0.8/dist/nodes-flowcontrol.mjs',
+	'https://cdn.jsdelivr.net/npm/@blackprint/nodes@0.9/dist/nodes-console.mjs',
+	'https://cdn.jsdelivr.net/npm/@blackprint/nodes@0.9/dist/nodes-data.mjs',
+	'https://cdn.jsdelivr.net/npm/@blackprint/nodes@0.9/dist/nodes-decoration.mjs',
+	'https://cdn.jsdelivr.net/npm/@blackprint/nodes@0.9/dist/nodes-example.mjs',
+	'https://cdn.jsdelivr.net/npm/@blackprint/nodes@0.9/dist/nodes-input.mjs',
+	'https://cdn.jsdelivr.net/npm/@blackprint/nodes@0.9/dist/nodes-flowcontrol.mjs',
 ], {
 	// Turn this on if you want to load .sf.js, and .sf.css
 	// only with single .mjs
